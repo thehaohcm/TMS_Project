@@ -10,21 +10,15 @@ import java.util.Set;
  */
 @Entity(name="USERS")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ID",nullable = false)
+
     private Integer id;
 
-    @Column(name="USERNAME",nullable = false)
     private String username;
 
-    @Column(name="PASS",nullable = false)
     private String password;
 
-    @Column(name="MANAGERID")
     private Integer managerID;
 
-    @Column(name="ACTIVE", nullable = true)
     private Boolean active;
 
     //forgein key
@@ -50,6 +44,25 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<UserProperty> userProperties;
 
+
+    //20h37 - 22-5-2017
+    //User-Couser_Trainees
+    private Set<Course> usercourses;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name="COURSE_TRAINEES", joinColumns = {@JoinColumn(name="TRAINEEID",referencedColumnName = "ID")},inverseJoinColumns = {@JoinColumn(name="COURSEID",referencedColumnName = "ID")})
+    public Set<Course> getUsercourses() {
+        return usercourses;
+    }
+
+    public void setUsercourses(Set<Course> usercourses) {
+        this.usercourses = usercourses;
+    }
+
+    //User-CourseTrainer
+    @OneToMany(mappedBy = "coursetraineruser",cascade = CascadeType.REMOVE)
+    private Set<CourseTrainer> courseTrainers;
+
     public User(){
 
     }
@@ -65,6 +78,9 @@ public class User {
 //        //this.courses = courses;
 //    }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="ID",nullable = false)
     public Integer getId() {
         return id;
     }
@@ -73,7 +89,7 @@ public class User {
         this.id = id;
     }
 
-
+    @Column(name="USERNAME",nullable = false)
     public String getUsername() {
         return username;
     }
@@ -82,6 +98,7 @@ public class User {
         this.username = username;
     }
 
+    @Column(name="PASS",nullable = false)
     public String getPassword() {
         return password;
     }
@@ -90,6 +107,7 @@ public class User {
         this.password = password;
     }
 
+    @Column(name="MANAGERID")
     public Integer getManagerID() {
         return managerID;
     }
@@ -98,6 +116,7 @@ public class User {
         this.managerID = managerID;
     }
 
+    @Column(name="ACTIVE", nullable = true)
     public Boolean getActive() {
         return active;
     }

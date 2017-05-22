@@ -30,8 +30,21 @@ public class Topic {
 //    @JoinColumn(name="COURSETRAINERID",nullable = false,updatable = false)
 //    private CourseTrainer topic_coursetrainer;
 
+    //Topic-Couser_Trainers
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="COURSETRAINERID")
+    private CourseTrainer topiccoursetrainer;
+
     public Topic(){
 
+    }
+
+    public CourseTrainer getTopiccoursetrainer() {
+        return topiccoursetrainer;
+    }
+
+    public void setTopiccoursetrainer(CourseTrainer topiccoursetrainer) {
+        this.topiccoursetrainer = topiccoursetrainer;
     }
 
     public Integer getId() {
