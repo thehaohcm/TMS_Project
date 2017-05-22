@@ -56,11 +56,11 @@ public class Property {
         this.description = description;
     }
 
-    public Set<UserProperty> getUserProperties() {
-        return userProperties;
-    }
-
-    public void setUserProperties(Set<UserProperty> userProperties) {
-        this.userProperties = userProperties;
-    }
+//    public Set<UserProperty> getUserProperties() {
+//        return userProperties;
+//    }
+//
+//    public void setUserProperties(Set<UserProperty> userProperties) {
+//        this.userProperties = userProperties;
+//    }
 }

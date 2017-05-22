@@ -1,6 +1,7 @@
 package org.fsoft.tms.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -105,13 +106,13 @@ public class User {
         this.active = active;
     }
 
-    public Set<UserProperty> getUserProperties() {
-        return userProperties;
-    }
-
-    public void setUserProperties(Set<UserProperty> userProperties) {
-        this.userProperties = userProperties;
-    }
+//    public Set<UserProperty> getUserProperties() {
+//        return userProperties;
+//    }
+//
+//    public void setUserProperties(Set<UserProperty> userProperties) {
+//        this.userProperties = userProperties;
+//    }
 
     //    public Set<User> getUsers() {
 //        return users;
