@@ -20,17 +20,17 @@ public class Role {
     private Set<Permission> permissions;
 
     //forgein key
-//    @OneToMany(mappedBy = "role",cascade = CascadeType.REMOVE)
-//    private Set<User> users;
+    @OneToMany(mappedBy = "userrole",cascade = CascadeType.REMOVE)
+    private Set<User> users;
 
     public Role(){
 
     }
 
-    public Role(String name) {
-        this.name = name;
-
-    }
+//    public Role(String name) {
+//        this.name = name;
+//
+//    }
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -52,8 +52,8 @@ public class Role {
         this.name = name;
     }
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "ROLE_PERMISSIONS", joinColumns = { @JoinColumn(name = "ROLEID", referencedColumnName = "ID") }, inverseJoinColumns = { @JoinColumn(name = "PERMISSIONID", referencedColumnName = "ID") })
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)//CascadeType.MERGE)
+    @JoinTable(name = "ROLE_PERMISSIONS", joinColumns = { @JoinColumn(name = "ROLEID", referencedColumnName = "ID", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "PERMISSIONID", referencedColumnName = "ID", nullable = false, updatable = false) })
     public Set<Permission> getPermissions() {
         return permissions;
     }

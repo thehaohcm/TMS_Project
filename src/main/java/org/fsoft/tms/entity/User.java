@@ -32,19 +32,15 @@ public class User {
     private Integer roleID;
 
     //forgein key
-    //User-User
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="MANAGERID",insertable = false,updatable = false)
+
     private User manager;
 
     //User-User
-    @OneToMany(mappedBy = "manager")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "manager")
     private Set<User> users;
 
-    //User-Role
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="ROLEID",insertable = false,updatable = false)
-    private Role role;
+
+    private Role userrole;
 
     //User-Course
     @OneToMany(mappedBy = "user_course",cascade = CascadeType.REMOVE)
@@ -151,21 +147,27 @@ public class User {
 //        this.users = users;
 //    }
 
-//    public User getManager() {
-//        return manager;
-//    }
-//
-//    public void setManager(User manager) {
-//        this.manager = manager;
-//    }
+    //User-User
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="MANAGERID",insertable = false,updatable = false)
+    public User getManager() {
+        return manager;
+    }
 
-//    public Role getRole() {
-//        return role;
-//    }
-//
-//    public void setRole(Role role) {
-//        this.role = role;
-//    }
+    public void setManager(User manager) {
+        this.manager = manager;
+    }
+
+    //User-Role
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="ROLEID",insertable = false,updatable = false)
+    public Role getRole() {
+        return userrole;
+    }
+
+    public void setRole(Role role) {
+        this.userrole = role;
+    }
 
 //    public Set<Course> getCourses() {
 //        return courses;
