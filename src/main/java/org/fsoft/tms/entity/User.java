@@ -21,6 +21,16 @@ public class User {
 
     private Boolean active;
 
+    public Integer getRoleID() {
+        return roleID;
+    }
+
+    public void setRoleID(Integer roleID) {
+        this.roleID = roleID;
+    }
+
+    private Integer roleID;
+
     //forgein key
     //User-User
     @ManyToOne(cascade = CascadeType.ALL)

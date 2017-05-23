@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <title>Manager Category</title>
+</head>
+<body>
+<h1>Form Update Category</h1>
+<form action="#" th:action="@{/tms/server/category/update}" th:object="${category}">
+    <p><textarea th:field="*{id}" hidden="hidden"/></p>
+    <p>Username <input type="text" th:field="*{name}"/></p>
+    <p>Description <textarea th:field="*{description}"/></p>
+    <p><input type="submit" value="Update"/><input type="reset" value="reset"/></p>
+
+</form>
+
+<h1>Show list acounts</h1>
+<table border="2">
+    <tr>
+        <td>No</td>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Update</td>
+        <td>Delete</td>
+    </tr>
+    <tr th:each="item:${listCategory}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.description}"></td>
+        <td><a th:href="@{/tms/server/category/update/{id}(id=${item.id})}">Update</a></td>
+        <td><a th:href="@{/tms/server/category/delete/{id}(id=${item.id})}">Delete</a></td>
+    </tr>
+</table>
+</body>
+</html>
+

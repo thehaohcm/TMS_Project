@@ -18,4 +18,16 @@ public class ServiceUser {
     public List<User> getListUser() {
         return service.findAll();
     }
+
+    public void addAccount(User u) {
+        service.save(u);
+    }
+
+    public void deleteAccount(int id) {
+        service.delete(id);
+    }
+
+    public User findOneAccount(int id) {
+        return service.findOne(id);
+    }
 }
