@@ -1,6 +1,6 @@
 package org.fsoft.tms.entity;
 
-import org.bouncycastle.asn1.cms.TimeStampAndCRL;
+
 
 import javax.persistence.*;
 import java.security.AllPermission;
