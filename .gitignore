@@ -19,3 +19,9 @@ target/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+.settings
+.classpath
+.project
+!hsql/lib/hsqldb.jar
+!hsql/lib/sqltool.jar
+
