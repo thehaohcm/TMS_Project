@@ -1,7 +1,5 @@
 package org.fsoft.tms.entity;
 
-
-
 import javax.persistence.*;
 import java.security.AllPermission;
 import java.sql.Timestamp;
@@ -40,8 +38,17 @@ public class Course {
     @JoinColumn(name = "CATID",insertable = false,updatable = false)
     private Category category_course;
 
+    //Couser-Topic
     @OneToMany(mappedBy = "course",cascade = CascadeType.REMOVE)
     private Set<Topic> topics;
+
+    //Course-course_trainees
+    @ManyToMany(mappedBy = "usercourses")
+    private Set<User> users;
+
+    //Course-course_trainers
+    @OneToMany(mappedBy = "coursetrainercouse",cascade = CascadeType.REMOVE)
+    private Set<CourseTrainer> courseTrainers;
 
     public Course(){
 
