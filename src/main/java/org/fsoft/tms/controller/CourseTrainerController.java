@@ -1,12 +1,11 @@
 package org.fsoft.tms.controller;
 
+import org.fsoft.tms.entity.Course;
 import org.fsoft.tms.entity.CourseTrainer;
+import org.fsoft.tms.entity.User;
 import org.fsoft.tms.repository.CourseTrainerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +21,22 @@ public class CourseTrainerController {
     @RequestMapping("/getall")
     public List<CourseTrainer> getAllCourseTrainer(){
         return courseTrainerRepository.findAll();
+    }
+
+    @RequestMapping(value="/addCourseTrainer/",method = RequestMethod.POST)
+    public boolean addTrainerToCourse(@PathVariable User user,@PathVariable Course course){
+        if(user==null || course==null)
+            return false;
+        try {
+            CourseTrainer courseTrainer = new CourseTrainer();
+            courseTrainer.setCoursetraineruser(user);
+            courseTrainer.setCoursetrainercouse(course);
+            courseTrainerRepository.save(courseTrainer);
+        }catch (Exception ex){
+            return false;
+        }
+        return true;
+
     }
 
     @RequestMapping(value="/add",method = RequestMethod.POST)
