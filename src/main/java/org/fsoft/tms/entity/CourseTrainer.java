@@ -10,26 +10,24 @@ import java.util.Set;
 @Table(name="COURSE_TRAINERS")
 public class CourseTrainer {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ID")
+
     private Integer id;
 
     @OneToMany(mappedBy = "topiccoursetrainer",cascade = CascadeType.REMOVE)
     private Set<Topic> topics;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "COURSEID",insertable = false,updatable = false)
+
     private Course coursetrainercouse;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="TRAINERID",insertable = false,updatable=false)
+
     private User coursetraineruser;
 
     public CourseTrainer(){
 
     }
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="TRAINERID",insertable = false,updatable=false)
     public User getCoursetraineruser() {
         return coursetraineruser;
     }
@@ -38,6 +36,9 @@ public class CourseTrainer {
         this.coursetraineruser = coursetraineruser;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="ID")
     public Integer getId() {
         return id;
     }
@@ -46,6 +47,8 @@ public class CourseTrainer {
         this.id = id;
     }
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "COURSEID",insertable = false,updatable = false)
     public Course getCoursetrainercouse() {
         return coursetrainercouse;
     }

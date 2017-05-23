@@ -19,7 +19,7 @@ public class Permission {
 
     private String description;
 
-    @ManyToMany(mappedBy = "permissions")
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "permissions")
     private Set<Role> roles;
 
     public Permission(){
@@ -60,7 +60,8 @@ public class Permission {
         this.description = description;
     }
 
-//    @ManyToMany(mappedBy = "permissions")
+    //@ManyToMany(mappedBy = "permissions")
+//    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "permissions")
 //    public Set<Role> getRoles() {
 //        return roles;
 //    }
