@@ -15,14 +15,22 @@
     <h1>Show list acounts</h1>
     <table border="2">
         <tr>
-            <td>Num</td>
+            <td>id</td>
             <td>Username</td>
             <td>Password</td>
+            <td>ManagerID</td>
+            <td>Active</td>
+            <td>Update</td>
+            <td>Delete</td>
         </tr>
-        <tr>
-            <td>1</td>
-            <td>12</td>
-            <td>121</td>
+        <tr th:each="item:${listUser}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.username}"></td>
+            <td th:text="${item.password}"></td>
+            <td th:text="${item.managerID}"></td>
+            <td th:text="${item.active}"></td>
+            <td><a th:href="@{/form/server/user/update/{id}(id=${item.id})}">Update</a></td>
+            <td><a th:href="@{/form/server/user/delete/{id}(id=${item.id})}">Delete</a></td>
         </tr>
     </table>
 </body>
