@@ -13,6 +13,6 @@ import java.util.List;
 @Transactional
 public interface UserRepository extends JpaRepository<User,Integer> {
     //public List<User> findAll();
-
+    public User findUserByUsername(String name);
 
 }
