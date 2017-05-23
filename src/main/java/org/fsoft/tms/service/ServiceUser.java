@@ -19,6 +19,11 @@ public class ServiceUser {
         return service.findAll();
     }
 
+    public List<User> getListUserByRole(int id) {
+        return service.findAllByRoleID(id);
+    }
+
+
     public void addAccount(User u) {
         service.save(u);
     }

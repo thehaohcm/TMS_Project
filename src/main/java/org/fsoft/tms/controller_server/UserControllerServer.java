@@ -26,12 +26,15 @@ public class UserControllerServer {
     public String getListUser(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("listRole", role.listRole());
-        model.addAttribute("listUser", user.getListUser());
-        return "them";
+        model.addAttribute("listUser", user.getListUserByRole(2));
+        return "trainingstaff";
     }
 
     @RequestMapping(value = "/add")
     public String addUser(@ModelAttribute User u) {
+        u.setActive(false);
+        u.setManagerID(1);
+        u.setRoleID(2);
         user.addAccount(u);
         return "redirect:/tms/getall";
     }

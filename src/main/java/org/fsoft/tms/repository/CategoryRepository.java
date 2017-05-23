@@ -9,5 +9,6 @@ import java.util.List;
  * Created by thehaohcm on 5/19/17.
  */
 public interface CategoryRepository extends JpaRepository<Category,Integer> {
-    public Category findByNameContains(String name);
+    public List<Category> findAllByNameContains(String name);
+    public List<Category> findAllByNameIsLike(String name);
 }
