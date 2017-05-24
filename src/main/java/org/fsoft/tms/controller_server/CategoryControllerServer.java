@@ -26,14 +26,13 @@ public class CategoryControllerServer {
         return "category";
     }
 
-    @RequestMapping(value = "/search")
-    public String searchCategory(Model model) {
+    @RequestMapping(value = "/add")
+    public String getPageAddCategory(Model model) {
         model.addAttribute("category", new Category());
-        model.addAttribute("listCategory", category.searchCategory("Language"));
-        return "category";
+        return "addCategory";
     }
 
-    @RequestMapping(value = "/add")
+    @RequestMapping(value = "/addCategory")
     public String addCategory(@ModelAttribute Category cat) {
         category.addCategory(cat);
         return "redirect:/tms/server/category/getall";

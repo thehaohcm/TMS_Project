@@ -41,11 +41,6 @@ public class ServiceCategory {
 
     public List<Category> searchCategory(String name)
     {
-        return service.findAllByNameContains(name);
-    }
-
-    public List<Category> searchCategory2(String name)
-    {
         return service.findAllByNameIsLike(name);
     }
 

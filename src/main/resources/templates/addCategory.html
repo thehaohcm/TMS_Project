@@ -5,14 +5,11 @@
     <title>Manager Category</title>
 </head>
 <body>
-<h1>Form Update Category</h1>
-<form action="#" th:action="@{/tms/server/category/update}" th:object="${category}">
-    <p><textarea th:field="*{id}" hidden="hidden"/></p>
+<h1>Form Add Category</h1>
+<form action="#" th:action="@{/tms/server/category/addCategory}" th:object="${category}" method="post">
     <p>Username <input type="text" th:field="*{name}"/></p>
     <p>Description <textarea th:field="*{description}"/></p>
-    <p><input type="submit" value="Update"/><input type="reset" value="reset"/></p>
-
+    <p><input type="submit" value="submit"/><input type="reset" value="reset"/></p>
 </form>
 </body>
 </html>
-

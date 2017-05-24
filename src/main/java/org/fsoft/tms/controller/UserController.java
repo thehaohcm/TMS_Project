@@ -35,7 +35,7 @@ public class UserController {
 
     @RequestMapping(value="/searchByName/{name}",method=RequestMethod.GET)
     public User getInfoByName(@PathVariable String name){
-        return userRepository.findUserByUsername(name);
+        return (User) userRepository.findUserByUsername(name);
     }
 
     @RequestMapping("/course")
