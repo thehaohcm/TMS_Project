@@ -19,6 +19,8 @@ public class Topic {
     @Column(name="CONTENT",nullable = true)
     private String content;
 
+    private Boolean active;
+
     //forgein key
     //Course-Topic
     @ManyToOne(cascade = CascadeType.ALL)
@@ -77,5 +79,14 @@ public class Topic {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    @Column(name="ACTIVE", nullable = true)
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

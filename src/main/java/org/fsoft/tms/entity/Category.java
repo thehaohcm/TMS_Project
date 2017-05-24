@@ -23,6 +23,7 @@ public class Category {
     @Column(name="DESCRIPTION",nullable = true)
     private String description;
 
+    private Boolean active;
     //forgein key
     @OneToMany(mappedBy = "category_course",cascade = CascadeType.REMOVE)
     private Set<Course> courses;
@@ -60,6 +61,14 @@ public class Category {
         this.description = description;
     }
 
+    @Column(name="ACTIVE", nullable = true)
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 //    public Set<Course> getCourses() {
 //        return courses;
 //    }

@@ -27,6 +27,8 @@ public class Course {
     @Column(name="CREATEDDATE", columnDefinition = "DATE",nullable = false)
     private java.sql.Date createdDate;
 
+    private Boolean active;
+
     //forgein key
     //Couse-User
     @ManyToOne(cascade = CascadeType.ALL)
@@ -100,6 +102,15 @@ public class Course {
 
     public void setCategory_course(Category category_course) {
         this.category_course = category_course;
+    }
+
+    @Column(name="ACTIVE", nullable = true)
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
 //    public Set<Topic> getTopics() {
