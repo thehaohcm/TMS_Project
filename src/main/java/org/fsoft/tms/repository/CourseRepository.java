@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package org.fsoft.tms.repository;
 
-import com.example.demo.entity.Course;
+import org.fsoft.tms.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Set;

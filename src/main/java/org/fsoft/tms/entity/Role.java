@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package org.fsoft.tms.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -44,7 +44,7 @@ public class Role implements Serializable{
     }
 
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "ROLES_PERMISSIONS", joinColumns = { @JoinColumn(name = "ROLEID", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "PERMISSIONID", nullable = false, updatable = false) })
+    @JoinTable(name = "ROLES_PERMISSIONS", joinColumns = { @JoinColumn(name = "ROLE_ID", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "PERMISSION_ID", nullable = false, updatable = false) })
     public Set<Permission> getPermissions() {
         return permissions;
     }

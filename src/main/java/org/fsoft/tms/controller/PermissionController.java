@@ -1,7 +1,7 @@
-package com.example.demo.controller;
+package org.fsoft.tms.controller;
 
-import com.example.demo.entity.Permission;
-import com.example.demo.service.PermissionService;
+import org.fsoft.tms.entity.Permission;
+import org.fsoft.tms.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

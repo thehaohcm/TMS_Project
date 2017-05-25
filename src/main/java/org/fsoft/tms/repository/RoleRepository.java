@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package org.fsoft.tms.repository;
 
-import com.example.demo.entity.Role;
+import org.fsoft.tms.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Set;

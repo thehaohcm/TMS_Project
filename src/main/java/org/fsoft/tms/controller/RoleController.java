@@ -1,7 +1,7 @@
-package com.example.demo.controller;
+package org.fsoft.tms.controller;
 
-import com.example.demo.entity.Role;
-import com.example.demo.service.RoleService;
+import org.fsoft.tms.entity.Role;
+import org.fsoft.tms.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

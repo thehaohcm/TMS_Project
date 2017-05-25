@@ -1,9 +1,8 @@
-package com.example.demo.entity;
-
-import java.util.HashSet;
-import java.util.Set;
+package org.fsoft.tms.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 

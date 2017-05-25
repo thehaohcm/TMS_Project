@@ -1,8 +1,8 @@
-package com.example.demo.controller;
+package org.fsoft.tms.controller;
 
-import com.example.demo.entity.Course;
-import com.example.demo.service.CategoryService;
-import com.example.demo.service.CourseService;
+import org.fsoft.tms.entity.Course;
+import org.fsoft.tms.service.CategoryService;
+import org.fsoft.tms.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

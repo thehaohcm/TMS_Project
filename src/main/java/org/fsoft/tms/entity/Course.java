@@ -1,6 +1,7 @@
-package com.example.demo.entity;
+package org.fsoft.tms.entity;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Set;
 
 /**
@@ -17,6 +18,8 @@ public class Course {
     private String description;
 
     private Boolean active;
+
+    private Date createdDate;
 
     private Category category_course;
 
@@ -109,4 +112,14 @@ public class Course {
     public void setTopics(Set<Topic> topics) {
         this.topics = topics;
     }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+
 }

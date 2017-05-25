@@ -1,7 +1,7 @@
-package com.example.demo.service;
+package org.fsoft.tms.service;
 
-import com.example.demo.entity.Property;
-import com.example.demo.repository.PropertyRepository;
+import org.fsoft.tms.entity.Property;
+import org.fsoft.tms.repository.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

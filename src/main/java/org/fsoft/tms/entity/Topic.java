@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package org.fsoft.tms.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +11,7 @@ public class Topic implements Serializable{
     private User trainer;
     private String title;
     private String content;
+    private Boolean active;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,5 +61,13 @@ public class Topic implements Serializable{
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

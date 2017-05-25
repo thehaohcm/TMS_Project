@@ -1,7 +1,7 @@
-package com.example.demo.controller;
+package org.fsoft.tms.controller;
 
-import com.example.demo.entity.Category;
-import com.example.demo.service.CategoryService;
+import org.fsoft.tms.entity.Category;
+import org.fsoft.tms.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

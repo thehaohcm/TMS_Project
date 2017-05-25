@@ -1,13 +1,6 @@
-package com.example.demo.entity;
+package org.fsoft.tms.entity;
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "USERS_PROPERTIES")

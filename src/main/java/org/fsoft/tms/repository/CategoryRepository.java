@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package org.fsoft.tms.repository;
 
-import com.example.demo.entity.Category;
+import org.fsoft.tms.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

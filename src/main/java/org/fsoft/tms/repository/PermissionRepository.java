@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package org.fsoft.tms.repository;
 
-import com.example.demo.entity.Permission;
+import org.fsoft.tms.entity.Permission;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Set;

@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package org.fsoft.tms.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
