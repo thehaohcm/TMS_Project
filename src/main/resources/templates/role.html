@@ -7,7 +7,7 @@
 <body>
 
 <h1>Search Course</h1>
-<!--<form action="#" th:object="${seachInfo}" th:action="@{/tms/serpropertyABCgory/search}">-->
+<!--<form action="#" th:object="${seachInfo}" th:action="@{/tms/server/category/search}">-->
 <form action="#">
     <p>Select
         <select >
@@ -18,28 +18,24 @@
     <p><input type="submit" value="search"/></p>
 </form>
 
-<h1>Show list Course</h1>
+<h1>Show list Role</h1>
 <table border="2">
     <tr>
         <td>No</td>
         <td>Name</td>
-        <td>Description</td>
-        <td>Catelory</td>
         <td>Update</td>
         <td>Delete</td>
     </tr>
-    <tr th:each="item:${listCourse}">
+    <tr th:each="item:${listRole}">
         <td th:text="${item.id}"></td>
         <td th:text="${item.name}"></td>
-        <td th:text="${item.description}"></td>
-        <td th:text="${item.category_course.name}"></td>
-        <td><a th:href="@{/demo/server/course/update/{id}(id=${item.id})}">Update</a></td>
-        <td><a th:href="@{/demo/server/course/delete/{id}(id=${item.id})}">Delete</a></td>
+        <td><a th:href="@{/demo/server/role/update/{id}(id=${item.id})}">Update</a></td>
+        <td><a th:href="@{/demo/server/role/delete/{id}(id=${item.id})}">Delete</a></td>
     </tr>
 </table>
 
-<a th:href="@{/demo/server/course/add}">Add Category</a>
-<a th:href="@{/demo/server/course/addStaff}">Add Staff</a>
+<a th:href="@{/demo/server/role/add}">Add Role</a>
+<a th:href="@{/demo/server/role/addPermission}">Add permission</a>
 </body>
 </html>
 

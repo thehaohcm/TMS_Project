@@ -1,9 +1,8 @@
-package org.fsoft.tms.entity;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.web.bind.annotation.ResponseBody;
+package com.example.demo.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,21 +10,17 @@ import java.util.Set;
  */
 @Entity
 @Table(name="CATEGORIES")
-public class Category {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ID")
+public class Category implements Serializable{
+
     private Integer id;
 
-    @Column(name="NAME",nullable = false)
     private String name;
 
-    @Column(name="DESCRIPTION",nullable = true)
     private String description;
 
-    //forgein key
-    @OneToMany(mappedBy = "category_course",cascade = CascadeType.REMOVE)
-    private Set<Course> courses;
+    private Boolean active;
+
+    private Set<Course> courses = new HashSet<Course>(0);
 
     public Category(){
 
@@ -36,6 +31,9 @@ public class Category {
         this.description = description;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ID")
     public Integer getId() {
         return id;
     }
@@ -44,6 +42,7 @@ public class Category {
         this.id = id;
     }
 
+    @Column(name="NAME",nullable = false)
     public String getName() {
         return name;
     }
@@ -52,6 +51,7 @@ public class Category {
         this.name = name;
     }
 
+    @Column(name="DESCRIPTION",nullable = true)
     public String getDescription() {
         return description;
     }
@@ -60,11 +60,21 @@ public class Category {
         this.description = description;
     }
 
-//    public Set<Course> getCourses() {
-//        return courses;
-//    }
-//
-//    public void setCourses(Set<Course> courses) {
-//        this.courses = courses;
-//    }
+    @Column(name="ACTIVE", nullable = true)
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category_course")
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
 }

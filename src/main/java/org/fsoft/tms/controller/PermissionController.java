@@ -1,63 +1,57 @@
-package org.fsoft.tms.controller;
+package com.example.demo.controller;
 
-import org.fsoft.tms.entity.Permission;
-import org.fsoft.tms.repository.PermissionRepository;
+import com.example.demo.entity.Permission;
+import com.example.demo.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
- * Created by thehaohcm on 5/22/17.
+ * Created by DELL on 5/24/2017.
  */
-@RestController
-@RequestMapping(value="/tms/permission")
+@Controller
+@RequestMapping(value = "/demo/server/permission")
 public class PermissionController {
-
     @Autowired
-    private PermissionRepository permissionRepository;
+    private PermissionService permission;
 
-    @RequestMapping("/getall")
-    public List<Permission> getAllPermissions(){
-        return permissionRepository.findAll();
+    @RequestMapping(value = "/getall")
+    public String getAllCourse(Model model) {
+        model.addAttribute("listPermission", permission.getAllPermission());
+        return "permission";
     }
 
-    @RequestMapping(value="/add",method = RequestMethod.POST)
-    public boolean addPermission(@RequestBody Permission permission){
-        if(permission==null)
-            return false;
-        try {
-            permissionRepository.save(permission);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
+    @RequestMapping(value = "/add")
+    public String getPageAddCourse(Model model) {
+        model.addAttribute("permission", new Permission());
+        model.addAttribute("listPermission", permission.getAllPermission());
+        return "addPermission";
     }
 
-    @RequestMapping(value="/edit",method = RequestMethod.POST)
-    public boolean editPermission(@RequestBody Permission permission){
-        if(permission==null)
-            return false;
-        try {
-            permissionRepository.save(permission);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
+    @RequestMapping(value = "/addPermission")
+    public String addCourse(@ModelAttribute Permission c) {
+        permission.addPermission(c);
+        return "redirect:/demo/server/permission/getall";
     }
 
-    @RequestMapping(value="/remove",method = RequestMethod.POST)
-    public boolean removePermission(@RequestBody Permission permission){
-        if(permission==null)
-            return false;
-        try {
-            permissionRepository.save(permission);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
+    @RequestMapping(value = "/addRole")
+    public String addRole() {
+        permission.addRole();
+        return "redirect:/demo/server/permission/getall";
     }
+//    @RequestMapping(value = "/update/{id}")
+//    public String updateCourse(@PathVariable String id, Model model) {
+//        Role c = role.findOneCourse(Integer.parseInt(id));
+//        model.addAttribute("role", c);
+//        model.addAttribute("listRole", role.getAllRole());
+//        return "updateRole";
+//    }
+//
+//    @RequestMapping(value = "/updateRole")
+//    public String updateCourse(@ModelAttribute Course c) {
+//        role.(c);
+//        return "redirect:/demo/server/role/getall";
+//    }
 }

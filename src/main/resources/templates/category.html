@@ -6,8 +6,8 @@
 </head>
 <body>
 
-<h1>Search category</h1>
-<!--<form action="#" th:object="${seachInfo}" th:action="@{/tms/server/category/search}">-->
+<h1>Search property</h1>
+<!--<form action="#" th:object="${seachInfo}" th:action="@{/tms/serpropertyABCgory/search}">-->
 <form action="#">
     <p>Select
         <select >
@@ -31,12 +31,12 @@
         <td th:text="${item.id}"></td>
         <td th:text="${item.name}"></td>
         <td th:text="${item.description}"></td>
-        <td><a th:href="@{/tms/server/category/update/{id}(id=${item.id})}">Update</a></td>
-        <td><a th:href="@{/tms/server/category/delete/{id}(id=${item.id})}">Delete</a></td>
+        <td><a th:href="@{/demo/server/category/update/{id}(id=${item.id})}">Update</a></td>
+        <td><a th:href="@{/demo/server/category/delete/{id}(id=${item.id})}">Delete</a></td>
     </tr>
 </table>
 
-<a th:href="@{/tms/server/category/add}">Add Category</a>
+<a th:href="@{/demo/server/category/add}">Add Category</a>
 </body>
 </html>
 

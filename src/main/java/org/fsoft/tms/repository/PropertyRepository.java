@@ -1,10 +1,10 @@
-package org.fsoft.tms.repository;
+package com.example.demo.repository;
 
-import org.fsoft.tms.entity.Property;
+import com.example.demo.entity.Property;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Created by thehaohcm on 5/22/17.
+ * Created by DELL on 5/25/2017.
  */
-public interface PropertyRepository extends JpaRepository<Property,Integer> {
+public interface PropertyRepository extends JpaRepository<Property, Integer> {
 }

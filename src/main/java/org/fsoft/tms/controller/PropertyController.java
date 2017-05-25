@@ -1,64 +1,52 @@
-package org.fsoft.tms.controller;
+package com.example.demo.controller;
 
-import org.fsoft.tms.entity.Property;
-import org.fsoft.tms.repository.PropertyRepository;
+import com.example.demo.entity.Property;
+import com.example.demo.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
- * Created by thehaohcm on 5/22/17.
+ * Created by DELL on 5/24/2017.
  */
-
-@RestController
-@RequestMapping(value="/tms/property")
+@Controller
+@RequestMapping(value = "/demo/server/property")
 public class PropertyController {
-
     @Autowired
-    private PropertyRepository propertyRepository;
+    private PropertyService property;
 
-    @RequestMapping("/getall")
-    public List<Property> getAllPermission(){
-        return propertyRepository.findAll();
+    @RequestMapping(value = "/getall")
+    public String getAllCourse(Model model) {
+        model.addAttribute("listProperty", property.getAllProperty());
+        return "property";
     }
 
-    @RequestMapping(value="/add",method = RequestMethod.POST)
-    public boolean addProperty(@RequestBody Property property){
-        if(property==null)
-            return false;
-        try {
-            propertyRepository.save(property);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
+    @RequestMapping(value = "/add")
+    public String getPageAddCourse(Model model) {
+        model.addAttribute("property", new Property());
+        model.addAttribute("listProperty", property.getAllProperty());
+        return "addProperty";
     }
 
-    @RequestMapping(value="/edit",method = RequestMethod.POST)
-    public boolean editProperty(@RequestBody Property property){
-        if(property==null)
-            return false;
-        try {
-            propertyRepository.save(property);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
+    @RequestMapping(value = "/addProperty")
+    public String addCourse(@ModelAttribute Property c) {
+        property.addProperty(c);
+        return "redirect:/demo/server/property/getall";
     }
-
-    @RequestMapping(value="/remove",method = RequestMethod.POST)
-    public boolean removeProperty(@RequestBody Property property){
-        if(property==null)
-            return false;
-        try {
-            propertyRepository.save(property);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
-    }
+//
+//    @RequestMapping(value = "/update/{id}")
+//    public String updateCourse(@PathVariable String id, Model model) {
+//        Role c = role.findOneCourse(Integer.parseInt(id));
+//        model.addAttribute("role", c);
+//        model.addAttribute("listRole", role.getAllRole());
+//        return "updateRole";
+//    }
+//
+//    @RequestMapping(value = "/updateRole")
+//    public String updateCourse(@ModelAttribute Course c) {
+//        role.(c);
+//        return "redirect:/demo/server/role/getall";
+//    }
 }

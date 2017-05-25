@@ -1,101 +1,70 @@
-package org.fsoft.tms.entity;
+package com.example.demo.entity;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by thehaohcm on 5/19/17.
- */
-@Entity(name="USERS")
-public class User {
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
+@Table(name = "USERS")
+public class User implements java.io.Serializable {
 
     private Integer id;
-
     private String username;
-
     private String password;
+    private boolean active;
 
-    private Integer managerID;
+    private Set<UserProperty> userProperties = new HashSet<UserProperty>(0);
 
-    private Boolean active;
-
-    public Integer getRoleID() {
-        return roleID;
-    }
-
-    public void setRoleID(Integer roleID) {
-        this.roleID = roleID;
-    }
-
-    private Integer roleID;
-
-    //forgein key
+    private Role role;
 
     private User manager;
 
-    //User-User
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "manager")
     private Set<User> users;
 
-
-    private Role userrole;
-
-    //User-Course
-    @OneToMany(mappedBy = "user_course",cascade = CascadeType.REMOVE)
     private Set<Course> courses;
 
-    //User-UserProperties
-    @OneToMany(mappedBy = "user")
-    private Set<UserProperty> userProperties;
+    private Set<Course> traineeCourses;
 
+    private Set<Topic> topics;
 
-    //20h37 - 22-5-2017
-    //User-Couser_Trainees
-    private Set<Course> usercourses;
-
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name="COURSE_TRAINEES", joinColumns = {@JoinColumn(name="TRAINEEID",referencedColumnName = "ID")},inverseJoinColumns = {@JoinColumn(name="COURSEID",referencedColumnName = "ID")})
-    public Set<Course> getUsercourses() {
-        return usercourses;
+    public User() {
     }
 
-    public void setUsercourses(Set<Course> usercourses) {
-        this.usercourses = usercourses;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    //User-CourseTrainer
-    @OneToMany(mappedBy = "coursetraineruser",cascade = CascadeType.REMOVE)
-    private Set<CourseTrainer> courseTrainers;
-
-    public User(){
-
+    public User(String username, String password, Set<UserProperty> userProperties) {
+        this.username = username;
+        this.password = password;
+        this.userProperties = userProperties;
     }
 
-//    public User(String username, String password, Integer managerID, Boolean active, Set<User> users, User manager, Role role){//, Set<Course> courses) {
-//        this.username = username;
-//        this.password = password;
-//        this.managerID = managerID;
-//        this.active = active;
-//        this.users = users;
-//        this.manager = manager;
-//        this.role = role;
-//        //this.courses = courses;
-//    }
+    public User(String username, String password, boolean active, Set<UserProperty> userProperties) {
+
+        this.username = username;
+        this.password = password;
+        this.active = active;
+        this.userProperties = userProperties;
+    }
+
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ID",nullable = false)
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "ID", unique = true, nullable = false)
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    @Column(name="USERNAME",nullable = false)
+    @Column(name = "USERNAME", unique = false, nullable = false)
     public String getUsername() {
         return username;
     }
@@ -104,7 +73,7 @@ public class User {
         this.username = username;
     }
 
-    @Column(name="PASS",nullable = false)
+    @Column(name = "PASSWORD", unique = false, nullable = false)
     public String getPassword() {
         return password;
     }
@@ -113,43 +82,37 @@ public class User {
         this.password = password;
     }
 
-    @Column(name="MANAGERID")
-    public Integer getManagerID() {
-        return managerID;
-    }
-
-    public void setManagerID(Integer managerID) {
-        this.managerID = managerID;
-    }
-
-    @Column(name="ACTIVE", nullable = true)
-    public Boolean getActive() {
+    @Column(name = "ACTIVE", unique = false, nullable = false)
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
-//    public Set<UserProperty> getUserProperties() {
-//        return userProperties;
-//    }
-//
-//    public void setUserProperties(Set<UserProperty> userProperties) {
-//        this.userProperties = userProperties;
-//    }
 
-    //    public Set<User> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set<User> users) {
-//        this.users = users;
-//    }
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade=CascadeType.ALL)
+    public Set<UserProperty> getUserProperties() {
+        return this.userProperties;
+    }
 
-    //User-User
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="MANAGERID",insertable = false,updatable = false)
+    public void setUserProperties(Set<UserProperty> userProperties) {
+        this.userProperties = userProperties;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "ROLE_ID")
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "MANAGER_ID", nullable = true)
     public User getManager() {
         return manager;
     }
@@ -158,22 +121,39 @@ public class User {
         this.manager = manager;
     }
 
-    //User-Role
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="ROLEID",insertable = false,updatable = false)
-    public Role getRole() {
-        return userrole;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "manager")
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setRole(Role role) {
-        this.userrole = role;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
-//    public Set<Course> getCourses() {
-//        return courses;
-//    }
-//
-//    public void setCourses(Set<Course> courses) {
-//        this.courses = courses;
-//    }
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "staff")
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "trainees")
+    public Set<Course> getTraineeCourses() {
+        return traineeCourses;
+    }
+
+    public void setTraineeCourses(Set<Course> traineeCourses) {
+        this.traineeCourses = traineeCourses;
+    }
+
+    @OneToMany(mappedBy = "trainer")
+    public Set<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(Set<Topic> topics) {
+        this.topics = topics;
+    }
 }

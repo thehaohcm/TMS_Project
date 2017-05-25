@@ -1,17 +1,15 @@
-package org.fsoft.tms.entity;
-
-import org.omg.CORBA.PRIVATE_MEMBER;
+package com.example.demo.entity;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * Created by thehaohcm on 5/19/17.
  */
 @Entity
-@Table(name="Permissions")
-public class Permission {
+@Table(name="PERMISSIONS")
+public class Permission implements Serializable{
 
     private Integer id;
 
@@ -19,21 +17,21 @@ public class Permission {
 
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "permissions")
+
     private Set<Role> roles;
 
     public Permission(){
 
     }
 
-    public Permission(String name, String description) {
+    public Permission(String name, String description, Set<Role> roles) {
         this.name = name;
         this.description = description;
+        this.roles = roles;
     }
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="ID", nullable = false)
     public Integer getId() {
         return id;
     }
@@ -42,7 +40,6 @@ public class Permission {
         this.id = id;
     }
 
-    @Column(name="NAME", nullable = false)
     public String getName() {
         return name;
     }
@@ -51,7 +48,6 @@ public class Permission {
         this.name = name;
     }
 
-    @Column(name="DESCRIPTION", nullable = false)
     public String getDescription() {
         return description;
     }
@@ -60,13 +56,12 @@ public class Permission {
         this.description = description;
     }
 
-    //@ManyToMany(mappedBy = "permissions")
-//    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "permissions")
-//    public Set<Role> getRoles() {
-//        return roles;
-//    }
-//
-//    public void setRoles(Set<Role> roles) {
-//        this.roles = roles;
-//    }
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "permissions")
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }

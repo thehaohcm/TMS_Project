@@ -1,8 +1,7 @@
-package org.fsoft.tms.service;
+package com.example.demo.service;
 
-import org.fsoft.tms.entity.Category;
-import org.fsoft.tms.entity.User;
-import org.fsoft.tms.repository.CategoryRepository;
+import com.example.demo.entity.Category;
+import com.example.demo.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,7 @@ import java.util.List;
  * Created by DELL on 5/23/2017.
  */
 @Service
-public class ServiceCategory {
+public class CategoryService {
     @Autowired
     private CategoryRepository service;
 
@@ -37,11 +36,6 @@ public class ServiceCategory {
 
     public Category findOneCategory(int id) {
         return service.findOne(id);
-    }
-
-    public List<Category> searchCategory(String name)
-    {
-        return service.findAllByNameIsLike(name);
     }
 
 }

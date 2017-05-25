@@ -1,14 +1,13 @@
-package org.fsoft.tms.repository;
+package com.example.demo.repository;
 
-import org.fsoft.tms.entity.Permission;
+import com.example.demo.entity.Permission;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import java.util.Set;
 
 /**
- * Created by thehaohcm on 5/19/17.
+ * Created by DELL on 5/24/2017.
  */
-public interface PermissionRepository extends JpaRepository<Permission, Integer> {
-
-    public List<Permission> findAll();
+public interface PermissionRepository extends JpaRepository<Permission,Integer> {
+    public Set<Permission> findPermissionABCSById(Integer id);
 }

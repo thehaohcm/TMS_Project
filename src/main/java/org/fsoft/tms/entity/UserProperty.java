@@ -1,77 +1,81 @@
-package org.fsoft.tms.entity;
+package com.example.demo.entity;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-/**
- * Created by thehaohcm on 5/22/17.
- */
 @Entity
-@Table(name="USER_PROPERTIES")
-@IdClass(UserPropertyKey.class)
-public class UserProperty implements Serializable {
+@Table(name = "USERS_PROPERTIES")
+@AssociationOverrides({
+        @AssociationOverride(name = "pk.user",
+                joinColumns = @JoinColumn(name = "USER_ID")),
+        @AssociationOverride(name = "pk.property",
+                joinColumns = @JoinColumn(name = "PROPERTY_ID")) })
+public class UserProperty implements java.io.Serializable {
 
-//    @Column(name="USERID",nullable = false)
-//    private Integer userid;
-//    @Column(name="PROPERTYID",nullable = false)
-//    private Integer propertyId;
-
-
-
-    @Id
-    @ManyToOne
-    @JoinColumn(name="USERID",nullable = false)
-    private User user;
-
-    @Id
-    @ManyToOne
-    @JoinColumn(name="PROPERTYID",nullable = false)
-    private Property property;
-
-    @Column(name="VALUE",nullable = false)
+    private UserPropertyId pk = new UserPropertyId();
     private String value;
 
-    public UserProperty(){
-
+    public UserProperty() {
     }
 
+    @EmbeddedId
+    public UserPropertyId getPk() {
+        return pk;
+    }
+
+    public void setPk(UserPropertyId pk) {
+        this.pk = pk;
+    }
+
+    @Transient
     public User getUser() {
-        return user;
+        return getPk().getUser();
     }
 
     public void setUser(User user) {
-        this.user = user;
+        getPk().setUser(user);
     }
 
+    @Transient
     public Property getProperty() {
-        return property;
+        return getPk().getProperty();
     }
 
     public void setProperty(Property property) {
-        this.property = property;
+        getPk().setProperty(property);
     }
 
-//    public Integer getUserid() {
-//        return userid;
-//    }
-//
-//    public void setUserid(Integer userid) {
-//        this.userid = userid;
-//    }
-//
-//    public Integer getPropertyId() {
-//        return propertyId;
-//    }
-//
-//    public void setPropertyId(Integer propertyId) {
-//        this.propertyId = propertyId;
-//    }
-
+    @Column(name = "VALUE", nullable = false)
     public String getValue() {
         return value;
     }
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        UserProperty that = (UserProperty) o;
+
+        if (getPk() != null ? !getPk().equals(that.getPk())
+                : that.getPk() != null)
+            return false;
+
+        return true;
+    }
+
+    public int hashCode() {
+        return (getPk() != null ? getPk().hashCode() : 0);
     }
 }

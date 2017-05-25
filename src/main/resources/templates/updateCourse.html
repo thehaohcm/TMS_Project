@@ -6,10 +6,9 @@
 </head>
 <body>
 <h1>Form Update Category</h1>
-<form action="#" th:action="@{/tms/server/course/updateCourse}" th:object="${course}" method="post">
+<form action="#" th:action="@{/demo/server/course/updateCourse}" th:object="${course}" method="post">
     <p>Name <input type="text" th:field="*{name}"/></p>
     <p>Description <textarea th:field="*{description}"/></p>
-    <p>Create DateTime<input type="date" th:field="*{createdDate}"/></p>
     <p>Category
         <select th:field="*{category_course}">
             <option th:each="item:${listCategory}" th:value="${item.id}" th:text="${item.name}"/>

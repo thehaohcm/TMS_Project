@@ -1,98 +1,57 @@
-package org.fsoft.tms.controller;
+package com.example.demo.controller;
 
-import org.fsoft.tms.entity.Permission;
-import org.fsoft.tms.entity.Role;
-import org.fsoft.tms.repository.PermissionRepository;
-import org.fsoft.tms.repository.RoleRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.example.demo.entity.Role;
+import com.example.demo.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Created by thehaohcm on 5/22/17.
+ * Created by DELL on 5/24/2017.
  */
-@RestController
-@RequestMapping(value="/tms/role")
+@Controller
+@RequestMapping(value = "/demo/server/role")
 public class RoleController {
-
-    private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
-
     @Autowired
-    private RoleRepository roleRepository;
+    private RoleService role;
 
-    @Autowired
-    private PermissionRepository permissionRepository;
+    @RequestMapping(value = "/getall")
+    public String getAllCourse(Model model) {
+        model.addAttribute("listRole", role.getAllRole());
+        return "role";
+    }
 
-//    @GetMapping(path="/add")
-//    public @ResponseBody
-//    Boolean addNewRole(@RequestParam String name){
-//        try {
-//            Role r = new Role();
-//            r.setName(name);
-//            roleRepository.save(r);
-//        }catch(Exception ex){
-//            return false;
-//        }
-//        return true;
+    @RequestMapping(value = "/add")
+    public String getPageAddCourse(Model model) {
+        model.addAttribute("role", new Role());
+        model.addAttribute("listRole", role.getAllRole());
+        return "addRole";
+    }
+
+    @RequestMapping(value = "/addRole")
+    public String addCourse(@ModelAttribute Role c) {
+        role.addRole(c);
+        return "redirect:/demo/server/role/getall";
+    }
+
+    @RequestMapping(value = "/addPermission")
+    public String addRolePermission() {
+        role.addPermissionForRole();
+        return "redirect:/demo/server/role/getall";
+    }
+//    @RequestMapping(value = "/update/{id}")
+//    public String updateCourse(@PathVariable String id, Model model) {
+//        Role c = role.findOneCourse(Integer.parseInt(id));
+//        model.addAttribute("role", c);
+//        model.addAttribute("listRole", role.getAllRole());
+//        return "updateRole";
 //    }
-
-    @RequestMapping("/getall")
-    public List<Role> getAllRole(){
-
-        return roleRepository.findAll();
-    }
-
-
-
-    @RequestMapping("/findByID")
-    public Role findRoleByID(Integer id){
-        Role r=roleRepository.findOne(id);
-        return r;
-    }
-
-    @RequestMapping("/permission")
-    public Set<Permission> setPermissions(){
-        return roleRepository.findOne(1).getPermissions();
-    }
-
-    @RequestMapping(value="/add",method = RequestMethod.POST)
-    public boolean addRole(@RequestBody Role role){
-        if(role==null)
-            return false;
-        try {
-            roleRepository.save(role);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
-    }
-
-    @RequestMapping(value="/edit",method = RequestMethod.POST)
-    public boolean editRole(@RequestBody Role role){
-        if(role==null)
-            return false;
-        try {
-            roleRepository.save(role);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
-    }
-
-    @RequestMapping(value="/remove",method = RequestMethod.POST)
-    public boolean removeRole(@RequestBody Role role){
-        if(role==null)
-            return false;
-        try {
-            roleRepository.save(role);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
-    }
+//
+//    @RequestMapping(value = "/updateRole")
+//    public String updateCourse(@ModelAttribute Course c) {
+//        role.(c);
+//        return "redirect:/demo/server/role/getall";
+//    }
 }

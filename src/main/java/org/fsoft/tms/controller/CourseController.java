@@ -1,62 +1,64 @@
-package org.fsoft.tms.controller;
+package com.example.demo.controller;
 
-import org.fsoft.tms.entity.Course;
-import org.fsoft.tms.repository.CourseRepository;
+import com.example.demo.entity.Course;
+import com.example.demo.service.CategoryService;
+import com.example.demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
- * Created by thehaohcm on 5/22/17.
+ * Created by DELL on 5/24/2017.
  */
-@RestController
-@RequestMapping(value="/tms/course")
+@Controller
+@RequestMapping(value = "/demo/server/course")
 public class CourseController {
     @Autowired
-    private CourseRepository courseRepository;
+    private CourseService course;
 
-    @RequestMapping("/getall")
-    public List<Course> getAllCourse(){
-        return courseRepository.findAll();
+    @Autowired
+    private CategoryService category;
+
+    @RequestMapping(value = "/getall")
+    public String getAllCourse(Model model) {
+        model.addAttribute("listCourse", course.getAllCourse());
+        return "course";
     }
 
-    @RequestMapping(value="/add",method= RequestMethod.POST)
-    public boolean addCourse(@RequestBody Course course){
-        if(course==null)
-            return false;
-        try {
-            courseRepository.save(course);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
+    @RequestMapping(value = "/add")
+    public String getPageAddCourse(Model model) {
+        model.addAttribute("course", new Course());
+        model.addAttribute("listCategory", category.getListCategory());
+        return "addcourse";
     }
 
-    @RequestMapping(value="/edit",method=RequestMethod.POST)
-    public boolean editCourse(@RequestBody Course course){
-        if(course==null)
-            return false;
-        try {
-            courseRepository.save(course);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
+    @RequestMapping(value = "/addCourse")
+    public String addCourse(@ModelAttribute Course c) {
+        c.setActive(true);
+        course.addCourse(c);
+        return "redirect:/demo/server/course/getall";
     }
 
-    @RequestMapping(value="/remove",method = RequestMethod.POST)
-    public boolean removeCourse(@RequestBody Course course){
-        if(course==null)
-            return false;
-        try {
-            courseRepository.delete(course);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
+    @RequestMapping(value = "/update/{id}")
+    public String updateCourse(@PathVariable String id, Model model) {
+        Course c = course.findOneCourse(Integer.parseInt(id));
+        model.addAttribute("course", c);
+        model.addAttribute("listCategory", category.getListCategory());
+        return "updateCourse";
+    }
+
+    @RequestMapping(value = "/updateCourse")
+    public String updateCourse(@ModelAttribute Course c) {
+        course.updateCourse(c);
+        return "redirect:/demo/server/course/getall";
+    }
+
+    @RequestMapping(value = "/addStaff")
+    public String addStaff() {
+        course.addTrainees();
+        return "redirect:/demo/server/course/getall";
     }
 }

@@ -1,10 +1,10 @@
-package org.fsoft.tms.repository;
+package com.example.demo.repository;
 
-import org.fsoft.tms.entity.Topic;
+import com.example.demo.entity.Topic;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Created by thehaohcm on 5/21/17.
+ * Created by DELL on 5/25/2017.
  */
-public interface TopicRepository extends JpaRepository<Topic,Integer> {
+public interface TopicRepository extends JpaRepository<Topic, Integer>{
 }

@@ -1,82 +1,64 @@
-package org.fsoft.tms.controller;
+package com.example.demo.controller;
 
-import org.fsoft.tms.entity.Course;
-import org.fsoft.tms.entity.CourseTrainer;
-import org.fsoft.tms.entity.User;
-import org.fsoft.tms.repository.CourseTrainerRepository;
-import org.fsoft.tms.repository.UserRepository;
-import org.omg.PortableInterceptor.USER_EXCEPTION;
+import com.example.demo.entity.User;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Set;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Created by thehaohcm on 5/22/17.
+ * Created by DELL on 5/24/2017.
  */
-@RestController
-@RequestMapping(value="/tms/user")
+@Controller
+@RequestMapping(value = "/demo/server/user")
 public class UserController {
-
     @Autowired
-    private UserRepository userRepository;
+    private UserService user;
 
-
-    @RequestMapping("/getall")
-    public List<User> getAllUsers(){
-        return userRepository.findAll();
+    @RequestMapping(value = "/getall")
+    public String getAllCourse(Model model) {
+        model.addAttribute("listUser", user.getAllUser());
+        return "user";
     }
 
-    @RequestMapping(value="/{id}",method = RequestMethod.GET)
-    public User getInfobyID(@PathVariable Integer id){
-        return userRepository.findOne(id);
+    @RequestMapping(value = "/add")
+    public String getPageAddCourse(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("listUser", user.getAllUser());
+        return "addUser";
     }
 
-    @RequestMapping(value="/searchByName/{name}",method=RequestMethod.GET)
-    public User getInfoByName(@PathVariable String name){
-        return (User) userRepository.findUserByUsername(name);
+    @RequestMapping(value = "/addUser")
+    public String addCourse(@ModelAttribute User c) {
+        c.setActive(true);
+        user.addUser(c);
+        return "redirect:/demo/server/user/getall";
     }
 
-    @RequestMapping("/course")
-    public Set<Course> getUserCouse(){
-        return userRepository.findOne(4).getUsercourses();
-        //return userRepository.findAll()
+    @RequestMapping(value = "/addProperty")
+    public String addRolePermission() {
+        user.addPropertyForUser();
+        return "redirect:/demo/server/user/getall";
     }
 
-    @RequestMapping(value="/add",method = RequestMethod.POST)
-    public boolean addUser(@RequestBody User user){
-        if(user==null)
-            return false;
-        try {
-            userRepository.save(user);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
+    @RequestMapping(value = "/addRole")
+    public String addRole() {
+        user.addTopic();
+        return "redirect:/demo/server/user/getall";
     }
-
-    @RequestMapping(value="/edit",method = RequestMethod.POST)
-    public boolean editUser(@RequestBody User user){
-        if(user==null)
-            return false;
-        try {
-            userRepository.save(user);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
-    }
-
-    @RequestMapping(value="/remove",method = RequestMethod.POST)
-    public boolean removeUser(@RequestBody User user){
-        if(user==null)
-            return false;
-        try {
-            userRepository.save(user);
-        }catch(Exception ex){
-            return false;
-        }
-        return true;
-    }
+//    @RequestMapping(value = "/update/{id}")
+//    public String updateCourse(@PathVariable String id, Model model) {
+//        Role c = role.findOneCourse(Integer.parseInt(id));
+//        model.addAttribute("role", c);
+//        model.addAttribute("listRole", role.getAllRole());
+//        return "updateRole";
+//    }
+//
+//    @RequestMapping(value = "/updateRole")
+//    public String updateCourse(@ModelAttribute Course c) {
+//        role.(c);
+//        return "redirect:/demo/server/role/getall";
+//    }
 }

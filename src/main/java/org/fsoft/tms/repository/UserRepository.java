@@ -1,19 +1,13 @@
-package org.fsoft.tms.repository;
+package com.example.demo.repository;
 
-import org.fsoft.tms.entity.Property;
-import org.fsoft.tms.entity.User;
+import com.example.demo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Set;
 
 /**
- * Created by thehaohcm on 5/19/17.
+ * Created by DELL on 5/25/2017.
  */
-@Transactional
-public interface UserRepository extends JpaRepository<User,Integer> {
-    //public List<User> findAll();
-     public List<User> findAllByRoleID(Integer roleID);
-    public List<User> findUserByUsername(String name);
-
+public interface UserRepository extends JpaRepository<User, Integer> {
+    public Set<User> findAllById(Integer id);
 }

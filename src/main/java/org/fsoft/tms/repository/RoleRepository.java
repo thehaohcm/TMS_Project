@@ -1,16 +1,13 @@
-package org.fsoft.tms.repository;
+package com.example.demo.repository;
 
-import org.fsoft.tms.entity.Role;
+import com.example.demo.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Set;
 
 /**
- * Created by thehaohcm on 5/18/17.
+ * Created by DELL on 5/24/2017.
  */
-@Transactional
 public interface RoleRepository extends JpaRepository<Role,Integer> {
-    //List<Role> findRoleByName(String name);
+    public Set<Role> findAllById(Integer id);
 }

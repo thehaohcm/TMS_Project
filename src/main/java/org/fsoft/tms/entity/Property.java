@@ -1,30 +1,26 @@
-package org.fsoft.tms.entity;
-
-import javax.annotation.Generated;
-import javax.persistence.*;
+package com.example.demo.entity;
+import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by thehaohcm on 5/22/17.
- */
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 @Entity
-@Table(name="PROPERTIES")
-public class Property {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+@Table(name = "PROPERTIES")
+public class Property implements java.io.Serializable {
+
     private Integer id;
-
-    @Column(name="NAME", nullable = false)
     private String name;
-
-    @Column(name="DESCRIPTION",nullable = true)
     private String description;
+    private Set<UserProperty> userProperties = new HashSet<UserProperty>(0);
 
-    @OneToMany(mappedBy = "property")
-    private Set<UserProperty> userProperties;
-
-    public Property(){
-
+    public Property() {
     }
 
     public Property(String name, String description) {
@@ -32,22 +28,33 @@ public class Property {
         this.description = description;
     }
 
+    public Property(String name, String description, Set<UserProperty> userProperties) {
+        this.name = name;
+        this.description = description;
+        this.userProperties = userProperties;
+    }
+
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "ID", unique = true, nullable = false)
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer categoryId) {
+        this.id = categoryId;
     }
 
+    @Column(name = "NAME", nullable = false)
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    @Column(name = "DESCRIPTION", nullable = false)
     public String getDescription() {
         return description;
     }
@@ -56,11 +63,13 @@ public class Property {
         this.description = description;
     }
 
-//    public Set<UserProperty> getUserProperties() {
-//        return userProperties;
-//    }
-//
-//    public void setUserProperties(Set<UserProperty> userProperties) {
-//        this.userProperties = userProperties;
-//    }
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.property")
+    public Set<UserProperty> getUserProperties() {
+        return this.userProperties;
+    }
+
+    public void setUserProperties(Set<UserProperty> userProperties) {
+        this.userProperties = userProperties;
+    }
+
 }

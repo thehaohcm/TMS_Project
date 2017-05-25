@@ -5,15 +5,10 @@
     <title>Manager Category</title>
 </head>
 <body>
-<h1>Form Add Category</h1>
-<form action="#" th:action="@{/demo/server/course/addCourse}" th:object="${course}" method="post">
+<h1>Form Add Permisssion</h1>
+<form action="#" th:action="@{/demo/server/permission/addPermission}" th:object="${permission}" method="post">
     <p>Name <input type="text" th:field="*{name}"/></p>
     <p>Description <textarea th:field="*{description}"/></p>
-    <p>Category
-        <select th:field="*{category_course}">
-            <option th:each="item:${listCategory}" th:value="${item.id}" th:text="${item.name}"/>
-        </select>
-    </p>
     <p><input type="submit" value="submit"/><input type="reset" value="reset"/></p>
 </form>
 </body>
