@@ -60,6 +60,6 @@ public class CategoryController {
     @RequestMapping(value = "/login")
     public String login() {
         //category.updateCategory(cat);
-        return "indexadmin";
+        return "login";
     }
 }
