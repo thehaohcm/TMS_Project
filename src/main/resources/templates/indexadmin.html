@@ -60,7 +60,7 @@
                      <!-- Messages: style can be found in dropdown.less-->
                      <!-- Tasks: style can be found in dropdown.less -->
                      <li class="dropdown tasks-menu">
-                        <a href="pages/calendaradmin.html" class="button" th:href="@{pages/calendaradmin.html}">
+                        <a href="calendaradmin.html" class="button" th:href="@{calendaradmin.html}">
                         <i class="fa fa-calendar"></i>
                         <span class="label label-danger"></span>
                         </a>
@@ -159,7 +159,7 @@
          </a>
          </li>
          <li class="treeview">
-         <a href="../static/pages/calendaradmin.html">
+         <a href="calendaradmin.html" th:href="calendaradmin.html">
          <i class="fa fa-calendar"></i> <span>Calendar</span>
          </a>
          </li>
@@ -244,7 +244,7 @@
       <script src="../static/dist/js/demo.js" th:src="@{/dist/js/demo.js}"></script>
       <!-- fullCalendar 2.2.5 -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js}"></script>
-      <script src="../static/plugins/fullcalendar/fullcalendar.min.js"></script>
+      <script src="../static/plugins/fullcalendar/fullcalendar.min.js" th:src="@{/plugins/fullcalendar/fullcalendar.min.js}"></script>
       <!-- Page specific script -->
       
       </body>
