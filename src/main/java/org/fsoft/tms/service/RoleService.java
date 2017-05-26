@@ -15,32 +15,32 @@ import java.util.List;
 @Service
 public class RoleService {
     @Autowired
-    RoleRepository service;
+    RoleRepository roleRepository;
 
     @Autowired
     PermissionRepository permissionService;
 
     public List<Role> getAllRole() {
-        return service.findAll();
+        return roleRepository.findAll();
     }
 
     public void addRole(Role role) {
-        service.save(role);
+        roleRepository.save(role);
     }
 
     public Role findOneCourse(int id) {
-        return service.findOne(id);
+        return roleRepository.findOne(id);
     }
 
     public void updateRole(Role c) {
-        Role temp = service.findOne(c.getId());
+        Role temp = roleRepository.findOne(c.getId());
         temp.setName(c.getName());
-        service.save(temp);
+        roleRepository.save(temp);
     }
 
     public void addPermissionForRole() {
-        Role temp = service.findOne(1);
+        Role temp = roleRepository.findOne(1);
         temp.setPermissions(permissionService.findPermissionABCSById(1));
-        service.save(temp);
+        roleRepository.save(temp);
     }
 }

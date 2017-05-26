@@ -14,33 +14,33 @@ import java.util.List;
 @Service
 public class PermissionService {
     @Autowired
-    PermissionRepository service;
+    PermissionRepository permissionRepository;
 
     @Autowired
     RoleRepository roleRepository;
 
     public List<Permission> getAllPermission() {
-        return service.findAll();
+        return permissionRepository.findAll();
     }
 
     public void addPermission(Permission role) {
-        service.save(role);
+        permissionRepository.save(role);
     }
 
     public Permission findOnePermisison(int id) {
-        return service.findOne(id);
+        return permissionRepository.findOne(id);
     }
 
     public void updatePermission(Permission c) {
-        Permission temp = service.findOne(c.getId());
+        Permission temp = permissionRepository.findOne(c.getId());
         temp.setName(c.getName());
         temp.setDescription(c.getDescription());
-        service.save(temp);
+        permissionRepository.save(temp);
     }
 
     public  void addRole() {
-        Permission temp = service.findOne(1);
+        Permission temp = permissionRepository.findOne(1);
         temp.setRoles(roleRepository.findAllById(1));
-        service.save(temp);
+        permissionRepository.save(temp);
     }
 }

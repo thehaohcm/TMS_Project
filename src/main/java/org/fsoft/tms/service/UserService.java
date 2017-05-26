@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class UserService {
     @Autowired
-    UserRepository service;
+    UserRepository userRepository;
 
     @Autowired
     PropertyRepository propertyRepository;
@@ -28,22 +28,22 @@ public class UserService {
     TopicRepository topicRepository;
 
     public List<User> getAllUser() {
-        return service.findAll();
+        return userRepository.findAll();
     }
 
     public void addUser(User u) {
-        service.save(u);
+        userRepository.save(u);
     }
 
     public User findOneUser(int id) {
-        return service.findOne(id);
+        return userRepository.findOne(id);
     }
 
     public void updateUser(User c) {
-        User temp = service.findOne(c.getId());
+        User temp = userRepository.findOne(c.getId());
         temp.setUsername(c.getUsername());
         temp.setPassword(c.getPassword());
-        service.save(temp);
+        userRepository.save(temp);
     }
 
     public void addPropertyForUser() {
@@ -63,7 +63,7 @@ public class UserService {
         userProperty.setValue("Tran Manh Cam");
 
         temp.getUserProperties().add(userProperty);
-        service.save(temp);
+        userRepository.save(temp);
 
     }
 
@@ -75,7 +75,7 @@ public class UserService {
 
         Role role = roleRepository.findOne(2);
         temp.setRole(role);
-        service.save(temp);
+        userRepository.save(temp);
     }
 
     public void addManager() {
@@ -87,7 +87,7 @@ public class UserService {
         Role role1 = roleRepository.findOne(2);
         temp1.setRole(role1);
         temp1.setManager(null);
-        service.save(temp1);
+        userRepository.save(temp1);
 
         User temp = new User();
         temp.setActive(false);
@@ -97,18 +97,18 @@ public class UserService {
         Role role = roleRepository.findOne(2);
         temp.setRole(role);
 
-        temp.setManager(service.findOne(1));
-        service.save(temp);
+        temp.setManager(userRepository.findOne(1));
+        userRepository.save(temp);
     }
 
     public void addCourse() {
-        User temp1 = service.findOne(2);
+        User temp1 = userRepository.findOne(2);
         temp1.setTraineeCourses(courseRepository.findAllById(3));
-        service.save(temp1);
+        userRepository.save(temp1);
     }
 
     public void addTopic() {
-        User temp1 = service.findOne(7);
+        User temp1 = userRepository.findOne(7);
         Course tempCourse = courseRepository.findOne(2);
         Topic topic = new Topic();
         topic.setTrainer(temp1);
