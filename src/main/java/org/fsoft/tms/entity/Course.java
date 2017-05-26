@@ -21,7 +21,7 @@ public class Course {
 
     private Date createdDate;
 
-    private Category category_course;
+    private Category category;
 
     private User staff;
 
@@ -33,11 +33,11 @@ public class Course {
 
     }
 
-    public Course(String name, String description, Boolean active, Category category_course) {
+    public Course(String name, String description, Boolean active, Category category) {
         this.name = name;
         this.description = description;
         this.active = active;
-        this.category_course = category_course;
+        this.category = category;
     }
 
     @Id
@@ -68,12 +68,12 @@ public class Course {
 
     @ManyToOne
     @JoinColumn(name = "CAT_ID")
-    public Category getCategory_course() {
-        return category_course;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategory_course(Category category_course) {
-        this.category_course = category_course;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Boolean getActive() {
