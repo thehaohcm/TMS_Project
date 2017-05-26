@@ -14,40 +14,40 @@ import java.util.List;
 @Service
 public class CourseService {
     @Autowired
-    private CourseRepository service;
+    private CourseRepository courseRepository;
 
     @Autowired
     private UserRepository userRepository;
 
     public List<Course> getAllCourse() {
-        return service.findAll();
+        return courseRepository.findAll();
     }
 
     public void addCourse(Course course) {
-        service.save(course);
+        courseRepository.save(course);
     }
 
     public Course findOneCourse(int id) {
-        return service.findOne(id);
+        return courseRepository.findOne(id);
     }
 
     public void updateCourse(Course c) {
-        Course temp = service.findOne(c.getId());
+        Course temp = courseRepository.findOne(c.getId());
         temp.setName(c.getName());
         temp.setDescription(c.getDescription());
-        temp.setCategory_course(c.getCategory_course());
-        service.save(temp);
+        temp.setCategory(c.getCategory());
+        courseRepository.save(temp);
     }
 
     public void addTrainingStaff() {
-        Course temp = service.findOne(2);
+        Course temp = courseRepository.findOne(2);
         temp.setStaff(userRepository.findOne(1));
-        service.save(temp);
+        courseRepository.save(temp);
     }
 
     public  void addTrainees() {
-        Course temp = service.findOne(2);
+        Course temp = courseRepository.findOne(2);
         temp.setTrainees(userRepository.findAllById(3));
-        service.save(temp);
+        courseRepository.save(temp);
     }
 }

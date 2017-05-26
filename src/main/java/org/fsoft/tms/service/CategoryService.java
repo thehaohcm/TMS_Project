@@ -13,29 +13,29 @@ import java.util.List;
 @Service
 public class CategoryService {
     @Autowired
-    private CategoryRepository service;
+    private CategoryRepository categoryRepository;
 
     public List<Category> getListCategory() {
-        return service.findAll();
+        return categoryRepository.findAll();
     }
 
     public void addCategory(Category cat) {
-        service.save(cat);
+        categoryRepository.save(cat);
     }
 
     public void deleteCategory(int id) {
-        service.delete(id);
+        categoryRepository.delete(id);
     }
 
     public void updateCategory(Category cat) {
-        Category temp = service.findOne(cat.getId());
+        Category temp = categoryRepository.findOne(cat.getId());
         temp.setName(cat.getName());
         temp.setDescription(cat.getDescription());
-        service.save(temp);
+        categoryRepository.save(temp);
     }
 
     public Category findOneCategory(int id) {
-        return service.findOne(id);
+        return categoryRepository.findOne(id);
     }
 
 }

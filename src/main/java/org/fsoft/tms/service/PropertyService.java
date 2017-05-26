@@ -13,24 +13,24 @@ import java.util.List;
 @Service
 public class PropertyService {
     @Autowired
-    PropertyRepository service;
+    PropertyRepository propertyRepository;
 
     public List<Property> getAllProperty() {
-        return service.findAll();
+        return propertyRepository.findAll();
     }
 
     public void addProperty(Property role) {
-        service.save(role);
+        propertyRepository.save(role);
     }
 
     public Property findOneProperty(int id) {
-        return service.findOne(id);
+        return propertyRepository.findOne(id);
     }
 
     public void updateProperty(Property c) {
-        Property temp = service.findOne(c.getId());
+        Property temp = propertyRepository.findOne(c.getId());
         temp.setName(c.getName());
         temp.setDescription(c.getDescription());
-        service.save(temp);
+        propertyRepository.save(temp);
     }
 }

@@ -56,4 +56,10 @@ public class CategoryController {
         category.updateCategory(cat);
         return "redirect:/demo/server/category/getall";
     }
+
+    @RequestMapping(value = "/login")
+    public String login() {
+        //category.updateCategory(cat);
+        return "indexadmin";
+    }
 }
