@@ -35,7 +35,7 @@ public class CourseService {
         Course temp = service.findOne(c.getId());
         temp.setName(c.getName());
         temp.setDescription(c.getDescription());
-        temp.setCategory_course(c.getCategory_course());
+        temp.setCategory(c.getCategory());
         service.save(temp);
     }
 

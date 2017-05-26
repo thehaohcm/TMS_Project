@@ -69,7 +69,7 @@ public class Category implements Serializable{
         this.active = active;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category_course")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
     public Set<Course> getCourses() {
         return courses;
     }
