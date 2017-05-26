@@ -1,6 +1,6 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
+<html>
+<head xmlns:th="http://www.thymeleaf.org" lang="en">
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width= device-width,initital-scale=1"/>
@@ -8,13 +8,13 @@
 <title>Login</title>
 
 <link href="../static/bootstrap-3.3.7/dist/css/bootstrap.min.css.map.css" rel="stylesheet" type="text/css" th:href="@{/bootstrap-3.3.7/dist/css/bootstrap.min.css.map.css}"/>
-<link href="../../static/login.css" rel="stylesheet" type="text/css" th:href="@{/login.css}"/>
+<link href="../static/login.css" rel="stylesheet" type="text/css" th:href="@{/login.css}"/>
 </head>
 
 <body>
 <div class="vid-container">
-  <video class="bgvid" autoplay="autoplay" muted="muted" preload="auto" loop="loop">
-      <source src="../static/login/12345.mp4" type="video/mp4" th:src="@{/login/12345.mp4}"/>
+  <video class="bgvid" autoplay muted preload="auto" loop>
+      <source src="../static/login/12345.mp4" type="video/mp4" th:src="@{/login/12345.mp4}"></source>
   </video>
   
   <div class="inner-container">
@@ -29,7 +29,7 @@
   </div>
 </div>
 
-<script src="../../static/bootstrap-3.3.7/dist/js/bootstrap.min.js" th:src="@{/bootstrap-3.3.7/dist/js/bootstrap.min.js}"></script>
-<script src="../../static/bootstrap-3.3.7/js/jquery-3.2.1.min.js" th:src="@{/bootstrap-3.3.7/js/jquery-3.2.1.min.js}"></script>
+<script  src="../static/bootstrap-3.3.7/dist/js/bootstrap.min.js" th:src="@{/bootstrap-3.3.7/dist/js/bootstrap.min.js}"></script>
+<script src="../static/bootstrap-3.3.7/js/jquery-3.2.1.min.js" th:src="@{/bootstrap-3.3.7/js/jquery-3.2.1.min.js}"></script>
 </body>
 </html>
