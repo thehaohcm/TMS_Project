@@ -7,19 +7,19 @@
       <!-- Tell the browser to be responsive to screen width -->
       <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
       <!-- Bootstrap 3.3.5 -->
-      <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css">
       <!-- Font Awesome -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
       <!-- Ionicons -->
       <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
       <!-- fullCalendar 2.2.5-->
-      <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.min.css">
-      <link rel="stylesheet" href="../plugins/fullcalendar/fullcalendar.print.css" media="print">
+      <link rel="stylesheet" href="../../static/plugins/fullcalendar/fullcalendar.min.css">
+      <link rel="stylesheet" href="../../static/plugins/fullcalendar/fullcalendar.print.css" media="print">
       <!-- Theme style -->
-      <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+      <link rel="stylesheet" href="../../static/dist/css/AdminLTE.min.css">
       <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-      <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+      <link rel="stylesheet" href="../../static/dist/css/skins/_all-skins.min.css">
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]>
@@ -52,7 +52,7 @@
                      <!-- Messages: style can be found in dropdown.less-->
                      <!-- Tasks: style can be found in dropdown.less -->
                      <li class="dropdown tasks-menu">
-                        <a href="calendartrainningstaff.html" class="button">
+                        <a href="../pages/calendartrainningstaff.html" class="button">
                         <i class="fa fa-calendar"></i>
                         <span class="label label-danger"></span>
                         </a>
@@ -60,13 +60,13 @@
                      <!-- User Account: style can be found in dropdown.less -->
                      <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="../dist/img/admin.jpg" class="user-image" alt="User Image">
+                        <img src="../../static/dist/img/admin.jpg" class="user-image" alt="User Image">
                         <span class="hidden-xs">Trainning staff</span>
                         </a>
                         <ul class="dropdown-menu">
                            <!-- User image -->
                            <li class="user-header">
-                              <img src="../dist/img/admin.jpg" class="img-circle" alt="User Image">
+                              <img src="../../static/dist/img/admin.jpg" class="img-circle" alt="User Image">
                               <p>
                                  Trainning staff
                               </p>
@@ -79,6 +79,7 @@
                               <div class="pull-right">
                                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
                               </div>
+                              </li>
                         </ul>
                      </li>
                      <!-- Control Sidebar Toggle Button -->
@@ -93,7 +94,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
       <div class="pull-left image">
-      <img src="dist/img/admin.jpg" class="img-circle" alt="User Image">
+      <img src="../../static/dist/img/admin.jpg" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
       <p>Trainning staff</p>
@@ -139,7 +140,7 @@
       <li><a href="#"><i class="fa fa-paper-plane"></i>Trainee</a></li>
       <li><a href="#"><i class="fa fa-paper-plane"></i>Trainer profile</a></li>
       <li><a href="#"><i class="fa fa-paper-plane"></i>Courses</a></li>
-      <li><a href="categoriestrainningstaff.html"><i class="fa fa-paper-plane"></i>Categories</a></li>
+      <li><a href="categories.html"><i class="fa fa-paper-plane"></i>Categories</a></li>
       <li><a href="#"><i class="fa fa-paper-plane"></i>Topics</a></li>
       </ul>
       </li>
@@ -150,7 +151,7 @@
       </a>
       </li>
       <li class="treeview">
-      <a href="calendartrainningstaff.html">
+      <a href="../pages/calendartrainningstaff.html">
       <i class="fa fa-calendar"></i> <span>Calendar</span>
       </a>
       </li>
@@ -188,7 +189,7 @@
 								<form action="#" th:action="@{/tms/server/category/update}" th:object="${category}">
 								<div class="input-group">
                                     <p>Name: </p>
-									<input size=100px type="text" class="form-control" placeholder="Name...">
+									<input size="100px" type="text" class="form-control" placeholder="Name...">
 									
 									<div class="form-group">
 									<label>Description: </label>
@@ -213,9 +214,11 @@
                      <!-- /. box -->
                   </div>
                   <!-- /.col -->
-               </div>
-               <!-- /.row -->
+               
             </section>
+               </div>
+               
+               <!-- /.row -->
             <!-- /.content -->
          </div>
          <!-- /.content-wrapper -->
@@ -232,7 +235,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
       <div class="pull-left image">
-      <img src="../dist/img/admin.jpg" class="img-circle" alt="User Image">
+      <img src="../../static/dist/img/admin.jpg" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
       <p>Trainning staff</p>
@@ -278,7 +281,7 @@
       <li><a href="#"><i class="fa fa-paper-plane"></i>Trainee</a></li>
       <li><a href="#"><i class="fa fa-paper-plane"></i>Trainer profile</a></li>
       <li><a href="#"><i class="fa fa-paper-plane"></i>Courses</a></li>
-      <li><a href="categoriestrainningstaff.html"><i class="fa fa-paper-plane"></i>Categories</a></li>
+      <li><a href="categories.html"><i class="fa fa-paper-plane"></i>Categories</a></li>
       <li><a href="#"><i class="fa fa-paper-plane"></i>Topics</a></li>
       </ul>
       </li>
@@ -289,7 +292,7 @@
       </a>
       </li>
       <li class="treeview">
-      <a href="calendartrainningstaff.html">
+      <a href="../pages/calendartrainningstaff.html">
       <i class="fa fa-calendar"></i> <span>Calendar</span>
       </a>
       </li>
@@ -297,25 +300,26 @@
       </section>
       <!-- /.sidebar -->
       </aside>
-      </div>
+      
+      
       <!-- ./wrapper -->
       <!-- jQuery 2.1.4 -->
-      <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+      <script src="../../static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
       <!-- Bootstrap 3.3.5 -->
-      <script src="../bootstrap/js/bootstrap.min.js"></script>
+      <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
       <!-- jQuery UI 1.11.4 -->
       <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
       <!-- Slimscroll -->
-      <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+      <script src="../../static/plugins/slimScroll/jquery.slimscroll.min.js"></script>
       <!-- FastClick -->
-      <script src="../plugins/fastclick/fastclick.min.js"></script>
+      <script src="../../static/plugins/fastclick/fastclick.min.js"></script>
       <!-- AdminLTE App -->
-      <script src="../dist/js/app.min.js"></script>
+      <script src="../../static/dist/js/app.min.js"></script>
       <!-- AdminLTE for demo purposes -->
-      <script src="../dist/js/demo.js"></script>
+      <script src="../../static/dist/js/demo.js"></script>
       <!-- fullCalendar 2.2.5 -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-      <script src="../plugins/fullcalendar/fullcalendar.min.js"></script>
+      <script src="../../static/plugins/fullcalendar/fullcalendar.min.js"></script>
       <!-- Page specific script -->
       <script>
          $(function () {

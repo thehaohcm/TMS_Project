@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by DELL on 5/23/2017.
  */
 @Controller
-@RequestMapping(value = "/demo/server/category")
+@RequestMapping(value = "/tms/categories")
 public class CategoryController {
     @Autowired
     private CategoryService category;
 
-    @RequestMapping(value = "/getall")
+    @RequestMapping(value = "/index")
     public String getAllCategory(Model model) {
         model.addAttribute("category", new Category());
         model.addAttribute("listCategory", category.getListCategory());
-        return "category";
+        return "categories/index";
     }
 
     @RequestMapping(value = "/add")
     public String getPageAddCategory(Model model) {
         model.addAttribute("category", new Category());
-        return "addCategory";
+        return "categories/add";
     }
 
     @RequestMapping(value = "/addCategory")
     public String addCategory(@ModelAttribute Category cat) {
         category.addCategory(cat);
-        return "redirect:/demo/server/category/getall";
+        return "redirect:/tms/categories/index";
     }
 
     @RequestMapping(value = "/delete/{id}")
     public String deleteCatogory(@PathVariable String id) {
         category.deleteCategory(Integer.parseInt(id));
-        return "redirect:/demo/server/category/getall";
+        return "redirect:/tms/categories/index";
     }
 
     @RequestMapping(value = "/update/{id}")
@@ -48,18 +48,13 @@ public class CategoryController {
         Category cat = category.findOneCategory(Integer.parseInt(id));
         model.addAttribute("category", cat);
         model.addAttribute("listCategory", category.getListCategory());
-        return "update_category";
+        return "categories/update";
     }
 
     @RequestMapping(value = "/update")
     public String updateCatogory(@ModelAttribute Category cat) {
         category.updateCategory(cat);
-        return "redirect:/demo/server/category/getall";
+        return "redirect:/tms/categories/index";
     }
 
-    @RequestMapping(value = "/login")
-    public String login() {
-        //category.updateCategory(cat);
-        return "indexadmin";
-    }
 }
