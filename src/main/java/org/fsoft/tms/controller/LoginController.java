@@ -41,7 +41,7 @@ public class LoginController {
 
             switch(role.getName()){
                 case "ROLE_ADMIN":
-                    return "indexadmin";
+                    return "redirect:/admin";
                 case "ROLE_TS":
                     return "indextrainingstaff";
                 case "ROLE_TER":
@@ -56,7 +56,7 @@ public class LoginController {
 
     @RequestMapping("/admin")
     public String admin() {
-        return "admin";
+        return "indexadmin";
     }
 
     @RequestMapping("/403")
