@@ -41,13 +41,13 @@ public class LoginController {
 
             switch(role.getName()){
                 case "ROLE_ADMIN":
-                    return "indexadmin";
+                    return "redirect:/admin";
                 case "ROLE_TS":
-                    return "indextrainingstaff";
+                    return "redirect:/staff";
                 case "ROLE_TER":
-                    return "index1";
+                    return "redirect:/trainer";
                 case "ROLE_TEE":
-                    return "index1";
+                    return "logout";
             }
 
         }
@@ -56,8 +56,19 @@ public class LoginController {
 
     @RequestMapping("/admin")
     public String admin() {
-        return "admin";
+        return "admin/index";
     }
+
+    @RequestMapping("/staff")
+    public String staff() {
+        return "staff/index";
+    }
+
+    @RequestMapping("/trainer")
+    public String trainer() {
+        return "trainer/index";
+    }
+
 
     @RequestMapping("/403")
     public String accessDenied() {

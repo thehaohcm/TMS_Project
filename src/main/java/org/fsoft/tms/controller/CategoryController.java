@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by DELL on 5/23/2017.
  */
 @Controller
-@RequestMapping(value = "/tms/category")
+@RequestMapping(value = "/**/category")
 public class CategoryController {
     @Autowired
     private CategoryService category;
