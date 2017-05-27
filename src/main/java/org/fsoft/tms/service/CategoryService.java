@@ -24,7 +24,10 @@ public class CategoryService {
     }
 
     public void deleteCategory(int id) {
-        categoryRepository.delete(id);
+        //categoryRepository.delete(id);
+        Category temp = categoryRepository.findOne(id);
+        temp.setActive(false);
+        categoryRepository.save(temp);
     }
 
     public void updateCategory(Category cat) {
