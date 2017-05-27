@@ -37,11 +37,11 @@ public class EmailController {
         message.setFrom("email");
         try{
             mailSender.send(message);
-            return "Email sent";//"{\"message\": \"OK\"}";
+            return "Email sent";
         }catch (Exception ex){
             mailSender.send(message);
             ex.printStackTrace();
-            return "Have a error";//{\"message\": \"Error\"}";
+            return "Have a error";
         }
     }
 }
