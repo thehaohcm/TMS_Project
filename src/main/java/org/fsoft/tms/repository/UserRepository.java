@@ -1,8 +1,10 @@
 package org.fsoft.tms.repository;
 
+import org.fsoft.tms.entity.Role;
 import org.fsoft.tms.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -11,4 +13,6 @@ import java.util.Set;
 public interface UserRepository extends JpaRepository<User, Integer> {
     public Set<User> findAllById(Integer id);
     public User findUserByUsername(String username);
+    public List<User> findAllByRole(Role role);
 }
+
