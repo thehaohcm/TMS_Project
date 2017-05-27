@@ -40,7 +40,7 @@ public class RoleService {
 
     public void addPermissionForRole() {
         Role temp = roleRepository.findOne(1);
-        temp.setPermissions(permissionService.findPermissionABCSById(1));
+        temp.setPermissions(permissionService.findPermissionById(1));
         roleRepository.save(temp);
     }
 }

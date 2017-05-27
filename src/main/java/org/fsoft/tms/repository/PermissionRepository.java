@@ -9,5 +9,5 @@ import java.util.Set;
  * Created by DELL on 5/24/2017.
  */
 public interface PermissionRepository extends JpaRepository<Permission,Integer> {
-    public Set<Permission> findPermissionABCSById(Integer id);
+    public Set<Permission> findPermissionById(Integer id);
 }
