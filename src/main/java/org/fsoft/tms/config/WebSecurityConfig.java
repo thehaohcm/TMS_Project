@@ -33,25 +33,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-
-            http
-                    .authorizeRequests()
+    protected void configure(HttpSecurity http) throws Exception{
+        http
+                .authorizeRequests()
                     .antMatchers("/register").permitAll()
                     .antMatchers("/").permitAll()
-                    .antMatchers("/admin/**").hasRole("Admin")
-                    .antMatchers("/staff/**").hasRole("Training Staff")
-                    .antMatchers("/trainer/**").hasRole("Trainer")
-                    .antMatchers("/trainee/**").hasRole("Trainee")
+                    .antMatchers("/admin").hasRole("ADMIN")
                     .and()
-                    .formLogin()
+                .formLogin()
                     .loginPage("/login")
                     .usernameParameter("username")
                     .passwordParameter("password")
                     .defaultSuccessUrl("/")
                     .failureUrl("/login?error")
                     .and()
-                    .exceptionHandling()
+                .exceptionHandling()
                     .accessDeniedPage("/403");
     }
 }
