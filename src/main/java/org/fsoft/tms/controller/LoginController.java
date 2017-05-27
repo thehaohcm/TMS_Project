@@ -42,7 +42,12 @@ public class LoginController {
             switch(role.getName()){
                 case "ROLE_ADMIN":
                     return "indexadmin";
-
+                case "ROLE_TS":
+                    return "indextrainingstaff";
+                case "ROLE_TER":
+                    return "index1";
+                case "ROLE_TEE":
+                    return "index1";
             }
 
         }
