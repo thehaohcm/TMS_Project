@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.entity.Role;
 import org.fsoft.tms.entity.User;
+import org.fsoft.tms.repository.RoleRepository;
 import org.fsoft.tms.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -48,5 +49,10 @@ public class LoginService implements UserDetailsService{
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(), user.getPassword(), grantedAuthorities);
 
+    }
+
+    public Role getRoleByUser(String str){
+        User user=userRepository.findUserByUsername(str);
+        return user.getRole();
     }
 }
