@@ -35,11 +35,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
+                //Disable CSRF for enable POST method in EmailController.java
+                .csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/register").permitAll()
                     .antMatchers("/").permitAll()
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/**/category/**").hasAnyRole("ADMIN","TS")
+                    .antMatchers("/email**").permitAll()
                     .and()
                 .formLogin()
                     .loginPage("/login")
