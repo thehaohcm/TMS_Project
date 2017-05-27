@@ -20,7 +20,7 @@ import java.util.Set;
  * Created by Isabella on 26-May-2017.
  */
 @Service
-public class LoginService implements UserDetailsService{
+public class LoginService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -29,7 +29,7 @@ public class LoginService implements UserDetailsService{
     @Transactional
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userRepository.findUserByUsername(s);
-        if(user == null){
+        if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
 
@@ -44,8 +44,8 @@ public class LoginService implements UserDetailsService{
 
     }
 
-    public Role getRoleByUser(String str){
-        User user=userRepository.findUserByUsername(str);
+    public Role getRoleByUser(String str) {
+        User user = userRepository.findUserByUsername(str);
         return user.getRole();
     }
 }

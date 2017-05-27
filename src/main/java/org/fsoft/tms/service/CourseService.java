@@ -45,7 +45,7 @@ public class CourseService {
         courseRepository.save(temp);
     }
 
-    public  void addTrainees() {
+    public void addTrainees() {
         Course temp = courseRepository.findOne(2);
         temp.setTrainees(userRepository.findAllById(3));
         courseRepository.save(temp);
