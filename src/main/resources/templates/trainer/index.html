@@ -199,17 +199,14 @@
                                                 <tr>
                                                     <td>No</td>
                                                     <td>Username</td>
+                                                    <td>Information</td>
                                                     <td>Update</td>
-                                                    <td>Delete</td>
                                                 </tr>
                                                 <tr th:each="item:${listUser}">
                                                     <td th:text="${item.id}"></td>
-                                                    <td ><a th:href="@{/tms/trainer/profile/{id}(id=${item.id})}" style="color:white;width: 100px" th:text="${item.username}"></a></td>
+                                                    <td th:text="${item.username}"></td>
+                                                    <td><a th:href="@{/tms/trainer/profile/{id}(id=${item.id})}" >link</a></td>
                                                     <td style="width:150px"><a type="button" class="btn btn-block btn-info" th:href="@{/tms/trainer/update/{id}(id=${item.id})}" style="color:white;width: 100px">Update</a></td>
-                                                    <td style="width:150px"><a type="button" class="btn btn-block btn-danger" th:href="@{/tms/trainer/delete/{id}(id=${item.id})}" style="color:white;width: 100px">Delete</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <a type="button" th:href="@{/tms/trainer/add}" class="btn btn-block btn-success" style="width:50pxcolor:white">Add</a>
                                                 </tr>
                                             </table>
                                         </div>
