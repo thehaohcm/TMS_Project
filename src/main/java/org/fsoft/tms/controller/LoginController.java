@@ -1,5 +1,8 @@
 package org.fsoft.tms.controller;
 
+import org.fsoft.tms.entity.Role;
+import org.fsoft.tms.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -20,10 +23,31 @@ public class LoginController {
 //        return "/categories/index";
 //    }
 
+    @Autowired
+    LoginService loginService;
+
 
     @RequestMapping("/")
     public String index() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            String name=auth.getName();
+            Role role=loginService.getRoleByUser(name);
+
+            switch(role.getName()){
+                case "ROLE_ADMIN":
+                    return "indexadmin";
+                case "ROLE_TS":
+                    return "indextrainningstaff";
+                case "ROLE_TER":
+                    return "admin";
+                case "ROLE_TEE":
+                    return "index1";
+            }
+
+        }
         return "index1";
+
     }
 
     @RequestMapping("/admin")
