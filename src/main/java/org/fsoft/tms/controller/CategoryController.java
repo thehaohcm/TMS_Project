@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by DELL on 5/23/2017.
  */
 @Controller
-@RequestMapping(value = "/tms/categories")
+@RequestMapping(value = "/tms/category")
 public class CategoryController {
     @Autowired
     private CategoryService category;
@@ -22,25 +22,25 @@ public class CategoryController {
     public String getAllCategory(Model model) {
         model.addAttribute("category", new Category());
         model.addAttribute("listCategory", category.getListCategory());
-        return "categories/index";
+        return "category/index";
     }
 
     @RequestMapping(value = "/add")
     public String getPageAddCategory(Model model) {
         model.addAttribute("category", new Category());
-        return "categories/add";
+        return "category/add";
     }
 
     @RequestMapping(value = "/addCategory")
     public String addCategory(@ModelAttribute Category cat) {
         category.addCategory(cat);
-        return "redirect:/tms/categories/index";
+        return "redirect:/tms/category/index";
     }
 
     @RequestMapping(value = "/delete/{id}")
     public String deleteCatogory(@PathVariable String id) {
         category.deleteCategory(Integer.parseInt(id));
-        return "redirect:/tms/categories/index";
+        return "redirect:/tms/category/index";
     }
 
     @RequestMapping(value = "/update/{id}")
@@ -48,13 +48,13 @@ public class CategoryController {
         Category cat = category.findOneCategory(Integer.parseInt(id));
         model.addAttribute("category", cat);
         model.addAttribute("listCategory", category.getListCategory());
-        return "categories/update";
+        return "category/update";
     }
 
     @RequestMapping(value = "/update")
     public String updateCatogory(@ModelAttribute Category cat) {
         category.updateCategory(cat);
-        return "redirect:/tms/categories/index";
+        return "redirect:/tms/category/index";
     }
 
 }
