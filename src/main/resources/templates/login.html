@@ -7,23 +7,24 @@
 
 <title>Login</title>
 
-<link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css.map.css" rel="stylesheet" type="text/css" />
+<link href="resources/static/bootstrap-3.3.7/dist/css/bootstrap.min.css.map.css" th:href ="@{/bootstrap-3.3.7/dist/css/bootstrap.min.css.map.css}" rel="stylesheet" type="text/css" />
 <link href="../static/login.css" rel="stylesheet" type="text/css" th:href="@{/login.css}"/>
 </head>
 
 <body>
 <div class="vid-container">
   <video class="bgvid" autoplay="autoplay" muted="muted" preload="auto" loop="loop">
-      <source src="../static/login/12345.mp4" type="video/mp4" th:src="@{/login/12345.mp4}"></source>
+      <source src="../static/login/12345.mp4" type="video/mp4" th:src="@{/login/12345.mp4}"/>
   </video>
   
   <div class="inner-container">
     <div class="box">
       <h1>Login</h1>
-	
-      <input type="text" id="ID" placeholder="Username"/>
-      <input type="text"  id="pass" placeholder="Password"/>
-      <button>Login</button>
+      <form th:action="@{/login}" method="POST">
+      <input type="text" id="ID" name="username" placeholder="Username"/>
+      <input type="text"  id="pass" name="password" placeholder="Password"/>
+      <button type="submit">Login</button>
+      </form>
       <p>Not a member? <span>Sign Up</span></p>
     </div>
   </div>
