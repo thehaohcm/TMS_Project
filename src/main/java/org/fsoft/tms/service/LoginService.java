@@ -42,4 +42,9 @@ public class LoginService implements UserDetailsService{
                 user.getUsername(), user.getPassword(), grantedAuthorities);
 
     }
+
+    public Role getRoleByUser(String str){
+        User user=userRepository.findUserByUsername(str);
+        return user.getRole();
+    }
 }
