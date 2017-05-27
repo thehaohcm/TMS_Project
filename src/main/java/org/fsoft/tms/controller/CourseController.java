@@ -23,7 +23,7 @@ public class CourseController {
     private CategoryService category;
 
     @RequestMapping(value = "/index")
-    public String getAllCourse(Model model) {
+    public String getPageIndex(Model model) {
         model.addAttribute("listCourse", course.getAllCourse());
         return "course/index";
     }
