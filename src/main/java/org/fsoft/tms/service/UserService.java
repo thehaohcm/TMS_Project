@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by DELL on 5/24/2017.
@@ -27,8 +28,16 @@ public class UserService {
     @Autowired
     TopicRepository topicRepository;
 
+    @Autowired
+    UserPropertyRepository userPropertyRepository;
+
     public List<User> getAllUser() {
         return userRepository.findAll();
+    }
+
+    public List<User> getAllUserByRole(int roleID) {
+        Role role = roleRepository.findOne(roleID);
+        return userRepository.findAllByRole(role);
     }
 
     public void addUser(User u) {

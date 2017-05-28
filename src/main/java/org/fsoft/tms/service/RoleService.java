@@ -28,7 +28,7 @@ public class RoleService {
         roleRepository.save(role);
     }
 
-    public Role findOneCourse(int id) {
+    public Role findOneRole(int id) {
         return roleRepository.findOne(id);
     }
 

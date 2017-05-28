@@ -38,7 +38,7 @@ public class PermissionService {
         permissionRepository.save(temp);
     }
 
-    public  void addRole() {
+    public void addRole() {
         Permission temp = permissionRepository.findOne(1);
         temp.setRoles(roleRepository.findAllById(1));
         permissionRepository.save(temp);

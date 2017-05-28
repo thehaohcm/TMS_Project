@@ -23,5 +23,6 @@ hs_err_pid*
 .classpath
 .project
 !hsql/lib/hsqldb.jar
+hsql/data/tms.lck
 !hsql/lib/sqltool.jar
 
