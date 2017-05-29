@@ -1,9 +1,13 @@
 package org.fsoft.tms.controller;
 
+import org.fsoft.tms.CurrentUser;
+import org.fsoft.tms.entity.Course;
+import org.fsoft.tms.entity.Topic;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.entity.UserProperty;
 import org.fsoft.tms.repository.RoleRepository;
 import org.fsoft.tms.service.RoleService;
+import org.fsoft.tms.service.TopicService;
 import org.fsoft.tms.service.UserPropertyService;
 import org.fsoft.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +32,10 @@ public class TrainerController
     @Autowired
     UserPropertyService userPropertyService;
 
-    @RequestMapping(value = "/index")
+    @Autowired
+    TopicService topicService;
+
+    @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
         model.addAttribute("listUser", userService.getAllUserByRole(3));
         return "trainer/index";
@@ -48,5 +55,23 @@ public class TrainerController
         model.addAttribute("user", user);
         model.addAttribute("listUserProperty", userPropertyService.getListUserProperty(user));
         return "trainer/update";
+    }
+
+
+    @RequestMapping(value = "/topic")
+    public String getListTopic(Model model) {
+        CurrentUser currentUser = CurrentUser.getInstance();
+        model.addAttribute("course", new Course());
+        model.addAttribute("listCourse", topicService.findAllCourseOfUser(currentUser.getUser()));
+        model.addAttribute("listTopic", topicService.getAllTopic());
+        return "coursetopic";
+    }
+
+    @RequestMapping(value = "/course")
+    public String getListTopicCourse(Model model) {
+        CurrentUser currentUser = CurrentUser.getInstance();
+        model.addAttribute("user",currentUser.getUser());
+        model.addAttribute("listCourse", topicService.findAllCourseOfUser(currentUser.getUser()));
+        return "course";
     }
 }
