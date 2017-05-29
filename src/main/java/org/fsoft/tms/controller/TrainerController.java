@@ -35,7 +35,7 @@ public class TrainerController
     @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
         model.addAttribute("listUser", userService.getAllUserByRole(3));
-        return "trainer/index";
+        return "trainers/index";
     }
 
     @RequestMapping(value = "/profile/{id}")
