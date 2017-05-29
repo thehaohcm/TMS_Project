@@ -1,5 +1,6 @@
 package org.fsoft.tms.controller;
 
+import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.entity.UserProperty;
 import org.fsoft.tms.repository.RoleRepository;
@@ -35,7 +36,7 @@ public class TrainerController
     @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
         model.addAttribute("listUser", userService.getAllUserByRole(3));
-        return "trainers/index";
+        return "trainer/index";
     }
 
     @RequestMapping(value = "/profile/{id}")
@@ -54,17 +55,18 @@ public class TrainerController
         return "trainer/update";
     }
 
-
-    @RequestMapping(value = "/topic")
-    public String getListTopic(Model model) {
-        model.addAttribute("listCourse", topicService.findAllCourseOfUser());
-        model.addAttribute("listTopic", topicService.findAllTopicByCourse());
-        return "coursetopic";
-    }
+//
+//    @RequestMapping(value = "/topic")
+//    public String getListTopic(Model model) {
+//        CurrentUser currentUser = CurrentUser.getInstance();
+//        model.addAttribute("listCourse", topicService.findAllCourseOfUser(currentUser.getUser()));
+//        return "coursetopic";
+//    }
 
     @RequestMapping(value = "/course")
-    public String getListTopic(Model model) {
-        model.addAttribute("listCourse", topicService.findAllCourseOfUser());
-        return "coursetopic";
+    public String getListTopicCourse(Model model) {
+        CurrentUser currentUser = CurrentUser.getInstance();
+        model.addAttribute("listCourse", topicService.findAllCourseOfUser(currentUser.getUser()));
+        return "course";
     }
 }

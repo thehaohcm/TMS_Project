@@ -69,7 +69,7 @@ public class LoginController {
 
     @RequestMapping("/trainer")
     public String trainer() {
-        return "trainer/index";
+        return "trainers/index";
     }
 
 
