@@ -10,7 +10,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
     <!-- Bootstrap 3.3.5 -->
 
-    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css}"/>
     <!-- Ionicons -->
@@ -59,32 +59,29 @@
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
                     <!-- Tasks: style can be found in dropdown.less -->
-                    <li class="dropdown tasks-menu">
+                    <!--<li class="dropdown tasks-menu">
                         <a href="calendaradmin.html" class="button" th:href="@{calendaradmin.html}">
                             <i class="fa fa-calendar"></i>
                             <span class="label label-danger"></span>
                         </a>
-                    </li>
+                    </li>-->
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="../staic/dist/img/avatar.png" class="user-image" alt="User Image" th:src="@{/dist/img/avatar.png}"/>
+                            <img src="../../staic/dist/img/avatar.png" class="user-image" alt="User Image" th:src="@{/dist/img/avatar.png}"/>
                             <span class="hidden-xs">Admin</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="../staic/dist/img/avatar.png" class="img-circle" alt="User Image" th:src="@{/dist/img/avatar.png}"/>
+                                <img src="../../staic/dist/img/avatar.png" class="img-circle" alt="User Image" th:src="@{/dist/img/avatar.png}"/>
                                 <p>
                                     Admin
                                 </p>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="editaccountadmin.html" class="btn btn-default btn-flat">Edit account</a>
-                                </div>
-                                <div class="pull-right">
+                                <div style="text-align:center" >
                                     <a href="#" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
@@ -102,24 +99,13 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="../static/dist/img/avatar.png" class="img-circle" alt="User Image" th:src="@{/dist/img/avatar.png}"/>
+                    <img src="../../static/dist/img/avatar.png" class="img-circle" alt="User Image" th:src="@{/dist/img/avatar.png}"/>
                 </div>
                 <div class="pull-left info">
                     <p>Admin</p>
                     <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
                 </div>
             </div>
-            <!-- search form -->
-            <!--<form action="#" method="get" class="sidebar-form">
-               <div class="input-group">
-                 <input type="text" name="q" class="form-control" placeholder="Search...">
-                 <span class="input-group-btn">
-                   <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-                 </span>
-               </div>
-               </form>-->
-            <!-- /.search form -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">Control Panel</li>
                 <li class="active treeview">
@@ -138,31 +124,11 @@
                         <li><a href="#"><i class="fa fa-paper-plane"></i> Trainer</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-mortar-board"></i>
-                        <span>Trainning Staff</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Trainee</a></li>
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Trainer profile</a></li>
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Courses</a></li>
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Categories</a></li>
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Topics</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-mortar-board"></i>
-                        <span>Trainer</span>
-                    </a>
-                </li>
-                <li class="treeview">
+                <!--<li class="treeview">
                     <a href="calendaradmin.html" th:href="calendaradmin.html">
                         <i class="fa fa-calendar"></i> <span>Calendar</span>
                     </a>
-                </li>
+                </li>-->
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -186,7 +152,7 @@
                     <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <img class="profile-user-img img-responsive img-circle" src="../static/dist/img/avatar.png" alt="User profile picture"/>
+                            <img class="profile-user-img img-responsive img-circle" src="../../static/dist/img/avatar.png" th:src="@{/dist/img/avatar.png}" alt="User profile picture"/>
                             <h3 class="profile-username text-center">Admin</h3>
                             <p class="text-muted text-center">Administrator</p>
                         </div><!-- /.box-body -->
@@ -194,7 +160,7 @@
                     <div class="box box-primary">
                         <section class="content">
                             <div class="form-group">
-                                <label for="userName">User Name</label>
+                                <label >User Name</label>
                                 <input type="text" class="form-control" id="nameInput" disabled="" placeholder="Your name"/>
                             </div>
                             <div class="callout callout-info">
