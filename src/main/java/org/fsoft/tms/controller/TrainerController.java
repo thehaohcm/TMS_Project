@@ -13,10 +13,12 @@ import org.fsoft.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.jws.WebParam;
+import javax.jws.soap.SOAPBinding;
 import java.util.Set;
 
 /**
@@ -45,7 +47,6 @@ public class TrainerController
     public String getPageProfile(@PathVariable String id, Model model) {
         User user = userService.findOneUser(Integer.parseInt(id));
         model.addAttribute("user", user);
-        model.addAttribute("listUserProperty", userPropertyService.getListUserProperty(user));
         return "trainer/profile";
     }
 
@@ -55,6 +56,12 @@ public class TrainerController
         model.addAttribute("user", user);
         model.addAttribute("listUserProperty", userPropertyService.getListUserProperty(user));
         return "trainer/update";
+    }
+
+    @RequestMapping(value = "/updateProfile")
+    public String Update(@ModelAttribute User user) {
+        userService.saveUser(user);
+        return "redirect:/tms/trainer/";
     }
 
 
