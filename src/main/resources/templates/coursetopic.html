@@ -177,9 +177,11 @@
                                         </div>
                                         <div class="box-body">
                                             <p>Course: </p>
-                                            <select class="form-control">
-                                                <option th:each="item:${listCourse}" th:value="${item.id}" th:text="${item.name}"></option>
-                                            </select>
+                                            <form action="#" th:action="@{/tms/trainer/topic}" th:object="${course}" method="post">
+                                                <select class="form-control" th:field="*{course}">
+                                                    <option th:each="course:${listCourse}" th:value="${item}" th:text="${item.name}"></option>
+                                                </select>
+                                            </form>
                                             <table class="table table-bordered">
                                                 <tr>
                                                     <td >No</td>

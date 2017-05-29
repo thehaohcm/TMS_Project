@@ -1,6 +1,8 @@
 package org.fsoft.tms.controller;
 
 import org.fsoft.tms.CurrentUser;
+import org.fsoft.tms.entity.Course;
+import org.fsoft.tms.entity.Topic;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.entity.UserProperty;
 import org.fsoft.tms.repository.RoleRepository;
@@ -55,17 +57,20 @@ public class TrainerController
         return "trainer/update";
     }
 
-//
-//    @RequestMapping(value = "/topic")
-//    public String getListTopic(Model model) {
-//        CurrentUser currentUser = CurrentUser.getInstance();
-//        model.addAttribute("listCourse", topicService.findAllCourseOfUser(currentUser.getUser()));
-//        return "coursetopic";
-//    }
+
+    @RequestMapping(value = "/topic")
+    public String getListTopic(Model model) {
+        CurrentUser currentUser = CurrentUser.getInstance();
+        model.addAttribute("course", new Course());
+        model.addAttribute("listCourse", topicService.findAllCourseOfUser(currentUser.getUser()));
+        model.addAttribute("listTopic", topicService.getAllTopic());
+        return "coursetopic";
+    }
 
     @RequestMapping(value = "/course")
     public String getListTopicCourse(Model model) {
         CurrentUser currentUser = CurrentUser.getInstance();
+        model.addAttribute("user",currentUser.getUser());
         model.addAttribute("listCourse", topicService.findAllCourseOfUser(currentUser.getUser()));
         return "course";
     }

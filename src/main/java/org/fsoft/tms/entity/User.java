@@ -1,11 +1,6 @@
 package org.fsoft.tms.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.authentication.PasswordEncoderParser;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import javax.persistence.*;
-import java.net.PasswordAuthentication;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,9 +9,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "USERS")
 public class User implements java.io.Serializable {
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     private Integer id;
     private String username;
@@ -42,19 +34,19 @@ public class User implements java.io.Serializable {
 
     public User(String username, String password) {
         this.username = username;
-        this.password = passwordEncoder.encode(password);
+        this.password = password;
     }
 
     public User(String username, String password, Set<UserProperty> userProperties) {
         this.username = username;
-        this.password = passwordEncoder.encode(password);
+        this.password = password;
         this.userProperties = userProperties;
     }
 
     public User(String username, String password, boolean active, Set<UserProperty> userProperties) {
 
         this.username = username;
-        this.password = passwordEncoder.encode(password);
+        this.password = password;
         this.active = active;
         this.userProperties = userProperties;
     }
@@ -86,7 +78,7 @@ public class User implements java.io.Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = passwordEncoder.encode(password);
+        this.password = password;
     }
 
     @Column(name = "ACTIVE", unique = false, nullable = false)
