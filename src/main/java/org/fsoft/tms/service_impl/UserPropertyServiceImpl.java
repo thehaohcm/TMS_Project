@@ -3,7 +3,7 @@ package org.fsoft.tms.service_impl;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.entity.UserProperty;
 import org.fsoft.tms.repository.UserPropertyRepository;
-import org.fsoft.tms.services.UserPropertyService;
+import org.fsoft.tms.service.UserPropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

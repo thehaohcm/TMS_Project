@@ -3,7 +3,7 @@ package org.fsoft.tms.service_impl;
 import org.fsoft.tms.entity.Permission;
 import org.fsoft.tms.repository.PermissionRepository;
 import org.fsoft.tms.repository.RoleRepository;
-import org.fsoft.tms.services.PermissionService;
+import org.fsoft.tms.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -3,7 +3,7 @@ package org.fsoft.tms.service_impl;
 import org.fsoft.tms.entity.Course;
 import org.fsoft.tms.repository.CourseRepository;
 import org.fsoft.tms.repository.UserRepository;
-import org.fsoft.tms.services.CourseService;
+import org.fsoft.tms.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -5,6 +5,7 @@ import org.fsoft.tms.entity.Role;
 import org.fsoft.tms.repository.UserRepository;
 import org.fsoft.tms.service.LoginService;
 import org.fsoft.tms.service.RoleService;
+import org.fsoft.tms.service_impl.AuthenticationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,9 +39,9 @@ public class LoginController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             String name=auth.getName();
-            Role role=loginService.getRoleByUser(name);
             CurrentUser currentUser = CurrentUser.getInstance();
             currentUser.setUser(loginService.getUserByUsername(name));
+            Role role = currentUser.getUser().getRole();
             switch(role.getName()){
                 case "ROLE_ADMIN":
                     return "redirect:/admin";

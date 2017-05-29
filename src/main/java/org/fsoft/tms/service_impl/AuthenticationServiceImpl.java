@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.entity.Role;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.repository.UserRepository;
+import org.fsoft.tms.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,7 +22,7 @@ import java.util.Set;
  * Created by Isabella on 29-May-2017.
  */
 @Service
-public class AuthenticationServiceImpl implements UserDetailsService {
+public class AuthenticationServiceImpl implements UserDetailsService,LoginService {
 
     private final Logger logger = LogManager.getLogger();
 
@@ -49,8 +50,7 @@ public class AuthenticationServiceImpl implements UserDetailsService {
 
     }
 
-    public Role getRoleByUser(String str) {
-        User user = userRepository.findUserByUsername(str);
-        return user.getRole();
+    public User getUserByUsername(String username){
+        return userRepository.findUserByUsername(username);
     }
 }

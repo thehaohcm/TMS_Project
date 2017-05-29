@@ -2,7 +2,7 @@ package org.fsoft.tms.service_impl;
 
 import org.fsoft.tms.entity.Property;
 import org.fsoft.tms.repository.PropertyRepository;
-import org.fsoft.tms.services.PropertyService;
+import org.fsoft.tms.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

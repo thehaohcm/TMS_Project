@@ -1,36 +1,19 @@
 package org.fsoft.tms.service;
 
 import org.fsoft.tms.entity.Property;
-import org.fsoft.tms.repository.PropertyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * Created by DELL on 5/24/2017.
+ * Created by Isabella on 29-May-2017.
  */
-@Service
-public class PropertyService {
-    @Autowired
-    PropertyRepository propertyRepository;
+public interface PropertyService {
 
-    public List<Property> getAllProperty() {
-        return propertyRepository.findAll();
-    }
+    List<Property> getAllProperty();
 
-    public void addProperty(Property role) {
-        propertyRepository.save(role);
-    }
+    void addProperty(Property role);
 
-    public Property findOneProperty(int id) {
-        return propertyRepository.findOne(id);
-    }
+    Property findOneProperty(int id);
 
-    public void updateProperty(Property c) {
-        Property temp = propertyRepository.findOne(c.getId());
-        temp.setName(c.getName());
-        temp.setDescription(c.getDescription());
-        propertyRepository.save(temp);
-    }
+    void updateProperty(Property c);
 }

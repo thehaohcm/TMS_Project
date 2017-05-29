@@ -2,7 +2,7 @@ package org.fsoft.tms.service_impl;
 
 import org.fsoft.tms.entity.Category;
 import org.fsoft.tms.repository.CategoryRepository;
-import org.fsoft.tms.services.CategoryService;
+import org.fsoft.tms.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
