@@ -13,6 +13,7 @@ import org.fsoft.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -55,6 +56,13 @@ public class TrainerController
         model.addAttribute("user", user);
         model.addAttribute("listUserProperty", userPropertyService.getListUserProperty(user));
         return "trainer/update";
+    }
+
+    @RequestMapping(value = "/updateProfile")
+    public String getPageUpdate(@ModelAttribute User user) {
+
+ //       userService.saveUser(user);
+        return "redirect:/tms/trainer/";
     }
 
 

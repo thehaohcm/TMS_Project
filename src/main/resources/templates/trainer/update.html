@@ -178,7 +178,7 @@
                                 <h1>Update Profile</h1>
                             </div>
                             <div class="box-body">
-                                <form action="#" th:action="@{/tms/trainer/updateProfile}" th:object="${listUserProperty}" method="post">
+                                <form action="#" th:action="@{/tms/trainer/updateProfile}" th:object="${user}" method="post">
                                     <div class="input-group">
                                         <div class="box-body">
                                             <table class="table table-bordered">
@@ -186,9 +186,9 @@
                                                     <td>Username</td>
                                                     <td th:text="${user.username}"></td>
                                                 </tr>
-                                                <tr th:each="item:${listUserProperty}">
+                                                <tr th:each="item, itemStat :*{userProperties}">
                                                     <td th:text="${item.pk.property.name}"></td>
-                                                    <td><input th:type="text" th:value="${item.value}"/></td>
+                                                    <td><input th:type="text" th:field="*{userProperties[__${itemStat.index}__].value}"/></td>
                                                 </tr>
                                             </table>
                                         </div>
