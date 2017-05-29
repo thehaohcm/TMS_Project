@@ -33,7 +33,6 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../static/dist/css/skins/_all-skins.min.css" th:href="@{/dist/css/skins/_all-skins.min.css}"/>
-
 </head>
 <body class="hold-transition skin-red sidebar-mini">
 <div class="wrapper">
@@ -177,7 +176,7 @@
                                 <h1>Form Update Category</h1>
                             </div>
                             <div class="box-body">
-                                <form action="#" th:action="@{/tms/category/update}" th:object="${category}">
+                                <form action="#" th:action="@{/staff/category/update}" th:object="${category}">
                                     <div class="input-group">
                                         <p>Name: </p>
                                         <input size="1200px" type="text" class="form-control" th:field="*{name}" placeholder="Name..."/>

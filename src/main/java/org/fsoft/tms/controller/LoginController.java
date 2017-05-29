@@ -1,5 +1,6 @@
 package org.fsoft.tms.controller;
 
+import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.Role;
 import org.fsoft.tms.repository.UserRepository;
 import org.fsoft.tms.service.LoginService;
@@ -38,7 +39,9 @@ public class LoginController {
         if (auth != null) {
             String name=auth.getName();
             Role role=loginService.getRoleByUser(name);
-
+            CurrentUser currentUser = CurrentUser.getInstance();
+            if(currentUser == null)
+                currentUser.setUser(loginService.getUserByUsername(name));
             switch(role.getName()){
                 case "ROLE_ADMIN":
                     return "redirect:/admin";

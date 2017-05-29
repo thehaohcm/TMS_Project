@@ -18,7 +18,7 @@ public class CategoryController {
     @Autowired
     private CategoryService category;
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/")
     public String getAllCategory(Model model) {
         model.addAttribute("category", new Category());
         model.addAttribute("listCategory", category.getListCategory());

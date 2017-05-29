@@ -1,5 +1,7 @@
 package org.fsoft.tms;
 
+import org.fsoft.tms.entity.User;
+
 /**
  * Created by DELL on 5/29/2017.
  */
@@ -11,5 +13,15 @@ public class CurrentUser {
     }
 
     private CurrentUser() {
+    }
+
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
