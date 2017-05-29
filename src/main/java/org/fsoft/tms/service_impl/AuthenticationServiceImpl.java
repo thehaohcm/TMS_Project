@@ -2,6 +2,7 @@ package org.fsoft.tms.service_impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fsoft.tms.entity.Permission;
 import org.fsoft.tms.entity.Role;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.repository.UserRepository;
@@ -43,6 +44,15 @@ public class AuthenticationServiceImpl implements UserDetailsService,LoginServic
 
         Role role = user.getRole();
 
+        Set<Permission> permissions = role.getPermissions();
+
+        //logger.debug(permissions.toString());
+
+        for(Permission permission : permissions)
+        {
+            logger.debug(permission.getName());
+            grantedAuthorities.add(new SimpleGrantedAuthority(permission.getName()));
+        }
         grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
 
         return new org.springframework.security.core.userdetails.User(
