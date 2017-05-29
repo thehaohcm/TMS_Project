@@ -1,46 +1,21 @@
 package org.fsoft.tms.service;
 
 import org.fsoft.tms.entity.Role;
-import org.fsoft.tms.repository.PermissionRepository;
-import org.fsoft.tms.repository.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 /**
- * Created by DELL on 5/24/2017.
+ * Created by Isabella on 29-May-2017.
  */
-@Service
-public class RoleService {
-    @Autowired
-    RoleRepository roleRepository;
+public interface RoleService {
 
-    @Autowired
-    PermissionRepository permissionService;
+    List<Role> getAllRole();
 
-    public List<Role> getAllRole() {
-        return roleRepository.findAll();
-    }
+    void addRole(Role role);
 
-    public void addRole(Role role) {
-        roleRepository.save(role);
-    }
+    Role findOneRole(int id);
 
-    public Role findOneRole(int id) {
-        return roleRepository.findOne(id);
-    }
+    void updateRole(Role c);
 
-    public void updateRole(Role c) {
-        Role temp = roleRepository.findOne(c.getId());
-        temp.setName(c.getName());
-        roleRepository.save(temp);
-    }
-
-    public void addPermissionForRole() {
-        Role temp = roleRepository.findOne(1);
-        temp.setPermissions(permissionService.findPermissionById(1));
-        roleRepository.save(temp);
-    }
+    void addPermissionForRole();
 }
