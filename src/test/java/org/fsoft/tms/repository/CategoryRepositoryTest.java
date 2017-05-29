@@ -17,13 +17,8 @@ import static org.junit.Assert.*;
 @SpringBootTest//(classes = {RepositoryConfiguration.class})
 public class CategoryRepositoryTest {
 
-
-    private CategoryRepository categoryRepository;
-
     @Autowired
-    public void setCategoryRepository(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
+    private CategoryRepository categoryRepository;
 
     @Test
     public void testSaveCategory(){
@@ -31,6 +26,7 @@ public class CategoryRepositoryTest {
         Category category = new Category();
         category.setName("English");
         category.setDescription("Learning English");
+        category.setActive(true);
         assertNull(category.getId());
         categoryRepository.save(category);
         assertNotNull(category.getId());
@@ -56,9 +52,10 @@ public class CategoryRepositoryTest {
         }
         assertEquals(count, 4);
 
-        categoryRepository.delete(fetchedUpdatedCategory);
-        Category fetchedDeletedCategory = categoryRepository.findOne(fetchedCategory.getId());
-        assertNull(fetchedDeletedCategory);
+        fetchedUpdatedCategory.setActive(false);
+        categoryRepository.save(fetchedUpdatedCategory);
+        Category fetchedDeletedCategory = categoryRepository.findOne(fetchedUpdatedCategory.getId());
+        assertEquals(fetchedDeletedCategory.getActive(), false);
 
     }
 

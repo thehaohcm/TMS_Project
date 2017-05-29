@@ -18,20 +18,11 @@ import static org.junit.Assert.*;
 @SpringBootTest//(classes = {RepositoryConfiguration.class})
 public class CourseRepositoryTest {
 
+    @Autowired
     private CourseRepository courseRepository;
 
     @Autowired
-    public void setCourseRepository(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
-    }
-
     private CategoryRepository categoryRepository;
-
-    @Autowired
-    public void setCategoryRepository(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
-
 
     @Test
     public void testSaveCourse(){
@@ -58,16 +49,17 @@ public class CourseRepositoryTest {
         long courseCount = courseRepository.count();
         assertEquals(courseCount, 2);
 
-        Iterable<Course> categories = courseRepository.findAll();
+        Iterable<Course> courses = courseRepository.findAll();
         int count = 0;
-        for(Course c : categories){
+        for(Course c : courses){
             count++;
         }
         assertEquals(count, 2);
 
-        courseRepository.delete(fetchedUpdatedCourse);
+        fetchedUpdatedCourse.setActive(false);
+        courseRepository.save(fetchedUpdatedCourse);
         Course fetchedDeletedCourse = courseRepository.findOne(fetchedCourse.getId());
-        assertNull(fetchedDeletedCourse);
+        assertEquals(fetchedDeletedCourse.getActive(), false);
 
     }
 
@@ -78,7 +70,7 @@ public class CourseRepositoryTest {
         for(Course c : categories){
             count++;
         }
-        assertEquals(count, courseRepository.count());
+        assertEquals(count, 1);
     }
 
 }
