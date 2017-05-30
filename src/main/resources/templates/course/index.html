@@ -194,29 +194,29 @@
                                         <div class="box-header with-border">
                                             <h1>Show list Course</h1>
                                         </div>
-                                        <div class="box-body">
+                                        <div>
                                             <table class="table table-bordered">
-                                                <tr>
-                                                    <td>No</td>
-                                                    <td>Name</td>
-                                                    <td>Description</td>
-                                                    <td>Catelory</td>
-                                                    <td>Create Date</td>
-                                                    <td>Update</td>
-                                                    <td>Delete</td>
-                                                </tr>
-                                                <tr th:each="item:${listCourse}">
-                                                    <td th:text="${item.id}"></td>
-                                                    <td th:text="${item.name}"></td>
-                                                    <td th:text="${item.description}"></td>
-                                                    <td th:text="${item.category.name}"></td>
-                                                    <td th:text="${item.createdDate}"></td>
-                                                    <td style="width:150px"><a type="button" class="btn btn-block btn-info" th:href="@{/tms/course/update/{id}(id=${item.id})}" style="color:white;width: 100px">Update</a></td>
-                                                    <td style="width:150px"><a type="button" class="btn btn-block btn-danger" th:href="@{/tms/course/delete/{id}(id=${item.id})}" style="color:white;width: 100px">Delete</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <a type="button" th:href="@{/tms/course/add}" class="btn btn-block btn-success" style="width:50pxcolor:white">Add</a>
-                                                </tr>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>No</td>
+                                                        <td>Name</td>
+                                                        <td>Description</td>
+                                                        <td>Catelory</td>
+                                                        <td>Update</td>
+                                                        <td>Delete</td>
+                                                    </tr>
+                                                    <tr th:each="item:${listCourse}" th:if="${item.active}">
+                                                        <td th:text="${item.id}"></td>
+                                                        <td th:text="${item.name}"></td>
+                                                        <td th:text="${item.description}"></td>
+                                                        <td th:text="${item.category.name}"></td>
+                                                        <td style="width:150px"><a type="button" class="btn btn-block btn-info" th:href="@{/staff/course/update/{id}(id=${item.id})}" style="color:white;width: 100px">Update</a></td>
+                                                        <td style="width:150px"><a type="button" class="btn btn-block btn-danger" th:href="@{/staff/course/delete/{id}(id=${item.id})}" style="color:white;width: 100px">Delete</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <a class="btn btn-block btn-success" style="width:70px; color:white" th:href="@{/staff/course/add}">Add</a>
+                                                    </tr>
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>

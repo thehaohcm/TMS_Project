@@ -20,4 +20,10 @@ public interface TopicService {
     List<Topic> findAllTopicByCourse(User user, Course course);
 
     List<Course> findAllCourseOfUser(User user);
+
+    void updateTopic(Topic topic);
+
+    void deleteTopic(int id);
+
+    void addTopic(Topic t);
 }

@@ -19,4 +19,5 @@ public interface CategoryService {
 
     Category findOneCategory(int id);
 
+    List<Category> getListCategoryActive();
 }
