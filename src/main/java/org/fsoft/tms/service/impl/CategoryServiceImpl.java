@@ -1,4 +1,4 @@
-package org.fsoft.tms.service_impl;
+package org.fsoft.tms.service.impl;
 
 import org.fsoft.tms.entity.Category;
 import org.fsoft.tms.repository.CategoryRepository;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Isabella on 29-May-2017.
+ * Created by thehaohcm on 5/30/17.
  */
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;

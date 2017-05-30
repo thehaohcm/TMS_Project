@@ -1,4 +1,4 @@
-package org.fsoft.tms.service_impl;
+package org.fsoft.tms.service.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Isabella on 29-May-2017.
+ * Created by thehaohcm on 5/30/17.
  */
 @Service
 public class AuthenticationServiceImpl implements UserDetailsService,LoginService {
