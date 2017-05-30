@@ -28,7 +28,7 @@ public class EmailController {
         message.setText("Xin chào bạn, đây là mail tự động được gửi vào lúc "+date.toLocaleString()
                 +" từ hệ thống TMS nhằm thông báo về việc tài khoản của bạn đã được tạo với thông tin như sau: \n" +
                 "Tên đăng nhập: "+username+"\nPassword: "+password
-                +"\nTrang đăng nhập: <a href=\"http://localhost:8080/login\">http://localhost:8080/login</a>"
+                +"\nTrang đăng nhập: http://localhost:8080"
                 +"\nKhi đăng nhập vào lần đầu trên hệ thống, bạn vui lòng thay đổi password.\n"
                 +"Xin chân thành cảm ơn\n" +
                 "Lưu ý: Đây là hộp thư tự động, bạn không cần trả lời email này");
