@@ -107,6 +107,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     //course
                 .antMatchers("/trainer/course").hasRole("ViewTrainerListOfCourse")
 
+                .antMatchers("/demo/**").denyAll()
+                .antMatchers("/tms/**").denyAll()
+
                 .and()
                 .formLogin()
                     .loginPage("/login")
