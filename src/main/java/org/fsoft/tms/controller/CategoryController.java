@@ -37,6 +37,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/addCategory")
     public String addCategory(@ModelAttribute Category cat) {
+        cat.setActive(true);
         category.addCategory(cat);
         return "redirect:/staff/category/";
     }

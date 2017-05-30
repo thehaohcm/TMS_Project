@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/staff/topic")
 public class TopicController {
+
     @Autowired
     CourseService courseService;
 
@@ -39,6 +40,7 @@ public class TopicController {
 
     @RequestMapping(value = "/addTopic")
     public String getPageAdd(@ModelAttribute Topic topic) {
+        topic.setActive(true);
         topicService.addTopic(topic);
         return "redirect:/staff/topic/";
     }
