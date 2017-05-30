@@ -1,5 +1,7 @@
+
 package org.fsoft.tms.service;
 
+import org.fsoft.tms.entity.Category;
 import org.fsoft.tms.entity.Course;
 
 import java.util.List;
@@ -11,6 +13,8 @@ public interface CourseService {
 
     List<Course> getAllCourse();
 
+    List<Course> getAllCourseByCategory(Category c);
+
     void addCourse(Course course);
 
     Course findOneCourse(int id);
@@ -20,4 +24,6 @@ public interface CourseService {
     void addTrainingStaff();
 
     void addTrainees();
+
+    void deleteCourse(int id);
 }

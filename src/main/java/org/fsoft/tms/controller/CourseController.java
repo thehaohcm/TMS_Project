@@ -1,5 +1,8 @@
 package org.fsoft.tms.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.fsoft.tms.entity.Category;
 import org.fsoft.tms.entity.Course;
 import org.fsoft.tms.service.CategoryService;
 import org.fsoft.tms.service.CourseService;
@@ -10,6 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 /**
  * Created by DELL on 5/24/2017.
@@ -23,7 +29,7 @@ public class CourseController {
     @Autowired
     private CategoryService category;
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
         model.addAttribute("listCourse", course.getAllCourse());
         return "course/index";
@@ -40,26 +46,32 @@ public class CourseController {
     public String addCourse(@ModelAttribute Course c) {
         c.setActive(true);
         course.addCourse(c);
-        return "redirect:/tms/course/index";
+        return "redirect:/staff/course/";
     }
 
     @RequestMapping(value = "/update/{id}")
     public String updateCourse(@PathVariable String id, Model model) {
         Course c = course.findOneCourse(Integer.parseInt(id));
         model.addAttribute("course", c);
-        model.addAttribute("listCategory", category.getListCategory());
+        model.addAttribute("listCategory", category.getListCategoryActive());
         return "course/update";
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    public String deleteCourse(@PathVariable String id) {
+        course.deleteCourse(Integer.parseInt(id));
+        return "redirect:/staff/course/";
     }
 
     @RequestMapping(value = "/updateCourse")
     public String updateCourse(@ModelAttribute Course c) {
         course.updateCourse(c);
-        return "redirect:/tms/course/index";
+        return "redirect:/staff/course/";
     }
 
     @RequestMapping(value = "/addStaff")
     public String addStaff() {
         course.addTrainees();
-        return "redirect:/tms/course/index";
+        return "redirect:/staff/course/";
     }
 }

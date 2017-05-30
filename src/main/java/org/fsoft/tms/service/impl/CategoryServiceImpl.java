@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by thehaohcm on 5/30/17.
+ * Created by Isabella on 29-May-2017.
  */
 @Service
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryServiceImpl implements CategoryService{
 
     private final Logger logger = LogManager.getLogger();
     @Autowired
@@ -52,4 +52,15 @@ public class CategoryServiceImpl implements CategoryService {
     public Category findOneCategory(int id) {
         return categoryRepository.findOne(id);
     }
+
+    @Override
+    public List<Category> getListCategoryActive() {
+        return categoryRepository.findAllByActive(true);
+    }
 }
+
+
+
+
+
+

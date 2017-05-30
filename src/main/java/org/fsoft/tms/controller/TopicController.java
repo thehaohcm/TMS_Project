@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by DELL on 5/27/2017.
  */
 @Controller
-@RequestMapping(value = "/tms/topic")
+@RequestMapping(value = "/staff/topic")
 public class TopicController {
     @Autowired
     CourseService courseService;
@@ -24,9 +24,8 @@ public class TopicController {
     @Autowired
     TopicService topicService;
 
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
-        model.addAttribute("listCourse", courseService.getAllCourse());
         model.addAttribute("listTopic", topicService.getAllTopic());
         return "topic/index";
     }
@@ -38,10 +37,28 @@ public class TopicController {
         return "topic/add";
     }
 
+    @RequestMapping(value = "/addTopic")
+    public String getPageAdd(@ModelAttribute Topic topic) {
+        topicService.addTopic(topic);
+        return "redirect:/staff/topic/";
+    }
+
     @RequestMapping(value = "/update/{id}")
     public String getPageAdd(@PathVariable String id, Model model) {
         Topic topic = topicService.finOneById(Integer.parseInt(id));
         model.addAttribute("topic", topic);
         return "topic/update";
+    }
+
+    @RequestMapping(value = "/updateTopic")
+    public String update(@ModelAttribute Topic topic) {
+        topicService.updateTopic(topic);
+        return "redirect:/staff/topic/";
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    public String getPageDelete(@PathVariable String id) {
+        topicService.deleteTopic(Integer.parseInt(id));
+        return "redirect:/staff/topic/";
     }
 }

@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by thehaohcm on 5/30/17.
+ * Created by Isabella on 29-May-2017.
  */
 @Service
-public class TopicServiceImpl implements TopicService {
+public class TopicServiceImpl implements TopicService{
 
     @Autowired
     TopicRepository topic;
@@ -65,5 +65,26 @@ public class TopicServiceImpl implements TopicService {
             }
         }
         return arrCourses;
+    }
+
+    @Override
+    public void updateTopic(Topic t) {
+        Topic temp = topic.findOne(t.getId());
+        temp.setTitle(t.getTitle());
+        temp.setContent(t.getContent());
+        topic.save(temp);
+    }
+
+    @Override
+    public void deleteTopic(int id) {
+        Topic temp = topic.findOne(id);
+        temp.setActive(false);
+        topic.save(temp);
+    }
+
+    @Override
+    public void addTopic(Topic t) {
+        t.setActive(true);
+        topic.save(t);
     }
 }
