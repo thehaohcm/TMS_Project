@@ -1,4 +1,4 @@
-package org.fsoft.tms.service_impl;
+package org.fsoft.tms.service.impl;
 
 import org.fsoft.tms.entity.Course;
 import org.fsoft.tms.entity.Topic;
@@ -65,5 +65,26 @@ public class TopicServiceImpl implements TopicService{
             }
         }
         return arrCourses;
+    }
+
+    @Override
+    public void updateTopic(Topic t) {
+        Topic temp = topic.findOne(t.getId());
+        temp.setTitle(t.getTitle());
+        temp.setContent(t.getContent());
+        topic.save(temp);
+    }
+
+    @Override
+    public void deleteTopic(int id) {
+        Topic temp = topic.findOne(id);
+        temp.setActive(false);
+        topic.save(temp);
+    }
+
+    @Override
+    public void addTopic(Topic t) {
+        t.setActive(true);
+        topic.save(t);
     }
 }

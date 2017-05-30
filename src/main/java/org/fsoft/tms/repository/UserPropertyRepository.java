@@ -1,5 +1,6 @@
 package org.fsoft.tms.repository;
 
+import org.fsoft.tms.entity.Property;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.entity.UserProperty;
 import org.fsoft.tms.entity.UserPropertyId;
@@ -14,4 +15,5 @@ import java.util.Set;
 public interface UserPropertyRepository extends JpaRepository<UserProperty, UserPropertyId>{
 //    public List<UserProperty> findAllByUser(User user);
     public List<UserProperty> getAllByPk_User(User user);
+    public UserProperty getAllByPk_UserAndPk_Property(User user, Property property);
 }

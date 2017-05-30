@@ -1,4 +1,4 @@
-package org.fsoft.tms.service_impl;
+package org.fsoft.tms.service.impl;
 
 import org.fsoft.tms.entity.*;
 import org.fsoft.tms.repository.*;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Isabella on 29-May-2017.
+ * Created by thehaohcm on 5/30/17.
  */
 @Service
 public class UserServiceImpl implements UserService {

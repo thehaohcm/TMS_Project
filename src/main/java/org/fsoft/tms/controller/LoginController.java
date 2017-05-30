@@ -2,18 +2,13 @@ package org.fsoft.tms.controller;
 
 import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.Role;
-import org.fsoft.tms.repository.UserRepository;
 import org.fsoft.tms.service.LoginService;
 import org.fsoft.tms.service.RoleService;
-import org.fsoft.tms.service_impl.AuthenticationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,7 +64,7 @@ public class LoginController {
 
     @RequestMapping("/trainer")
     public String trainer() {
-        return "trainers/index";
+        return "trainer/index";
     }
 
 

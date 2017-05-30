@@ -1,5 +1,6 @@
-package org.fsoft.tms.service_impl;
 
+package org.fsoft.tms.service.impl;
+import org.fsoft.tms.entity.Category;
 import org.fsoft.tms.entity.Course;
 import org.fsoft.tms.repository.CourseRepository;
 import org.fsoft.tms.repository.UserRepository;
@@ -57,5 +58,17 @@ public class CourseServiceImpl implements CourseService{
         Course temp = courseRepository.findOne(2);
         temp.setTrainees(userRepository.findAllById(3));
         courseRepository.save(temp);
+    }
+
+    @Override
+    public void deleteCourse(int id) {
+        Course c = courseRepository.findOne(id);
+        c.setActive(false);
+        courseRepository.save(c);
+    }
+
+    @Override
+    public List<Course> getAllCourseByCategory(Category c) {
+        return  courseRepository.findAllByCategory(c);
     }
 }

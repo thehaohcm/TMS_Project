@@ -38,21 +38,85 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //Disable CSRF for enable POST method in EmailController.java
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/register").permitAll()
-                    .antMatchers("/").permitAll()
-                    .antMatchers("/tms/course/**").hasRole("CreateTrainerAccount")
-//                    .antMatchers("/admin/**").hasRole("Login")
-//                    .antMatchers("/staff/**").hasRole("TS")
+                //Login - Admin, Training Staff, Trainer
+                .antMatchers("/").hasRole("Login")
 
+                //Admin
+                .antMatchers("/admin").hasRole("AccessAdminPage")
+                    //Trainer
+                .antMatchers("/admin/trainer/").hasRole("ViewSearchTrainerAccount")
+                .antMatchers("/admin/trainer/add").hasRole("CreateTrainerAccount")
+                .antMatchers("/admin/trainer/addTrainer").hasRole("CreateTrainerAccount")
+                .antMatchers("/admin/trainer/update/**").hasRole("UpdateTrainerAccount")
+                .antMatchers("/admin/trainer/updateTrainer").hasRole("UpdateTrainerAccount")
+                .antMatchers("/admin/trainer/delete/**").hasRole("DeleteTrainerAccount")
+                .antMatchers("/admin/trainer/deleteTrainer").hasRole("DeleteTrainerAccount")
+                    //Training Staff
+                .antMatchers("/admin/staff/").hasRole("ViewSearchTrainingStaffAccount")
+                .antMatchers("/admin/staff/add").hasRole("CreateTrainingStaffAccount")
+                .antMatchers("/admin/staff/addStaff").hasRole("CreateTrainingStaffAccount")
+                .antMatchers("/admin/staff/update/**").hasRole("UpdateTrainingStaffAccount")
+                .antMatchers("/admin/staff/updateStaff").hasRole("UpdateTrainingStaffAccount")
+                .antMatchers("/admin/staff/delete/**").hasRole("DeleteTrainingStaffAccount")
+                .antMatchers("/admin/staff/deleteStaff").hasRole("DeleteTrainingStaffAccount")
+                .antMatchers("/admin/trainer/addCourse").hasRole("AddTrainerToCourse")
 
-                    .antMatchers("/email**").permitAll()
-                    .and()
+                //Training Staff
+                .antMatchers("/staff").hasRole("AccessStaffPage")
+                .antMatchers("staff/updateProfile").hasRole("EditTrainingStaffProfile")
+                    //Trainee
+                .antMatchers("/staff/trainee/").hasRole("ViewSearchTraineeAccount")
+                .antMatchers("/staff/trainee/add").hasRole("CreateTraineeAccount")
+                .antMatchers("/staff/trainee/addTrainee").hasRole("CreateTraineeAccount")
+                .antMatchers("/staff/trainee/update/**").hasRole("UpdateTraineeAccount")
+                .antMatchers("/staff/trainee/updateTrainee").hasRole("UpdateTraineeAccount")
+                .antMatchers("/staff/trainee/delete/**").hasRole("DeleteTraineeAccount")
+                .antMatchers("/staff/trainee/deleteTrainee").hasRole("DeleteTraineeAccount")
+                .antMatchers("/staff/trainee/updateProfile").hasRole("EditTraineeProfile")
+                    //Course
+                .antMatchers("/staff/course/").hasRole("ViewSearchCourse")
+                .antMatchers("/staff/course/add").hasRole("AddCourse")
+                .antMatchers("/staff/course/addCourse").hasRole("AddCourse")
+                .antMatchers("/staff/course/update/**").hasRole("UpdateCourse")
+                .antMatchers("/staff/course/updateCourse").hasRole("UpdateCourse")
+                .antMatchers("/staff/course/delete/**").hasRole("DeleteCourse")
+                .antMatchers("/staff/course/deleteCourse").hasRole("DeleteCourse")
+                    //Category
+                .antMatchers("/staff/category/").hasRole("ViewSearchCourseCategory")
+                .antMatchers("/staff/category/add").hasRole("AddCourseCategory")
+                .antMatchers("/staff/category/addCategory").hasRole("AddCourseCategory")
+                .antMatchers("/staff/category/update/**").hasRole("UpdateCourseCategory")
+                .antMatchers("/staff/category/updateCategory").hasRole("UpdateCourseCategory")
+                .antMatchers("/staff/category/delete/**").hasRole("DeleteCourseCategory")
+                .antMatchers("/staff/category/deleteCategory").hasRole("DeleteCourseCategory")
+                    //Topic
+                .antMatchers("/staff/topic/").hasRole("ViewSearchCourseTopic")
+                .antMatchers("/staff/topic/add").hasRole("AddCourseTopic")
+                .antMatchers("/staff/topic/addTopic").hasRole("AddCourseTopic")
+                .antMatchers("/staff/topic/update/**").hasRole("UpdateCourseTopic")
+                .antMatchers("/staff/topic/updateTopic").hasRole("UpdateCourseTopic")
+                .antMatchers("/staff/topic/delete/**").hasRole("DeleteCourseTopic")
+                .antMatchers("/staff/topic/deleteTopic").hasRole("DeleteCourseTopic")
+                    //Trainer
+                .antMatchers("/staff/trainer/addCourse").hasRole("AssignTraineeToCouse")
+                .antMatchers("/staff/trainer/addTopic").hasRole("AssignTraineeToTopic")
+                .antMatchers("/staff/trainer/editProfile").hasRole("EditTrainerProfile")
+
+                //Trainer
+                .antMatchers("/trainer").hasRole("AccessTrainerPage")
+                    //course
+                .antMatchers("/trainer/course").hasRole("ViewTrainerListOfCourse")
+
+                .and()
                 .formLogin()
                     .loginPage("/login")
                     .usernameParameter("username")
                     .passwordParameter("password")
                     .defaultSuccessUrl("/")
                     .failureUrl("/login?error")
+                    .and()
+                .logout()
+                    .logoutSuccessUrl("/login")
                     .and()
                 .exceptionHandling()
                     .accessDeniedPage("/403");
