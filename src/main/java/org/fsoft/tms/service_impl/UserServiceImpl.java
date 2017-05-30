@@ -136,4 +136,11 @@ public class UserServiceImpl implements UserService {
         topic.setContent("tri tue");
         topicRepository.save(topic);
     }
+
+    @Override
+    public void saveUser(User user) {
+        User user1 = userRepository.findOne(user.getId());
+        user1.setUserProperties(user.getUserProperties());
+        userRepository.save(user1);
+    }
 }

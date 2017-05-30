@@ -28,4 +28,6 @@ public interface UserService {
     void addCourse();
 
     void addTopic();
+
+    void saveUser(User user);
 }

@@ -34,27 +34,26 @@ public class CategoryController {
     @RequestMapping(value = "/addCategory")
     public String addCategory(@ModelAttribute Category cat) {
         category.addCategory(cat);
-        return "redirect:/tms/category/index";
+        return "redirect:/tms/category/";
     }
 
     @RequestMapping(value = "/delete/{id}")
     public String deleteCatogory(@PathVariable String id) {
         category.deleteCategory(Integer.parseInt(id));
-        return "redirect:/tms/category/index";
+        return "redirect:/tms/category/";
     }
 
     @RequestMapping(value = "/update/{id}")
     public String updateCategory(@PathVariable String id, Model model) {
         Category cat = category.findOneCategory(Integer.parseInt(id));
         model.addAttribute("category", cat);
-        model.addAttribute("listCategory", category.getListCategory());
         return "category/update";
     }
 
     @RequestMapping(value = "/update")
     public String updateCatogory(@ModelAttribute Category cat) {
         category.updateCategory(cat);
-        return "redirect:/tms/category/index";
+        return "redirect:/tms/category/";
     }
 
 }
