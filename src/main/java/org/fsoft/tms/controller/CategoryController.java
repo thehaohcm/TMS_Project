@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by DELL on 5/23/2017.
  */
 @Controller
-@RequestMapping(value = "/staff/category")
+@RequestMapping(value = "/tms/category")
 public class CategoryController {
 
     private final Logger logger = LogManager.getLogger();

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by DELL on 5/24/2017.
  */
 @Controller
-@RequestMapping(value = "/tms/course")
+@RequestMapping(value = "/staff/course")
 public class CourseController {
     @Autowired
     private CourseService course;
