@@ -1,5 +1,7 @@
 package org.fsoft.tms.service.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.entity.Category;
 import org.fsoft.tms.repository.CategoryRepository;
 import org.fsoft.tms.service.CategoryService;
@@ -14,6 +16,7 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
+    private final Logger logger = LogManager.getLogger();
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -33,6 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category temp = categoryRepository.findOne(id);
         temp.setActive(false);
         categoryRepository.save(temp);
+        logger.debug("vao roi tui bay oi "+id );
     }
 
     @Override

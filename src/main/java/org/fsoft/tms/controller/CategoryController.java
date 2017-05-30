@@ -1,5 +1,7 @@
 package org.fsoft.tms.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.entity.Category;
 import org.fsoft.tms.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by DELL on 5/23/2017.
  */
 @Controller
-@RequestMapping(value = "/**/category")
+@RequestMapping(value = "/staff/category")
 public class CategoryController {
+
+    private final Logger logger = LogManager.getLogger();
     @Autowired
     private CategoryService category;
 
@@ -34,13 +38,14 @@ public class CategoryController {
     @RequestMapping(value = "/addCategory")
     public String addCategory(@ModelAttribute Category cat) {
         category.addCategory(cat);
-        return "redirect:/tms/category/";
+        return "redirect:/staff/category/";
     }
 
     @RequestMapping(value = "/delete/{id}")
     public String deleteCatogory(@PathVariable String id) {
+        logger.debug("vao rui");
         category.deleteCategory(Integer.parseInt(id));
-        return "redirect:/tms/category/";
+        return "redirect:/staff/category/";
     }
 
     @RequestMapping(value = "/update/{id}")
@@ -53,7 +58,7 @@ public class CategoryController {
     @RequestMapping(value = "/update")
     public String updateCatogory(@ModelAttribute Category cat) {
         category.updateCategory(cat);
-        return "redirect:/tms/category/";
+        return "redirect:/staff/category/";
     }
 
 }
