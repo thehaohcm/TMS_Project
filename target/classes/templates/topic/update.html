@@ -178,8 +178,9 @@
                                 <h1>Update Topic</h1>
                             </div>
                             <div class="box-body">
-                                <form action="#" th:action="@{/tms/topic/updateTopic}" th:object="${topic}" method="post">
+                                <form action="#" th:action="@{/staff/topic/updateTopic}" th:object="${topic}" method="post">
                                     <div class="input-group">
+                                        <input size="1200px" type="hidden" class="form-control" th:field="*{id}"/>
                                         <p>Title: </p>
                                         <input size="1200px" type="text" class="form-control" th:field="*{title}" placeholder="Name..."/>
                                         <div class="form-group">
@@ -189,7 +190,6 @@
 
                                         <div class="btn-group">
                                             <input class="btn btn-primary" type="submit" value="Submit"/>
-                                            <input class="btn btn-primary" type="reset" value="Reset"/>
                                         </div>
                                     </div>
                                 </form>
