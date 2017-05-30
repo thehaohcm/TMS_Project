@@ -178,19 +178,30 @@
                                 <h1>Update Profile</h1>
                             </div>
                             <div class="box-body">
-                                <form action="#" th:action="@{/tms/trainer/updateProfile}" th:object="${listUserProperty}" method="post">
+                                <form action="#" th:action="@{/tms/trainer/updateProfile}" th:object="${user}" method="get">
                                     <div class="input-group">
                                         <div class="box-body">
-                                            <table class="table table-bordered">
-                                                <tr>
-                                                    <td>Username</td>
-                                                    <td th:text="${user.username}"></td>
-                                                </tr>
-                                                <tr th:each="item:${listUserProperty}">
-                                                    <td th:text="${item.pk.property.name}"></td>
-                                                    <td><input th:type="text" th:value="${item.value}"/></td>
-                                                </tr>
-                                            </table>
+                                            <input type="text" th:field="*{name}"/>
+                                            <input type="text" th:field="*{email}"/>
+                                            <input type="text" th:field="*{phone}"/>
+                                            <input type="text" th:field="*{address}"/>
+                                            <!--<input type="text" th:field="*{id}"/>-->
+                                            <!--<input type="text" th:field="*{username}"/>-->
+                                            <!--<input type="text" th:field="*{password}"/>-->
+
+                                            <!--<input type="text" th:field="*{manager}"/>-->
+                                            <!--<input type="text" th:field="*{role}"/>-->
+                                            <!--<input type="text" th:field="*{users}"/>-->
+                                            <!--<input type="text" th:field="*{traineeCourses}"/>-->
+                                            <!--<input type="text" th:field="*{topics}"/>-->
+                                            <!--<input type="text" th:field="*{courses}"/>-->
+                                            <!--<input type="text" th:field="*{userProperties}"/>-->
+                                            <!--<table class="table table-bordered">-->
+                                                <!--<tr th:each="item, itemStat : *{userProperties}">-->
+                                                    <!--<td th:field="*{userProperties[__${itemStat.index}__].pk.property.name}"></td>-->
+                                                    <!--<td><input type="text" th:field="*{userProperties[__${itemStat.index}__].value}"/></td>-->
+                                                <!--</tr>-->
+                                            <!--</table>-->
                                         </div>
                                         <div class="btn-group">
                                             <input class="btn btn-primary" type="submit" value="Submit"/>
