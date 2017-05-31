@@ -1,18 +1,24 @@
 package org.fsoft.tms.service.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.entity.*;
 import org.fsoft.tms.repository.*;
 import org.fsoft.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by thehaohcm on 5/30/17.
  */
 @Service
 public class UserServiceImpl implements UserService {
+
+    private final Logger logger = LogManager.getLogger();
 
     @Autowired
     private UserRepository userRepository;
@@ -43,7 +49,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(User u) {
+    public void addUser(User u, int roleId) {
+        Role role = roleRepository.findOne(roleId);
+        u.setRole(role);
+        u.setActive(true);
+        User manager = userRepository.findOne(1);
+        u.setManager(manager);
+        userRepository.save(u);
+    }
+
+    @Override
+    public void addTrainee(User u, int staffId) {
+        Role role = roleRepository.findOne(4);
+        u.setRole(role);
+        u.setActive(true);
+        User manager = userRepository.findOne(staffId);
+        u.setManager(manager);
         userRepository.save(u);
     }
 
@@ -142,5 +163,60 @@ public class UserServiceImpl implements UserService {
         User user1 = userRepository.findOne(user.getId());
         user1.setUserProperties(user.getUserProperties());
         userRepository.save(user1);
+    }
+
+    @Override
+    public void saveTrainer(TrainerInfo trainerInfo) {
+        Set<UserProperty> userProperties = new HashSet<>(0);
+
+        logger.debug("-1:"+trainerInfo.getName());
+
+        userProperties = setTrainerProperty(trainerInfo.getUser(), trainerInfo.getName(),
+                trainerInfo.getEmail(), trainerInfo.getPhone(), trainerInfo.getAddress());
+        for(UserProperty userProperty : userProperties)
+            logger.debug("0:"+userProperty.getValue());
+
+        User user = userRepository.findOne(trainerInfo.getUser().getId());
+        user.setUserProperties(userProperties);
+        logger.debug("1:"+user.getUsername());
+        logger.debug("2:"+user.getPassword());
+        Set<UserProperty> userProperties1 = user.getUserProperties();
+        for(UserProperty userProperty : userProperties1)
+            logger.debug("3:"+userProperty.getValue());
+//        logger.debug("4:"+user.getManager().toString());
+        saveUser(user);
+    }
+
+    @Override
+    public Set<UserProperty> setTrainerProperty(User user, String name, String email, String phone, String address) {
+        UserProperty userProperty = new UserProperty();
+        Set<UserProperty> userProperties = new HashSet<>(0);
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(1));
+        userProperty.setValue(name);
+        userProperties.add(userProperty);
+        userProperty = new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(10));
+        userProperty.setValue(email);
+        userProperties.add(userProperty);
+        userProperty = new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(9));
+        userProperty.setValue(phone);
+        userProperties.add(userProperty);
+        userProperty = new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(8));
+        userProperty.setValue(address);
+        userProperties.add(userProperty);
+        return userProperties;
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        User user = userRepository.findOne(id);
+        user.setActive(false);
+        userRepository.save(user);
     }
 }
