@@ -96,6 +96,7 @@ public class TraineeController {
 
     @RequestMapping(value="/addTrainee")
     public String addTrainee(@ModelAttribute TraineeInfo traineeInfo){
+        logger.debug("ID user instance: "+CurrentUser.getInstance().getUser().getUsername()+" "+CurrentUser.getInstance().getUser().getId());
         userService.addTrainee(traineeInfo.getUser(), CurrentUser.getInstance().getUser().getId());
         return "redirect:/staff/trainee/";
     }
