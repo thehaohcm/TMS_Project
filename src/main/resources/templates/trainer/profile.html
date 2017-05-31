@@ -42,9 +42,9 @@
         <!-- Logo -->
         <a href="#" class="logo" >
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>TMS</span>
+            <span class="logo-mini"><b>TN</b>TMS</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Trainer</b>TMS</span>
+            <span class="logo-lg"><b>Trainer </b>TMS</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -66,7 +66,7 @@
                             <li class="user-header">
                                 <img src="../../staic/dist/img/avatar04.png" class="img-circle" alt="User Image" th:src="@{/dist/img/avatar04.png}"/>
                                 <p>
-                                    Admin
+                                    Trainer
                                 </p>
                             </li>
                             <!-- Menu Footer-->
@@ -95,14 +95,14 @@
                     <img src="../../static/dist/img/avatar04.png" class="img-circle" alt="User Image" th:src="@{/dist/img/avatar04.png}"/>
                 </div>
                 <div class="pull-left info">
-                    <p>Admin</p>
+                    <p>Trainer</p>
                     <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
                 </div>
             </div>
             <ul class="sidebar-menu">
                 <li class="header">Control Panel</li>
                 <li class="active treeview">
-                    <a href="indexadmin.html">
+                    <a th:href="@{/trainer}">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
@@ -113,8 +113,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Course</a></li>
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Topic</a></li>
+                        <li><a th:href="@{/trainer/course}"><i class="fa fa-paper-plane"></i>Course</a></li>
+                        <li><a th:href="@{/trainer/topic}"><i class="fa fa-paper-plane"></i>Topic</a></li>
                     </ul>
                 </li>
                 <!--<li class="treeview">
