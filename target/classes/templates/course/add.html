@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Admin TMS</title>
+    <title>Training Staff TMS</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
     <!-- Bootstrap 3.3.5 -->
@@ -59,11 +59,11 @@
     <!--Header part of the indexwebpage -->
     <header class="main-header">
         <!-- Logo -->
-        <a href="../indextrainingstaff.html" class="logo">
+        <a th:href="@{/staff}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>TF </b>TMS</span>
+            <span class="logo-mini"><b>TS </b>TMS</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Trainning Staff </b>TMS</span>
+            <span class="logo-lg"><b>Training Staff </b>TMS</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -74,19 +74,20 @@
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
                     <!-- Tasks: style can be found in dropdown.less -->
-                    <li class="dropdown tasks-menu"> <a href="calendartrainningstaff.html" class="button"> <i class="fa fa-calendar"></i> <span class="label label-danger"></span> </a> </li>
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="../dist/img/admin.jpg" class="user-image" alt="User Image"/> <span class="hidden-xs">Trainning staff</span> </a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="../../static/dist/img/avatar2.png" class="user-image" th:src="@{/dist/img/avatar2.png}" alt="User Image"/>
+                            <span class="hidden-xs">Trainning staff</span> </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="../dist/img/admin.jpg" class="img-circle" alt="User Image"/>
+                                <img src="../../static/dist/img/avatar2.png" class="user-image" th:src="@{/dist/img/avatar2.png}" alt="User Image"/>
                                 <p> Trainning staff </p>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left"> <a href="../editaccountadmin.html" class="btn btn-default btn-flat">Edit account</a> </div>
+                                <div class="pull-left"> <a href="#" class="btn btn-default btn-flat">Edit profile</a> </div>
                                 <div class="pull-right"> <a href="#" class="btn btn-default btn-flat">Sign out</a> </div>
                             </li>
                         </ul>
@@ -103,7 +104,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="../../static/dist/img/admin.jpg" class="img-circle" alt="User Image"/>
+                    <img src="../../static/dist/img/avatar2.png" class="user-image" th:src="@{/dist/img/avatar2.png}" alt="User Image"/>
                 </div>
                 <div class="pull-left info">
                     <p>Trainning staff</p>
@@ -113,21 +114,11 @@
             <ul class="sidebar-menu">
                 <li class="header">Control Panel</li>
                 <li class="active treeview">
-                    <a href="../indextrainingstaff.html">
+                    <a th:href="@{/staff}">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-mortar-board"></i>
-                        <span>Admin</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-paper-plane"></i> Trainning Staff</a></li>
-                        <li><a href="#"><i class="fa fa-paper-plane"></i> Trainer</a></li>
-                    </ul>
-                </li>
+
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-mortar-board"></i>
@@ -136,23 +127,18 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="#"><i class="fa fa-paper-plane"></i>Trainee</a></li>
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Trainer profile</a></li>
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Courses</a></li>
-                        <li><a href="categoriestrainningstaff.html"><i class="fa fa-paper-plane"></i>Categories</a></li>
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Topics</a></li>
+                        <li><a th:href="@{/staff/trainer/}"><i class="fa fa-paper-plane"></i>Trainer profile</a></li>
+                        <li><a th:href="@{/staff/course/}"><i class="fa fa-paper-plane"></i>Courses</a></li>
+                        <li><a th:href="@{/staff/category/}"><i class="fa fa-paper-plane"></i>Category</a></li>
+                        <li><a th:href="@{/staff/topic/}"><i class="fa fa-paper-plane"></i>Topic</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-mortar-board"></i>
-                        <span>Trainer</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="calendartrainningstaff.html">
-                        <i class="fa fa-calendar"></i> <span>Calendar</span>
-                    </a>
-                </li>
+
+                <!--<li class="treeview">-->
+                    <!--<a href="calendartrainningstaff.html">-->
+                        <!--<i class="fa fa-calendar"></i> <span>Calendar</span>-->
+                    <!--</a>-->
+                <!--</li>-->
             </ul>
         </section>
         <!-- /.sidebar -->
