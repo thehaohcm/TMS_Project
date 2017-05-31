@@ -33,7 +33,7 @@ public class StaffAccountController {
 
     @RequestMapping(value = "/addAccount")
     public String addAccount (@ModelAttribute  User user) {
-        userService.addUser(user, 2);
+//        userService.addUser(user, 2);
         return "redirect:/admin/staff/";
     }
 
@@ -52,7 +52,7 @@ public class StaffAccountController {
 
     @RequestMapping(value = "/delete/{id}")
     public String deleteAccount(@PathVariable String id, Model model) {
-        userService.deleteUser(Integer.parseInt(id));
+//        userService.deleteUser(Integer.parseInt(id));
         return "redirect:/admin/staff/";
     }
 }

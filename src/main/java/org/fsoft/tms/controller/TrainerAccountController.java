@@ -35,7 +35,7 @@ public class TrainerAccountController {
     @RequestMapping(value = "/addAccount")
     public String addAccount (@ModelAttribute  TrainerInfo trainerInfo) {
 
-        userService.addUser(trainerInfo.getUser(), 3);
+//        userService.addUser(trainerInfo.getUser(), 3);
         return "redirect:/admin/trainer/";
     }
 
@@ -54,7 +54,7 @@ public class TrainerAccountController {
 
     @RequestMapping(value = "/delete/{id}")
     public String deleteAccount(@PathVariable String id, Model model) {
-        userService.deleteUser(Integer.parseInt(id));
+//        userService.deleteUser(Integer.parseInt(id));
         return "redirect:/admin/trainer/";
     }
 

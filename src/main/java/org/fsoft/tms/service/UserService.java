@@ -14,7 +14,9 @@ public interface UserService {
 
     List<User> getAllUserByRole(int roleID);
 
-    void addUser(User u);
+    void addUser(User u, int roleId);
+
+    void addTrainee(User u, int staffId);
 
     User findOneUser(int id);
 
