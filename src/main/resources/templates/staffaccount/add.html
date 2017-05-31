@@ -42,11 +42,11 @@
     <!--Header part of the indexwebpage -->
     <header class="main-header">
         <!-- Logo -->
-        <a href="indexadmin.html" class="logo" th:href="@{indexadmin.html}">
+        <a  class="logo" th:href="@{/admin}">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>TMS</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>TMS</span>
+            <span class="logo-lg"><b>Admin </b>TMS</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -100,7 +100,7 @@
             <ul class="sidebar-menu">
                 <li class="header">Control Panel</li>
                 <li class="active treeview">
-                    <a href="indexadmin.html">
+                    <a th:href="@{/staff}">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
