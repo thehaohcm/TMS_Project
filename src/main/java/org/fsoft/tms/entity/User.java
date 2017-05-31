@@ -53,8 +53,8 @@ public class User implements java.io.Serializable {
 
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "ID", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ID")
     public Integer getId() {
         return this.id;
     }

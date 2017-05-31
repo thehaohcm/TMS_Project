@@ -14,11 +14,13 @@ public interface UserService {
 
     List<User> getAllUserByRole(int roleID);
 
-    void addUser(User u);
+    void addUser(User u, int roleId);
 
     User findOneUser(int id);
 
     void updateUser(User c);
+
+    void addTrainee(User u, int staffId);
 
     void addPropertyForUser();
 
@@ -31,6 +33,8 @@ public interface UserService {
     void addTopic();
 
     void saveUser(User user);
+
+    void deleteUser(int id);
 
     void saveTrainer(TrainerInfo trainerInfo);
 
