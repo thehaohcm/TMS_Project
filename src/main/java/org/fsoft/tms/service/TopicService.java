@@ -13,6 +13,8 @@ public interface TopicService {
 
     List<Topic> getAllTopic();
 
+    List<Topic> getAllTopicByStaff();
+
     Topic finOneById(Integer id);
 
     List<Topic> findAllTopicByTrainer(User user);

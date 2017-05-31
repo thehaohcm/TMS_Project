@@ -13,6 +13,8 @@ public interface CourseService {
 
     List<Course> getAllCourse();
 
+    List<Course> getAllCourseByStaff();
+
     List<Course> getAllCourseByCategory(Category c);
 
     void addCourse(Course course);

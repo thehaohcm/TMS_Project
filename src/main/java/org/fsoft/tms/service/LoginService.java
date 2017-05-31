@@ -10,4 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 public interface LoginService {
 
     User getUserByUsername(String username);
+
+    User findUserByUsername(String username);
 }

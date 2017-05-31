@@ -31,7 +31,7 @@ public class CourseController {
 
     @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
-        model.addAttribute("listCourse", course.getAllCourse());
+        model.addAttribute("listCourse", course.getAllCourseByStaff());
         return "course/index";
     }
 
@@ -44,7 +44,6 @@ public class CourseController {
 
     @RequestMapping(value = "/addCourse")
     public String addCourse(@ModelAttribute Course c) {
-        c.setActive(true);
         course.addCourse(c);
         return "redirect:/staff/course/";
     }
