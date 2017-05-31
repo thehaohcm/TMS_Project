@@ -42,7 +42,7 @@
     <!--Header part of the indexwebpage -->
     <header class="main-header">
         <!-- Logo -->
-        <a  class="logo" th:href="@{/admin}">
+        <a href="indexadmin.html" class="logo" th:href="@{indexadmin.html}">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>TMS</span>
             <!-- logo for regular state and mobile devices -->
@@ -57,15 +57,6 @@
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <!-- Tasks: style can be found in dropdown.less -->
-                    <!--<li class="dropdown tasks-menu">
-                        <a href="calendaradmin.html" class="button" th:href="@{calendaradmin.html}">
-                            <i class="fa fa-calendar"></i>
-                            <span class="label label-danger"></span>
-                        </a>
-                    </li>-->
-                    <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="../../staic/dist/img/avatar.png" class="user-image" alt="User Image" th:src="@{/dist/img/avatar.png}"/>
@@ -82,7 +73,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div style="text-align:center" >
-                                    <a href="#" th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -109,7 +100,7 @@
             <ul class="sidebar-menu">
                 <li class="header">Control Panel</li>
                 <li class="active treeview">
-                    <a th:href="@{/admin}">
+                    <a href="indexadmin.html">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
@@ -120,8 +111,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a th:href="@{/admin/staff/}" ><i class="fa fa-paper-plane"></i> Trainning Staff</a></li>
-                        <li><a th:href="@{/admin/trainer/}"><i class="fa fa-paper-plane"></i> Trainer</a></li>
+                        <li><a href="#"><i class="fa fa-paper-plane"></i> Trainning Staff</a></li>
+                        <li><a href="#"><i class="fa fa-paper-plane"></i> Trainer</a></li>
                     </ul>
                 </li>
                 <!--<li class="treeview">
@@ -141,7 +132,7 @@
                 Dashboard
             </h1>
             <ol class="breadcrumb">
-                <li><a th:href="@{/admin}"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">DashBoard</li>
             </ol>
         </section>
@@ -159,10 +150,20 @@
                     </div><!-- /.box -->
                     <div class="box box-primary">
                         <section class="content">
-                            <div class="form-group">
-                                <label >User Name</label>
-                                <input type="text" class="form-control" id="nameInput" disabled="" placeholder="Your name"/>
-                            </div>
+                            <form action="#" th:action="@{/admin/staff/addAccount}" th:object="${user}" method="post">
+                                <div class="form-group has-feedback">
+                                    <input th:field="${user.username}" type="text" class="form-control" placeholder="User name"/>
+                                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                </div>
+                                <div class="form-group has-feedback">
+                                    <input th:field="${user.password}" type="password" class="form-control" placeholder="Password"/>
+                                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                </div>
+                                <div class="col-xs-4">
+                                    <button type="submit" class="btn btn-primary btn-block btn-flat">Create</button>
+                                </div><!-- /.col -->
+                            </form>
+
                             <div class="callout callout-info">
                                 <h4>Tip!</h4>
                                 <p>Using the Control Panel for easy to use the website and locale the place you need to work with. Everything will be more simple for you managerment.</p>
