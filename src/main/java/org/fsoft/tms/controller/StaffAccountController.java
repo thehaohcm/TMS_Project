@@ -2,10 +2,12 @@ package org.fsoft.tms.controller;
 
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.service.UserService;
+import org.hibernate.validator.internal.engine.messageinterpolation.InterpolationTerm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -31,7 +33,26 @@ public class StaffAccountController {
 
     @RequestMapping(value = "/addAccount")
     public String addAccount (@ModelAttribute  User user) {
-        userService.saveUser(user);
+        userService.addUser(user, 2);
+        return "redirect:/admin/staff/";
+    }
+
+    @RequestMapping(value = "/update/{id}")
+    public String getPageUpdate(@PathVariable String id, Model model) {
+        User user = userService.findOneUser(Integer.parseInt(id));
+        model.addAttribute("user", user);
+        return "staffaccount/update";
+    }
+
+    @RequestMapping(value = "/update")
+    public String updateAccount (@ModelAttribute User user) {
+        userService.updateUser(user);
+        return "redirect:/admin/staff/";
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    public String deleteAccount(@PathVariable String id, Model model) {
+        userService.deleteUser(Integer.parseInt(id));
         return "redirect:/admin/staff/";
     }
 }

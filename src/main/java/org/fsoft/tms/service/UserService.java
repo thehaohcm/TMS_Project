@@ -34,6 +34,8 @@ public interface UserService {
 
     void saveUser(User user);
 
+    void deleteUser(int id);
+
     void saveTrainer(TrainerInfo trainerInfo);
 
     Set<UserProperty> setTrainerProperty(User user, String name, String email, String phone, String address);

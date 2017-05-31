@@ -177,7 +177,7 @@
                                                     <td>Update</td>
                                                     <td>Delte</td>
                                                 </tr>
-                                                <tr th:each="item:${listUser}">
+                                                <tr th:each="item:${listUser}" th:if="${item.active}">
                                                     <td th:text="${item.id}"></td>
                                                     <td th:text="${item.username}"></td>
                                                     <td><a th:href="@{/admin/staff/profile/{id}(id=${item.id})}" >link</a></td>
