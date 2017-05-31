@@ -42,7 +42,7 @@
         <!-- Logo -->
         <a class="logo" th:href="@{/staff}">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>ST</b>TMS</span>
+            <span class="logo-mini"><b>ST </b>TMS</span>
             <!-- logo for regular state and mobile devices -->
             <span class="logo-lg"><b>Training Staff </b>TMS</span>
         </a>
@@ -83,7 +83,7 @@
                                     <a href="#" class="btn btn-default btn-flat">Edit Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -122,7 +122,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Trainee</a></li>
+                        <li><a th:href="@{/staff/trainee/}"><i class="fa fa-paper-plane"></i>Trainee</a></li>
                         <li><a th:href="@{/staff/trainer/}"><i class="fa fa-paper-plane"></i>Trainer profile</a></li>
                         <li><a th:href="@{/staff/course/}"><i class="fa fa-paper-plane"></i>Courses</a></li>
                         <li><a th:href="@{/staff/category/}"><i class="fa fa-paper-plane"></i>Category</a></li>
