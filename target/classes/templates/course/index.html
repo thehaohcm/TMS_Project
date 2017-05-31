@@ -77,7 +77,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a th:href="@{/staff}" class="btn btn-default btn-flat">Edit profile</a>
+                                    <a href="#" class="btn btn-default btn-flat">Edit profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <a th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
@@ -118,7 +118,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Trainee</a></li>
+                        <li><a th:href="@{/staff/trainee/}"><i class="fa fa-paper-plane"></i>Trainee</a></li>
                         <li><a th:href="@{/staff/trainer/}"><i class="fa fa-paper-plane"></i>Trainer profile</a></li>
                         <li><a th:href="@{/staff/course/}"><i class="fa fa-paper-plane"></i>Courses</a></li>
                         <li><a th:href="@{/staff/category/}"><i class="fa fa-paper-plane"></i>Category</a></li>

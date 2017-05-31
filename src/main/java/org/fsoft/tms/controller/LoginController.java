@@ -37,7 +37,7 @@ public class LoginController {
         if (auth != null) {
             String name=auth.getName();
             CurrentUser currentUser = CurrentUser.getInstance();
-            currentUser.setUser(loginService.getUserByUsername(name));
+            currentUser.setUser(loginService.findUserByUsername(name));
             Role role = currentUser.getUser().getRole();
             switch(role.getName()){
                 case "ROLE_ADMIN":

@@ -56,12 +56,12 @@
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
                     <!-- Tasks: style can be found in dropdown.less -->
-                    <li class="dropdown tasks-menu">
-                        <a href="calendaradmin.html" class="button" th:href="@{calendaradmin.html}">
-                            <i class="fa fa-calendar"></i>
-                            <span class="label label-danger"></span>
-                        </a>
-                    </li>
+                    <!--<li class="dropdown tasks-menu">-->
+                        <!--<a href="calendaradmin.html" class="button" th:href="@{calendaradmin.html}">-->
+                            <!--<i class="fa fa-calendar"></i>-->
+                            <!--<span class="label label-danger"></span>-->
+                        <!--</a>-->
+                    <!--</li>-->
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -82,7 +82,7 @@
                                     <a href="#" class="btn btn-default btn-flat">Edit account</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -102,7 +102,7 @@
                     <img src="../static/dist/img/avatar2.png" class="img-circle" alt="User Image" th:src="@{/dist/img/avatar2.png}"/>
                 </div>
                 <div class="pull-left info">
-                    <p>Admin</p>
+                    <p>Training Staff</p>
                     <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                     <ul class="treeview-menu">
                         <li><a href="#"><i class="fa fa-paper-plane"></i>Trainee</a></li>
                         <li><a th:href="@{/staff/trainer/}"><i class="fa fa-paper-plane"></i>Trainer profile</a></li>
-                        <li><a th:href="@{/staff/course/}"><i class="fa fa-paper-plane"></i>Courses</a></li>
+                        <li><a th:href="@{/staff/course/}"><i class="fa fa-paper-plane"></i>Course</a></li>
                         <li><a th:href="@{/staff/category/}"><i class="fa fa-paper-plane"></i>Category</a></li>
                         <li><a th:href="@{/staff/topic/}"><i class="fa fa-paper-plane"></i>Topic</a></li>
                     </ul>
@@ -143,12 +143,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Categories
+                Category
                 <small>Control panel</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Categories</li>
+                <li class="active">Category</li>
             </ol>
         </section>
         <!-- Main content -->
