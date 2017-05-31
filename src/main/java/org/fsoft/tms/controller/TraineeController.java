@@ -60,8 +60,8 @@ public class TraineeController {
         traineeInfo.setUser(user);
         traineeInfo.setName(userPropertyService.getUserProperty(user,
                 propertyService.findOneProperty(1)).getValue());
-        traineeInfo.setBirthDate(Date.valueOf(userPropertyService.getUserProperty(user,
-                propertyService.findOneProperty(2)).getValue()));
+        traineeInfo.setBirthDate(userPropertyService.getUserProperty(user,
+                propertyService.findOneProperty(2)).getValue());
         traineeInfo.setEducation(userPropertyService.getUserProperty(user,
                 propertyService.findOneProperty(3)).getValue());
         traineeInfo.setProgrammingLanguage(userPropertyService.getUserProperty(user,
@@ -77,6 +77,13 @@ public class TraineeController {
         model.addAttribute("trainee", traineeInfo);
         return "trainee/update";
     }
+
+    @RequestMapping(value="/updateProfile")
+    public String updateProfile(@ModelAttribute TraineeInfo traineeInfo){
+        userService.saveTrainee(traineeInfo);
+        return "redirect:/staff/trainee/";
+    }
+
     @RequestMapping(value="/add")
     public String getPageUpdate(Model model){
         model.addAttribute("user",new User());

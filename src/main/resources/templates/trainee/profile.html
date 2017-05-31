@@ -160,30 +160,19 @@
                                         <h1 >Profile</h1>
                                     </div>
                                     <div class="box-body">
-                                        <form action="#" th:action="@{/trainee/update}" th:object="${trainee}" method="get">
-                                            <table class="table table-bordered">
-                                                <tr>
-                                                    <td>Name<input type="hidden" th:field="*{user}"/></td>
-                                                    <td><input type="text" th:field="*{name}"/></td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td>Email</td>
-                                                    <td><input type="text" th:field="*{education}"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Phone</td>
-                                                    <td><input type="text" th:field="*{toeicScore}"/></td>
-                                                </tr>
-                                                <!--<tr>-->
-                                                    <!--<td>Address</td>-->
-                                                    <!--<td><input type="text" th:field="*{address}"/></td>-->
-                                                <!--</tr>-->
-                                                <tr>
-                                                    <input class="btn btn-primary" type="submit" value="Submit"/>
-                                                </tr>
-                                            </table>
-                                        </form>
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <td>Username</td>
+                                                <td th:text="${trainee.username}"></td>
+                                            </tr>
+                                            <tr th:each="item:${trainee.userProperties}">
+                                                <td th:text="${item.pk.property.name}"></td>
+                                                <td th:text="${item.value}"></td>
+                                            </tr>
+                                            <tr>
+                                                <a type="button" th:href="@{/staff/trainee/update/{id}(id=${trainee.id})}" class="btn btn-block btn-info"  style="width:130px;color:white">Update Profile</a>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>

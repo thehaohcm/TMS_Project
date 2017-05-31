@@ -11,7 +11,7 @@ public class TraineeInfo {
 
     private String name;
 
-    private Date birthDate;
+    private String birthDate;
 
     private String education;
 
@@ -45,11 +45,11 @@ public class TraineeInfo {
         this.name = name;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

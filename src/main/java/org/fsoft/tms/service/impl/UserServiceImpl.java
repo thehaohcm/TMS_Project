@@ -213,6 +213,68 @@ public class UserServiceImpl implements UserService {
         return userProperties;
     }
 
+    public void saveTrainee(TraineeInfo trainee){
+        Set<UserProperty> userProperties=new HashSet<>(0);
+        userProperties=setTraineeProperty(trainee.getUser(),trainee.getName(),trainee.getBirthDate(),
+                trainee.getEducation(),trainee.getProgrammingLanguage(),trainee.getToeicScore(),
+                trainee.getExperienceDetail(),trainee.getDepartment(),trainee.getLocation());
+
+        User user=userRepository.findOne(trainee.getUser().getId());
+        user.setUserProperties(userProperties);
+        saveUser(user);
+    }
+
+    public Set<UserProperty> setTraineeProperty(User user,String name,String birthDate,String education,
+                                                String programmingLanguage,String toeicScrore,String experienceDetail,
+                                                String department,String localtion){
+        Set<UserProperty> userProperties=new HashSet<>(0);
+        UserProperty userProperty;
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(1));
+        userProperty.setValue(name);
+        userProperties.add(userProperty);
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(2));
+        userProperty.setValue(birthDate);
+        userProperties.add(userProperty);
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(3));
+        userProperty.setValue(education);
+        userProperties.add(userProperty);
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(4));
+        userProperty.setValue(programmingLanguage);
+        userProperties.add(userProperty);
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(5));
+        userProperty.setValue(toeicScrore);
+        userProperties.add(userProperty);
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(6));
+        userProperty.setValue(experienceDetail);
+        userProperties.add(userProperty);
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(7));
+        userProperty.setValue(department);
+        userProperties.add(userProperty);
+
+        return userProperties;
+    }
+
     @Override
     public void deleteUser(int id) {
         User user = userRepository.findOne(id);
