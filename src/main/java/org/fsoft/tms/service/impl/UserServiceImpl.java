@@ -49,7 +49,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(User u) {
+    public void addUser(User u, int roleId) {
+        Role role = roleRepository.findOne(roleId);
+        u.setRole(role);
+        u.setActive(true);
+        User manager = userRepository.findOne(1);
+        u.setManager(manager);
+        userRepository.save(u);
+    }
+
+    @Override
+    public void addTrainee(User u, int staffId) {
+        Role role = roleRepository.findOne(4);
+        u.setRole(role);
+        u.setActive(true);
+        User manager = userRepository.findOne(staffId);
+        u.setManager(manager);
         userRepository.save(u);
     }
 
