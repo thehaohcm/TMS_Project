@@ -10,6 +10,7 @@ import org.fsoft.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -46,6 +47,15 @@ public class TraineeController {
         return "traineeProfile/profile";
     }
 
+    @RequestMapping(value="/add")
+    public String getPageUpdate(Model model){
+        model.addAttribute("user",new User());
+        return "trainee/add";
+    }
 
+//    @RequestMapping(value="/addTrainee")
+//    public String addTrainee(@ModelAttribute TraineeInfo traineeInfo){
+//
+//    }
 
 }
