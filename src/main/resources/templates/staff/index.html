@@ -39,7 +39,7 @@
     <!--Header part of the indexwebpage -->
     <header class="main-header">
         <!-- Logo -->
-        <a href="index.html" class="logo">
+        <a th:href="@{/staff}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>ST</b> TMS</span>
             <!-- logo for regular state and mobile devices -->
@@ -79,9 +79,12 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                             <li class="user-footer">
-                                <div style="text-align:center" >
-                                    <a href="#" th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
+                            <div class="pull-left">
+                                <a th:href="@{/staff}" class="btn btn-default btn-flat">Edit Profile</a>
+                            </div>
+                            <div class="pull-right" >
+                                <a  th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
+                            </div>
                             </li>
                             </li>
                         </ul>
@@ -107,7 +110,7 @@
             <ul class="sidebar-menu">
                 <li class="header">Control Panel</li>
                 <li class="active treeview">
-                    <a href="indextrainingstaff.html">
+                    <a th:href="@{/staff}">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
@@ -121,8 +124,8 @@
                         <li><a href="#"><i class="fa fa-paper-plane"></i>Trainee</a></li>
                         <li><a th:href="@{/staff/trainer/}"><i class="fa fa-paper-plane"></i>Trainer profile</a></li>
                         <li><a th:href="@{/staff/course/}"><i class="fa fa-paper-plane"></i>Courses</a></li>
-                        <li><a th:href="@{/staff/category/}"><i class="fa fa-paper-plane"></i>Categories</a></li>
-                        <li><a th:href="@{/staff/topic/}"><i class="fa fa-paper-plane"></i>Topics</a></li>
+                        <li><a th:href="@{/staff/category/}"><i class="fa fa-paper-plane"></i>Category</a></li>
+                        <li><a th:href="@{/staff/topic/}"><i class="fa fa-paper-plane"></i>Topic</a></li>
                     </ul>
                 </li>
                 <!--<a href="">
@@ -141,7 +144,7 @@
                 Dashboard
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a th:href="@{/staff}"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">DashBoard</li>
             </ol>
         </section>
