@@ -154,36 +154,39 @@
                         <section class="content">
 
 
-                            <div class="form-group">
-                                <label >User Name</label>
-                                <input type="text" class="form-control"  disabled="" placeholder="Your name"/>
-                                <label>Type</label>
-                                <input type="text" class="form-control"  disabled="" placeholder="Type"/>
-                                <label>Education</label>
-                                <input type="text" class="form-control"  disabled="" placeholder="Education"/>
-                                <label>Working place</label>
-                                <input type="text" class="form-control"  disabled="" placeholder="Working place"/>
-                                <label>Telephone</label>
-                                <input type="text" class="form-control"  disabled="" placeholder="Telephone"/>
-                                <label>Email address</label>
-                                <input type="text" class="form-control"  disabled="" placeholder="Email address"/>
-                            </div>
-                            <div class="callout callout-info">
-                                <h4>Tip!</h4>
-                                <p>Using the Control Panel for easy to use the website and locale the place you need to work with. Everything will be more simple for you managerment.</p>
-                            </div>
-                            <div class="callout callout-danger">
-                                <h4>Warning!</h4>
-                                <p>Do not provide your account to strangers or anyone request you except the development team leader.We will not take reposibility for your action if you provide your account to other or getting back your account because the stealer can change anything when they got your account</p>
-                            </div>
-                            <div class="box box-default">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Blank Box</h3>
+                            <div class="col-md-15">
+                                <div class="box">
+                                    <div class="box-header with-border">
+                                        <h1 >Profile</h1>
+                                    </div>
+                                    <div class="box-body">
+                                        <form action="#" th:action="@{/trainer/updateProfile}" th:object="${trainer}" method="get">
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <td>Name<input type="hidden" th:field="*{user}"/></td>
+                                                    <td><input type="text" th:field="*{name}"/></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>Email</td>
+                                                    <td><input type="text" th:field="*{email}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Phone</td>
+                                                    <td><input type="text" th:field="*{phone}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Address</td>
+                                                    <td><input type="text" th:field="*{address}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <input class="btn btn-primary" type="submit" value="Submit"/>
+                                                </tr>
+                                            </table>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="box-body">
-                                    <p>Any question or opinions please contact us via email supportteam@gmail.com</p>
-                                </div><!-- /.box-body -->
-                            </div><!-- /.box -->
+                            </div>
                         </section><!-- /.content -->
                     </div><!-- /.box-body -->
                 </div><!-- /.tab-content -->
@@ -220,4 +223,3 @@
 
 </body>
 </html>
-
