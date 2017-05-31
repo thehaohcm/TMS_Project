@@ -15,7 +15,7 @@ public class TraineeInfo {
 
     private String education;
 
-    private String programingLanguage;
+    private String programmingLanguage;
 
     private String toeicScore;
 
@@ -61,12 +61,12 @@ public class TraineeInfo {
         this.education = education;
     }
 
-    public String getProgramingLanguage() {
-        return programingLanguage;
+    public String getProgrammingLanguage() {
+        return programmingLanguage;
     }
 
-    public void setProgramingLanguage(String programingLanguage) {
-        this.programingLanguage = programingLanguage;
+    public void setProgrammingLanguage(String programmingLanguage) {
+        this.programmingLanguage = programmingLanguage;
     }
 
     public String getToeicScore() {
