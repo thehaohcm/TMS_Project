@@ -163,27 +163,25 @@
                                         <form action="#" th:action="@{/trainer/updateProfile}" th:object="${trainer}" method="get">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <td></td>
-                                                    <td><input type="hidden" th:field="*{user}"/></td>
+                                                    <td>Name<input type="hidden" th:field="*{user}"/></td>
+                                                    <td><input type="text" th:field="*{name}"/></td>
+
                                                 </tr>
                                                 <tr>
-                                                    <td>Name</td>
-                                                    <td><input type="hidden" th:field="*{name}"/></td>
+                                                    <td>Email</td>
+                                                    <td><input type="text" th:field="*{email}"/></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Name</td>
-                                                    <td><input type="hidden" th:field="*{email}"/></td>
+                                                    <td>Phone</td>
+                                                    <td><input type="text" th:field="*{phone}"/></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Name</td>
-                                                    <td><input type="hidden" th:field="*{phone}"/></td>
+                                                    <td>Address</td>
+                                                    <td><input type="text" th:field="*{address}"/></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Name</td>
-                                                    <td><input type="hidden" th:field="*{address}"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <a type="button" th:href="@{trainer/update/{id}(id=${user.id})}" class="btn btn-block btn-info"  style="width:130px;color:white">Update Profile</a>
+                                                    <input class="btn btn-primary" type="submit" value="Submit"/>
+                                                    <a class="btn btn-block btn-info" type="submit" style="width:130px;color:white">Update Profile</a>
                                                 </tr>
                                             </table>
                                         </form>

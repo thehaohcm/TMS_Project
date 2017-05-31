@@ -3,6 +3,7 @@ package org.fsoft.tms.service;
 import org.fsoft.tms.entity.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Isabella on 29-May-2017.
@@ -30,4 +31,8 @@ public interface UserService {
     void addTopic();
 
     void saveUser(User user);
+
+    void saveTrainer(TrainerInfo trainerInfo);
+
+    Set<UserProperty> setTrainerProperty(User user, String name, String email, String phone, String address);
 }
