@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,12 +42,6 @@ public class TraineeController {
 
     @RequestMapping(value="/")
     public String getPageIndex(Model model){
-//        List<User> users = userService.getAllUserByRole(4);
-//        List<TraineeInfo> traineeInfos=new List<TraineeInfo>();
-//        for(User user:users){
-//            traineeInfos.add(new TraineeInfo(userPropertyService.getUserProperty(user,)));
-//        }
-        model.addAttribute("trainee", new TraineeInfo());
         model.addAttribute("listTrainee",userService.getAllUserByRole(4));
         return "trainee/index";
     }
@@ -54,10 +49,34 @@ public class TraineeController {
     @RequestMapping(value="/profile/{id}")
     public String getPageProfile(@PathVariable String id, Model model){
         User user=userService.findOneUser(Integer.parseInt(id));
-        model.addAttribute("user",user);
+        model.addAttribute("trainee",user);
         return "trainee/profile";
     }
 
+    @RequestMapping(value = "/update/{id}")
+    public String getPageUpdate(@PathVariable String id, Model model) {
+        User user = userService.findOneUser(Integer.parseInt(id));
+        TraineeInfo traineeInfo = new TraineeInfo();
+        traineeInfo.setUser(user);
+        traineeInfo.setName(userPropertyService.getUserProperty(user,
+                propertyService.findOneProperty(1)).getValue());
+        traineeInfo.setBirthDate(Date.valueOf(userPropertyService.getUserProperty(user,
+                propertyService.findOneProperty(2)).getValue()));
+        traineeInfo.setEducation(userPropertyService.getUserProperty(user,
+                propertyService.findOneProperty(3)).getValue());
+        traineeInfo.setProgrammingLanguage(userPropertyService.getUserProperty(user,
+                propertyService.findOneProperty(4)).getValue());
+        traineeInfo.setToeicScore(userPropertyService.getUserProperty(user,
+                propertyService.findOneProperty(5)).getValue());
+        traineeInfo.setExperienceDetail(userPropertyService.getUserProperty(user,
+                propertyService.findOneProperty(6)).getValue());
+        traineeInfo.setDepartment(userPropertyService.getUserProperty(user,
+                propertyService.findOneProperty(7)).getValue());
+        traineeInfo.setLocation(userPropertyService.getUserProperty(user,
+                propertyService.findOneProperty(12)).getValue());
+        model.addAttribute("trainee", traineeInfo);
+        return "trainee/update";
+    }
     @RequestMapping(value="/add")
     public String getPageUpdate(Model model){
         model.addAttribute("user",new User());
@@ -69,7 +88,14 @@ public class TraineeController {
         User user=userService.findOneUser(Integer.parseInt(id));
         user.setActive(false);
         userService.saveUser(user);
-        return "/staff/trainee/";
+        return "redirect:/staff/trainee/";
     }
 
+    @RequestMapping(value="/recover/{id}")
+    public String recoverTrainee(@PathVariable String id){
+        User user=userService.findOneUser(Integer.parseInt(id));
+        user.setActive(true);
+        userService.saveUser(user);
+        return "redirect:/staff/trainee/";
+    }
 }
