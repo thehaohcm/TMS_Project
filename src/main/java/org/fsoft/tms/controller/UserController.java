@@ -33,7 +33,7 @@ public class UserController {
     @RequestMapping(value = "/addUser")
     public String addCourse(@ModelAttribute User c) {
         c.setActive(true);
-        user.addUser(c);
+//        user.addUser(c);
         return "redirect:/demo/server/user/getall";
     }
 
