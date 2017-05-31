@@ -78,7 +78,7 @@ public class TrainerController
 
         logger.debug("-1:"+trainerInfo.getName());
 
-        userProperties = userPropertyService.setTrainerProperty(trainerInfo.getUser(), trainerInfo.getName(),
+        userProperties = userService.setTrainerProperty(trainerInfo.getUser(), trainerInfo.getName(),
                 trainerInfo.getEmail(), trainerInfo.getPhone(), trainerInfo.getAddress());
         for(UserProperty userProperty : userProperties)
             logger.debug("0:"+userProperty.getValue());
