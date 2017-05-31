@@ -212,4 +212,11 @@ public class UserServiceImpl implements UserService {
         userProperties.add(userProperty);
         return userProperties;
     }
+
+    @Override
+    public void deleteUser(int id) {
+        User user = userRepository.findOne(id);
+        user.setActive(false);
+        userRepository.save(user);
+    }
 }
