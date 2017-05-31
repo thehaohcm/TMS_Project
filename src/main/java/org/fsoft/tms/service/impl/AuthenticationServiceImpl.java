@@ -63,4 +63,9 @@ public class AuthenticationServiceImpl implements UserDetailsService,LoginServic
     public User getUserByUsername(String username){
         return userRepository.findUserByUsername(username);
     }
+
+    @Override
+    public User findUserByUsername(String username) {
+        return userRepository.findAllByUsername(username);
+    }
 }

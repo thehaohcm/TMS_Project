@@ -176,7 +176,7 @@
                                 <h1>Form Update Category</h1>
                             </div>
                             <div class="box-body">
-                                <form action="#" th:action="@{/staff/trainee/updateProfile}" th:object="${trainee}" method="get">
+                                <form action="#" th:action="@{/staff/trainee/addProfile}" th:object="${trainee}" method="post">
                                     <table class="table table-bordered">
                                         <tr>
                                             <td>Name<input type="hidden" th:field="*{user}"/></td>

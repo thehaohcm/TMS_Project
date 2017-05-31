@@ -2,6 +2,7 @@ package org.fsoft.tms.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.Property;
 import org.fsoft.tms.entity.TraineeInfo;
 import org.fsoft.tms.entity.User;
@@ -85,9 +86,18 @@ public class TraineeController {
     }
 
     @RequestMapping(value="/add")
-    public String getPageUpdate(Model model){
-        model.addAttribute("user",new User());
+    public String getPageAdd(Model model){
+        User user =new User();
+        TraineeInfo traineeInfo=new TraineeInfo();
+        traineeInfo.setUser(user);
+        model.addAttribute("trainee",traineeInfo);
         return "trainee/add";
+    }
+
+    @RequestMapping(value="/addTrainee")
+    public String addTrainee(@ModelAttribute TraineeInfo traineeInfo){
+        userService.addTrainee(traineeInfo.getUser(), CurrentUser.getInstance().getUser().getId());
+        return "redirect:/staff/trainee/";
     }
 
     @RequestMapping(value="/delete/{id}")
