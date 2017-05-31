@@ -27,14 +27,14 @@ public class TopicController {
 
     @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
-        model.addAttribute("listTopic", topicService.getAllTopic());
+        model.addAttribute("listTopic", topicService.getAllTopicByStaff());
         return "topic/index";
     }
 
     @RequestMapping(value = "/add")
     public String getPageAdd(Model model) {
         model.addAttribute("topic", new Topic());
-        model.addAttribute("listCourse", courseService.getAllCourse());
+        model.addAttribute("listCourse", courseService.getAllCourseByStaff());
         return "topic/add";
     }
 

@@ -1,5 +1,6 @@
 package org.fsoft.tms.service.impl;
 
+import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.Course;
 import org.fsoft.tms.entity.Topic;
 import org.fsoft.tms.entity.User;
@@ -23,6 +24,11 @@ public class TopicServiceImpl implements TopicService{
     @Override
     public List<Topic> getAllTopic() {
         return topic.findAll();
+    }
+
+    @Override
+    public List<Topic> getAllTopicByStaff() {
+        return topic.findAllByCourse_Staff(CurrentUser.getInstance().getUser());
     }
 
     @Override
