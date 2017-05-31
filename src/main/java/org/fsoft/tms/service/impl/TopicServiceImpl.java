@@ -40,7 +40,7 @@ public class TopicServiceImpl implements TopicService{
         List<Topic> arrTopic = topic.findAllByTrainer(user);
         List<Topic> arrTopics = new ArrayList<>();
         for (Topic tp: arrTopic) {
-            if (tp.getCourse().equals(course)) {
+            if (tp.getCourse().getName().equals(course.getName())) {
                 arrTopics.add(tp);
             }
         }

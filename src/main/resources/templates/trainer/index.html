@@ -72,10 +72,10 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" th:href="@{/trainer/profile}" class="btn btn-default btn-flat">Edit Profile</a>
+                                    <a th:href="@{/trainer/profile}" class="btn btn-default btn-flat">Edit Profile</a>
                                 </div>
                                 <div class="pull-right" >
-                                    <a href="#" th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
+                                    <a th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -113,8 +113,9 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Course</a></li>
-                        <li><a href="#"><i class="fa fa-paper-plane"></i>Topic</a></li>
+                        <li><a th:href="@{/trainer/course}"><i class="fa fa-paper-plane"></i>Course</a></li>
+                        <li><a th:href="@{/trainer/topic}"><i class="fa fa-paper-plane"></i>Topic</a></li>
+                        <li><a th:href="@{/trainer/profile}"><i class="fa fa-paper-plane"></i>Profile</a></li>
                     </ul>
                 </li>
                 <!--<li class="treeview">
@@ -152,22 +153,33 @@
                     </div><!-- /.box -->
                     <div class="box box-primary">
                         <section class="content">
-
-
+                            <!--<div class="form-group">-->
+                                <!--<label >User Name</label>-->
+                                <!--<input th:value="${trainer.username}" type="text" class="form-control"  disabled=""/>-->
+                                <!--<label>Type</label>-->
+                                <!--<input th:value="${trainer.userProperties.pk.}" type="text" class="form-control"  disabled=""/>-->
+                                <!--<label>Education</label>-->
+                                <!--<input th:value="${trainer.username}" type="text" class="form-control"  disabled=""/>-->
+                                <!--<label>Working place</label>-->
+                                <!--<input th:value="${trainer.username}" type="text" class="form-control"  disabled="" placeholder="Working place"/>-->
+                                <!--<label>Telephone</label>-->
+                                <!--<input th:value="${trainer.username}" type="text" class="form-control"  disabled="" placeholder="Telephone"/>-->
+                                <!--<label>Email address</label>-->
+                                <!--<input th:value="${trainer.username}" type="text" class="form-control"  disabled="" placeholder="Email address"/>-->
+                            <!--</div>-->
                             <div class="form-group">
-                                <label >User Name</label>
-                                <input type="text" class="form-control"  disabled="" placeholder="Your name"/>
-                                <label>Type</label>
-                                <input type="text" class="form-control"  disabled="" placeholder="Type"/>
-                                <label>Education</label>
-                                <input type="text" class="form-control"  disabled="" placeholder="Education"/>
-                                <label>Working place</label>
-                                <input type="text" class="form-control"  disabled="" placeholder="Working place"/>
-                                <label>Telephone</label>
-                                <input type="text" class="form-control"  disabled="" placeholder="Telephone"/>
-                                <label>Email address</label>
-                                <input type="text" class="form-control"  disabled="" placeholder="Email address"/>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td>Username</td>
+                                        <td th:text="${user.username}"></td>
+                                    </tr>
+                                    <tr th:each="item:${user.userProperties}">
+                                        <td th:text="${item.pk.property.name}"></td>
+                                        <td th:text="${item.value}"></td>
+                                    </tr>
+                                </table>
                             </div>
+
                             <div class="callout callout-info">
                                 <h4>Tip!</h4>
                                 <p>Using the Control Panel for easy to use the website and locale the place you need to work with. Everything will be more simple for you managerment.</p>
