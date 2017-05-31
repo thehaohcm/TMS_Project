@@ -1,7 +1,9 @@
 
 package org.fsoft.tms.service.impl;
+import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.Category;
 import org.fsoft.tms.entity.Course;
+import org.fsoft.tms.entity.User;
 import org.fsoft.tms.repository.CourseRepository;
 import org.fsoft.tms.repository.UserRepository;
 import org.fsoft.tms.service.CourseService;
@@ -28,7 +30,15 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
+    public List<Course> getAllCourseByStaff() {
+        User user = CurrentUser.getInstance().getUser();
+        return courseRepository.findAllByStaff(user);
+    }
+
+    @Override
     public void addCourse(Course course) {
+        course.setActive(true);
+        course.setStaff(CurrentUser.getInstance().getUser());
         courseRepository.save(course);
     }
 

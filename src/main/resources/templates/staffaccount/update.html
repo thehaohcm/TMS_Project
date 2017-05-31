@@ -151,6 +151,7 @@
                     <div class="box box-primary">
                         <section class="content">
                             <form action="#" th:action="@{/admin/staff/update}" th:object="${user}" method="post">
+                                <input th:field="*{id}" type="hidden" class="form-control"/>
                                 <div class="form-group has-feedback">
                                     <input th:field="*{username}" type="text" class="form-control" placeholder="User name"/>
                                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -159,6 +160,9 @@
                                     <input th:field="*{password}" type="password" class="form-control" placeholder="Password"/>
                                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                                 </div>
+                                <div class="col-xs-4">
+                                    <button type="submit" class="btn btn-primary btn-block btn-flat">Create</button>
+                                </div><!-- /.col -->
                             </form>
 
                             <div class="callout callout-info">
