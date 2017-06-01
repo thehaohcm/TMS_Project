@@ -182,17 +182,17 @@
                                     <table class="table table-bordered">
 
                                         <tr>
-                                            <td>UserName<input type="hidden" th:field="*{user}"/></td>
+                                            <td><input type="hidden" th:field="*{user.id}"/></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>UserName</td>
                                             <td><input type="text" th:field="*{user.username}"/></td>
                                         </tr>
                                         <tr>
                                             <td>Password</td>
                                             <td><input type="password" th:field="*{user.password}"/></td>
                                         </tr>
-                                        <!--<tr>-->
-                                            <!--<td>Confirm Password</td>-->
-                                            <!--<td><input type="password" th:field="*{birthDate}"/></td>-->
-                                        <!--</tr>-->
                                         <tr>
                                             <td>Name</td>
                                             <td><input type="text" th:field="*{name}"/></td>

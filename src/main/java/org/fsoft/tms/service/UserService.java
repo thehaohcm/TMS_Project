@@ -20,7 +20,7 @@ public interface UserService {
 
     void updateUser(User c);
 
-    void addTrainee(User u, int staffId);
+    void addTrainee(TraineeInfo traineeInfo, int staffId);
 
     void addPropertyForUser();
 
