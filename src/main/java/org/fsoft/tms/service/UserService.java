@@ -22,11 +22,11 @@ public interface UserService {
 
     void addUser(User u, int roleId);
 
+    void addTrainee(User u, int staffId);
+
     User findOneUser(int id);
 
     void updateUser(User c);
-
-    void addTrainee(User u, int staffId);
 
     void addPropertyForUser();
 

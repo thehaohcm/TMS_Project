@@ -96,10 +96,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User c) {
+
         User temp = userRepository.findOne(c.getId());
+        if(!c.getPassword().equals("")) {
+            temp.setPassword(encode(c.getPassword()));
+        }
         temp.setUsername(c.getUsername());
-        String password = c.getPassword();
-        temp.setPassword(encode(password));
+//        String password = c.getPassword();
+//        temp.setPassword(encode(password));
         userRepository.save(temp);
     }
 
@@ -191,12 +195,12 @@ public class UserServiceImpl implements UserService {
     public void saveTrainer(TrainerInfo trainerInfo) {
         Set<UserProperty> userProperties = new HashSet<>(0);
 
-        logger.debug("-1:"+trainerInfo.getName());
+//        logger.debug("-1:"+trainerInfo.getName());
 
         userProperties = setTrainerProperty(trainerInfo.getUser(), trainerInfo.getName(),
                 trainerInfo.getEmail(), trainerInfo.getPhone(), trainerInfo.getAddress());
-        for(UserProperty userProperty : userProperties)
-            logger.debug("0:"+userProperty.getValue());
+//        for(UserProperty userProperty : userProperties)
+//            logger.debug("0:"+userProperty.getValue());
 
         User user = userRepository.findOne(trainerInfo.getUser().getId());
         user.setUserProperties(userProperties);
@@ -206,7 +210,8 @@ public class UserServiceImpl implements UserService {
         for(UserProperty userProperty : userProperties1)
             logger.debug("3:"+userProperty.getValue());
 //        logger.debug("4:"+user.getManager().toString());
-        saveUser(user);
+//        saveUser(user);
+        userRepository.save(user);
     }
 
     @Override
@@ -235,6 +240,17 @@ public class UserServiceImpl implements UserService {
         return userProperties;
     }
 
+//    public void saveTrainee(TraineeInfo trainee){
+//        Set<UserProperty> userProperties=new HashSet<>(0);
+//        userProperties=setTraineeProperty(trainee.getUser(),trainee.getName(),trainee.getBirthDate(),
+//                trainee.getEducation(),trainee.getProgrammingLanguage(),trainee.getToeicScore(),
+//                trainee.getExperienceDetail(),trainee.getDepartment(),trainee.getLocation());
+//
+//        User user=userRepository.findOne(trainee.getUser().getId());
+//        user.setUserProperties(userProperties);
+//        saveUser(user);
+//    }
+
     public void saveTrainee(TraineeInfo trainee){
         Set<UserProperty> userProperties=new HashSet<>(0);
         userProperties=setTraineeProperty(trainee.getUser(),trainee.getName(),trainee.getBirthDate(),
@@ -242,8 +258,12 @@ public class UserServiceImpl implements UserService {
                 trainee.getExperienceDetail(),trainee.getDepartment(),trainee.getLocation());
 
         User user=userRepository.findOne(trainee.getUser().getId());
+        if(!trainee.getUser().getPassword().equals("")) {
+            user.setPassword(encode(trainee.getUser().getPassword()));
+        }
+        user.setUsername(trainee.getUser().getUsername());
         user.setUserProperties(userProperties);
-        saveUser(user);
+        userRepository.save(user);
     }
 
     public Set<UserProperty> setTraineeProperty(User user,String name,String birthDate,String education,
