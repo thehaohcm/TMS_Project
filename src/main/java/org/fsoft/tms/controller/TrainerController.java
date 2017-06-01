@@ -67,33 +67,13 @@ public class TrainerController
                 propertyService.findOneProperty(8)).getValue());
         model.addAttribute("trainer", trainerInfo);
 //        model.addAttribute("listUserProperty", userPropertyService.getListUserProperty(user));
-        return "trainerProfile/update";
+        return "trainer/update";
     }
 
     @RequestMapping(value = "/updateProfile")
     public String Update(@ModelAttribute TrainerInfo trainerInfo) {
         userService.saveTrainer(trainerInfo);
-//        logger.debug(trainerInfo.getUser().getUsername());
-//
-//        Set<UserProperty> userProperties = new HashSet<>(0);
-//
-//        logger.debug("-1:"+trainerInfo.getName());
-//
-//        userProperties = userService.setTrainerProperty(trainerInfo.getUser(), trainerInfo.getName(),
-//                trainerInfo.getEmail(), trainerInfo.getPhone(), trainerInfo.getAddress());
-//        for(UserProperty userProperty : userProperties)
-//            logger.debug("0:"+userProperty.getValue());
-//
-//        User user = userService.findOneUser(trainerInfo.getUser().getId());
-//        user.setUserProperties(userProperties);
-//        logger.debug("1:"+user.getUsername());
-//        logger.debug("2:"+user.getPassword());
-//        Set<UserProperty> userProperties1 = user.getUserProperties();
-//        for(UserProperty userProperty : userProperties1)
-//            logger.debug("3:"+userProperty.getValue());
-////        logger.debug("4:"+user.getManager().toString());
-//
-//        userService.saveUser(user);
+
         return "redirect:/staff/trainer/";
     }
 

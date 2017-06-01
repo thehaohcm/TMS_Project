@@ -16,11 +16,11 @@ public interface UserService {
 
     void addUser(User u, int roleId);
 
+    void addTrainee(User u, int staffId);
+
     User findOneUser(int id);
 
     void updateUser(User c);
-
-    void addTrainee(User u, int staffId);
 
     void addPropertyForUser();
 
@@ -41,4 +41,10 @@ public interface UserService {
     void saveTrainer(TrainerInfo trainerInfo);
 
     Set<UserProperty> setTrainerProperty(User user, String name, String email, String phone, String address);
+
+    void saveTrainee(TraineeInfo traineeInfo);
+
+    Set<UserProperty> setTraineeProperty(User user,String name,String birthDate,String education,
+                                         String programmingLanguage,String toeicScore,String experimentDetail,
+                                         String department,String location);
 }

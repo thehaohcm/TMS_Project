@@ -11,11 +11,11 @@ public class TraineeInfo {
 
     private String name;
 
-    private Date birthDate;
+    private String birthDate;
 
     private String education;
 
-    private String programingLanguage;
+    private String programmingLanguage;
 
     private String toeicScore;
 
@@ -45,11 +45,11 @@ public class TraineeInfo {
         this.name = name;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -61,12 +61,12 @@ public class TraineeInfo {
         this.education = education;
     }
 
-    public String getProgramingLanguage() {
-        return programingLanguage;
+    public String getProgrammingLanguage() {
+        return programmingLanguage;
     }
 
-    public void setProgramingLanguage(String programingLanguage) {
-        this.programingLanguage = programingLanguage;
+    public void setProgrammingLanguage(String programmingLanguage) {
+        this.programmingLanguage = programmingLanguage;
     }
 
     public String getToeicScore() {

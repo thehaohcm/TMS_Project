@@ -84,10 +84,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User c) {
+
         User temp = userRepository.findOne(c.getId());
+        if(!c.getPassword().equals("")) {
+            temp.setPassword(encode(c.getPassword()));
+        }
         temp.setUsername(c.getUsername());
-        String password = c.getPassword();
-        temp.setPassword(encode(password));
+//        String password = c.getPassword();
+//        temp.setPassword(encode(password));
         userRepository.save(temp);
     }
 
@@ -179,12 +183,12 @@ public class UserServiceImpl implements UserService {
     public void saveTrainer(TrainerInfo trainerInfo) {
         Set<UserProperty> userProperties = new HashSet<>(0);
 
-        logger.debug("-1:"+trainerInfo.getName());
+//        logger.debug("-1:"+trainerInfo.getName());
 
         userProperties = setTrainerProperty(trainerInfo.getUser(), trainerInfo.getName(),
                 trainerInfo.getEmail(), trainerInfo.getPhone(), trainerInfo.getAddress());
-        for(UserProperty userProperty : userProperties)
-            logger.debug("0:"+userProperty.getValue());
+//        for(UserProperty userProperty : userProperties)
+//            logger.debug("0:"+userProperty.getValue());
 
         User user = userRepository.findOne(trainerInfo.getUser().getId());
         user.setUserProperties(userProperties);
@@ -194,7 +198,8 @@ public class UserServiceImpl implements UserService {
         for(UserProperty userProperty : userProperties1)
             logger.debug("3:"+userProperty.getValue());
 //        logger.debug("4:"+user.getManager().toString());
-        saveUser(user);
+//        saveUser(user);
+        userRepository.save(user);
     }
 
     @Override
@@ -220,6 +225,83 @@ public class UserServiceImpl implements UserService {
         userProperty.setProperty(propertyRepository.findOne(8));
         userProperty.setValue(address);
         userProperties.add(userProperty);
+        return userProperties;
+    }
+
+//    public void saveTrainee(TraineeInfo trainee){
+//        Set<UserProperty> userProperties=new HashSet<>(0);
+//        userProperties=setTraineeProperty(trainee.getUser(),trainee.getName(),trainee.getBirthDate(),
+//                trainee.getEducation(),trainee.getProgrammingLanguage(),trainee.getToeicScore(),
+//                trainee.getExperienceDetail(),trainee.getDepartment(),trainee.getLocation());
+//
+//        User user=userRepository.findOne(trainee.getUser().getId());
+//        user.setUserProperties(userProperties);
+//        saveUser(user);
+//    }
+
+    public void saveTrainee(TraineeInfo trainee){
+        Set<UserProperty> userProperties=new HashSet<>(0);
+        userProperties=setTraineeProperty(trainee.getUser(),trainee.getName(),trainee.getBirthDate(),
+                trainee.getEducation(),trainee.getProgrammingLanguage(),trainee.getToeicScore(),
+                trainee.getExperienceDetail(),trainee.getDepartment(),trainee.getLocation());
+
+        User user=userRepository.findOne(trainee.getUser().getId());
+        if(!trainee.getUser().getPassword().equals("")) {
+            user.setPassword(encode(trainee.getUser().getPassword()));
+        }
+        user.setUsername(trainee.getUser().getUsername());
+        user.setUserProperties(userProperties);
+        userRepository.save(user);
+    }
+
+    public Set<UserProperty> setTraineeProperty(User user,String name,String birthDate,String education,
+                                                String programmingLanguage,String toeicScrore,String experienceDetail,
+                                                String department,String localtion){
+        Set<UserProperty> userProperties=new HashSet<>(0);
+        UserProperty userProperty;
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(1));
+        userProperty.setValue(name);
+        userProperties.add(userProperty);
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(2));
+        userProperty.setValue(birthDate);
+        userProperties.add(userProperty);
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(3));
+        userProperty.setValue(education);
+        userProperties.add(userProperty);
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(4));
+        userProperty.setValue(programmingLanguage);
+        userProperties.add(userProperty);
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(5));
+        userProperty.setValue(toeicScrore);
+        userProperties.add(userProperty);
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(6));
+        userProperty.setValue(experienceDetail);
+        userProperties.add(userProperty);
+
+        userProperty=new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(7));
+        userProperty.setValue(department);
+        userProperties.add(userProperty);
+
         return userProperties;
     }
 

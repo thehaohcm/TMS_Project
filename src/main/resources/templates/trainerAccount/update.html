@@ -42,11 +42,11 @@
     <!--Header part of the indexwebpage -->
     <header class="main-header">
         <!-- Logo -->
-        <a href="indexadmin.html" class="logo" th:href="@{indexadmin.html}">
+        <a class="logo" th:href="@{/admin}">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>TMS</span>
+            <span class="logo-mini"><b>A </b>TMS</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>TMS</span>
+            <span class="logo-lg"><b>Admin </b>TMS</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -57,15 +57,6 @@
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <!-- Tasks: style can be found in dropdown.less -->
-                    <!--<li class="dropdown tasks-menu">
-                        <a href="calendaradmin.html" class="button" th:href="@{calendaradmin.html}">
-                            <i class="fa fa-calendar"></i>
-                            <span class="label label-danger"></span>
-                        </a>
-                    </li>-->
-                    <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="../../staic/dist/img/avatar.png" class="user-image" alt="User Image" th:src="@{/dist/img/avatar.png}"/>
@@ -82,7 +73,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div style="text-align:center" >
-                                    <a href="#" th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -109,7 +100,7 @@
             <ul class="sidebar-menu">
                 <li class="header">Control Panel</li>
                 <li class="active treeview">
-                    <a href="indexadmin.html">
+                    <a th:href="@{/admin}">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
@@ -148,57 +139,71 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-md-20">
+                <div class="col-md-15">
+                    <!-- Profile Image -->
                     <div class="box box-primary">
-
-                        <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <h1>Add Category</h1>
-                            </div>
-                            <div class="box-body">
-                                <form action="#" th:action="@{/admin/trainer/addAccount}" th:object="${trainer}" method="post">
-                                    <div class="input-group">
-                                        <div class="form-group has-feedback">
-                                            <input th:field="*{user.username}" type="text" class="form-control" placeholder="User name"/>
-                                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                                        </div>
-                                        <div class="form-group has-feedback">
-                                            <input th:field="*{user.password}" type="password" class="form-control" placeholder="Password"/>
-                                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                                        </div>
-                                        <div class="form-group has-feedback">
-                                            <input th:field="*{name}" type="text" class="form-control" placeholder="Real name"/>
-                                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                                        </div>
-                                        <div class="form-group has-feedback">
-                                            <input th:field="*{email}" type="text" class="form-control" placeholder="Email"/>
-                                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                                        </div>
-                                        <div class="form-group has-feedback">
-                                            <input th:field="*{phone}" type="text" class="form-control" placeholder="Phone number"/>
-                                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                                        </div>
-                                        <div class="form-group has-feedback">
-                                            <input th:field="*{address}" type="text" class="form-control" placeholder="Address"/>
-                                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <button type="submit" class="btn btn-primary btn-block btn-flat">Create</button>
-                                        </div>
-                                        <!-- /.col -->
+                        <div class="box-body box-profile">
+                            <img class="profile-user-img img-responsive img-circle" src="../../static/dist/img/avatar.png" th:src="@{/dist/img/avatar.png}" alt="User profile picture"/>
+                            <h3 class="profile-username text-center">Admin</h3>
+                            <p class="text-muted text-center">Administrator</p>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                    <div class="box box-primary">
+                        <section class="content">
+                            <form action="#" th:action="@{/admin/trainer/update}" th:object="${trainer}" method="post">
+                                <div class="input-group">
+                                    <div class="form-group has-feedback">
+                                        <input th:field="*{user}" type="hidden" class="form-control" placeholder="User name"/>
+                                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                     </div>
-                                </form>
+                                    <div class="form-group has-feedback">
+                                        <input th:field="*{user.password}" type="password" class="form-control" placeholder="Password"/>
+                                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <input th:field="*{name}" type="text" class="form-control" placeholder="Real name"/>
+                                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <input th:field="*{email}" type="text" class="form-control" placeholder="Email"/>
+                                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <input th:field="*{phone}" type="text" class="form-control" placeholder="Phone number"/>
+                                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <input th:field="*{address}" type="text" class="form-control" placeholder="Address"/>
+                                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <button type="submit" class="btn btn-primary btn-block btn-flat">Create</button>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </form>
+
+                            <div class="callout callout-info">
+                                <h4>Tip!</h4>
+                                <p>Using the Control Panel for easy to use the website and locale the place you need to work with. Everything will be more simple for you managerment.</p>
                             </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /. box -->
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-        </section>
-        <!-- /.content -->
+                            <div class="callout callout-danger">
+                                <h4>Warning!</h4>
+                                <p>Do not provide your account to strangers or anyone request you except the development team leader.We will not take reposibility for your action if you provide your account to other or getting back your account because the stealer can change anything when they got your account</p>
+                            </div>
+                            <div class="box box-default">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Blank Box</h3>
+                                </div>
+                                <div class="box-body">
+                                    <p>Any question or opinions please contact us via email supportteam@gmail.com</p>
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box -->
+                        </section><!-- /.content -->
+                    </div><!-- /.box-body -->
+                </div><!-- /.tab-content -->
+            </div><!-- /.nav-tabs-custom -->
+        </section><!-- /.content -->
     </div>
     <footer class="main-footer">
         <div class="pull-right hidden-xs">

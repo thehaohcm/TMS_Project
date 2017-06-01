@@ -176,20 +176,45 @@
                                 <h1>Form Update Category</h1>
                             </div>
                             <div class="box-body">
-                                <form action="#" th:action="@{/staff/category/update}" th:object="${category}" method="post">
-                                    <div class="input-group">
-                                        <p>Name: </p>
-                                        <input size="1200px" type="text" class="form-control" th:field="*{name}" placeholder="Name..."/>
-                                        <p>id: </p>
-                                        <input size="1200px" type="hidden" class="form-control" th:field="*{id}" placeholder="Name..."/>
-                                        <div class="form-group">
-                                            <label>Description: </label>
-                                        </div>
-                                        <textarea style="width:100%;height:250px;resize:none;" id="description" th:field="*{description}"></textarea>
-                                    </div>
-                                    <div class="btn-group">
-                                        <input class="btn btn-primary" style="width:100px" type="submit" value="Submit"/>
-                                    </div>
+                                <form action="#" th:action="@{/staff/trainee/addProfile}" th:object="${trainee}" method="post">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>Name<input type="hidden" th:field="*{user}"/></td>
+                                            <td><input type="text" th:field="*{name}"/></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Birthdate</td>
+                                            <td><input type="text" th:field="*{birthDate}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Education</td>
+                                            <td><input type="text" th:field="*{education}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Programming Language</td>
+                                            <td><input type="text" th:field="*{programmingLanguage}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Toeic Score</td>
+                                            <td><input type="text" th:field="*{toeicScore}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Experience Detail</td>
+                                            <td><input type="text" th:field="*{experienceDetail}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Department</td>
+                                            <td><input type="text" th:field="*{Department}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Location</td>
+                                            <td><input type="text" th:field="*{location}"/></td>
+                                        </tr>
+                                        <tr>
+                                            <input class="btn btn-primary" type="submit" value="Submit"/>
+                                        </tr>
+                                    </table>
                                 </form>
                             </div>
                         </div>
