@@ -180,19 +180,15 @@
                             <div class="box-body">
                                 <form action="#" th:action="@{/staff/trainee/addTrainee}" th:object="${trainee}" method="post">
                                     <table class="table table-bordered">
-
                                         <tr>
-                                            <td>UserName<input type="hidden" th:field="*{user}"/></td>
+
+                                            <td>UserName</td>
                                             <td><input type="text" th:field="*{user.username}"/></td>
                                         </tr>
                                         <tr>
                                             <td>Password</td>
                                             <td><input type="password" th:field="*{user.password}"/></td>
                                         </tr>
-                                        <!--<tr>-->
-                                            <!--<td>Confirm Password</td>-->
-                                            <!--<td><input type="password" th:field="*{birthDate}"/></td>-->
-                                        <!--</tr>-->
                                         <tr>
                                             <td>Name</td>
                                             <td><input type="text" th:field="*{name}"/></td>
@@ -219,7 +215,7 @@
                                         </tr>
                                         <tr>
                                             <td>Department</td>
-                                            <td><input type="text" th:field="*{Department}"/></td>
+                                            <td><input type="text" th:field="*{department}"/></td>
                                         </tr>
                                         <tr>
                                             <td>Location</td>

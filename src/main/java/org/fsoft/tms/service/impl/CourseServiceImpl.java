@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Isabella on 29-May-2017.
@@ -64,9 +65,10 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public void addTrainees() {
-        Course temp = courseRepository.findOne(2);
-        temp.setTrainees(userRepository.findAllById(3));
+    public void addTrainees(int courseID, int traineeID) {
+        Course temp = courseRepository.findOne(courseID);
+        Set<User> arr = temp.getTrainees();
+        arr.add(userRepository.findAllById(traineeID));
         courseRepository.save(temp);
     }
 

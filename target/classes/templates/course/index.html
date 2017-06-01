@@ -186,6 +186,8 @@
                                                         <td>Name</td>
                                                         <td>Description</td>
                                                         <td>Category</td>
+                                                        <td>List Trainee</td>
+                                                        <td>Assign</td>
                                                         <td>Update</td>
                                                         <td>Delete</td>
                                                     </tr>
@@ -194,6 +196,8 @@
                                                         <td th:text="${item.name}"></td>
                                                         <td th:text="${item.description}"></td>
                                                         <td th:text="${item.category.name}"></td>
+                                                        <td style="width:150px"><a type="button" class="btn btn-block btn-info" th:href="@{/staff/course/listtrainee/{id}(id=${item.id})}" style="color:white;width: 100px">View</a></td>
+                                                        <td style="width:150px"><a type="button" class="btn btn-block btn-info" th:href="@{/staff/course/trainee/{id}(id=${item.id})}" style="color:white;width: 100px">Add trainee</a></td>
                                                         <td style="width:150px"><a type="button" class="btn btn-block btn-info" th:href="@{/staff/course/update/{id}(id=${item.id})}" style="color:white;width: 100px">Update</a></td>
                                                         <td style="width:150px"><a type="button" class="btn btn-block btn-danger" th:href="@{/staff/course/delete/{id}(id=${item.id})}" style="color:white;width: 100px">Delete</a></td>
                                                     </tr>

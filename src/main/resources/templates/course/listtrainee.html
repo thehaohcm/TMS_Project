@@ -33,6 +33,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../static/dist/css/skins/_all-skins.min.css" th:href="@{/dist/css/skins/_all-skins.min.css}"/>
+
 </head>
 <body class="hold-transition skin-red sidebar-mini">
 <div class="wrapper">
@@ -158,93 +159,56 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Categories
+                Assign trainee to a course.
                 <small>Control panel</small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Categories</li>
-            </ol>
         </section>
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-md-20">
+                <div class="col-md-15">
                     <div class="box box-primary">
-                        <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <h1>Form Update Category</h1>
-                            </div>
-                            <div class="box-body">
-                                <form action="#" th:action="@{/staff/trainee/updateProfile}" th:object="${trainee}" method="post">
-                                    <table class="table table-bordered">
-
-                                        <tr>
-                                            <td>UserName<input type="hidden" th:field="*{user}"/></td>
-                                            <td><input type="text" th:field="*{user.username}"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Password</td>
-                                            <td><input type="password" th:field="*{user.password}"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Name</td>
-                                            <td><input type="text" th:field="*{name}"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Birthdate</td>
-                                            <td><input type="text" th:field="*{birthDate}"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Education</td>
-                                            <td><input type="text" th:field="*{education}"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Programming Language</td>
-                                            <td><input type="text" th:field="*{programmingLanguage}"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Toeic Score</td>
-                                            <td><input type="text" th:field="*{toeicScore}"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Experience Detail</td>
-                                            <td><input type="text" th:field="*{experienceDetail}"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Department</td>
-                                            <td><input type="text" th:field="*{Department}"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Location</td>
-                                            <td><input type="text" th:field="*{location}"/></td>
-                                        </tr>
-                                        <tr>
-                                            <input class="btn btn-primary" type="submit" value="Submit"/>
-                                        </tr>
-                                    </table>
-                                </form>
-                            </div>
+                        <div class="box box-primary ">
+                            <section class="content">
+                                <div class="col-md-15">
+                                    <div class="box">
+                                        <div class="box-header with-border">
+                                            <h1>Show list trainee</h1>
+                                        </div>
+                                        <div class="box-body">
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <td >No</td>
+                                                    <td>Username</td>
+                                                </tr>
+                                                <tr th:each="item:${listTrainee}" th:if="${item.active}==true">
+                                                    <td th:text="${item.id}"></td>
+                                                    <td th:text="${item.username}"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
+                        <!-- /.box-body -->
                     </div>
-                    <!-- /.box-body -->
+                    <!-- /. box -->
                 </div>
-                <!-- /. box -->
+                <!-- /.col -->
             </div>
-            <!-- /.col -->
+            <!-- /.row -->
         </section>
+        <!-- /.content -->
     </div>
-    <!-- /.row -->
-    <!-- /.content -->
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0
+        </div>
+        <strong>Copyright TMSGroup</strong> All rights reserved.
+    </footer>
 </div>
-<!-- /.content-wrapper -->
-<footer class="main-footer">
-    <div class="pull-right hidden-xs">
-        <b>Version</b> 1.0
-    </div>
-    <strong>Copyright TMSGroup</strong> All rights reserved.
-</footer>
-<!-- Control Sidebar -->
 <!-- ./wrapper -->
 <!-- jQuery 2.1.4 -->
 <script src="../static/plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/plugins/jQuery/jQuery-2.1.4.min.js}"></script>
@@ -264,7 +228,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js}"></script>
 <script src="../static/plugins/fullcalendar/fullcalendar.min.js" th:src="@{/plugins/fullcalendar/fullcalendar.min.js}"></script>
 <!-- Page specific script -->
-
 <script>
     $(function () {
 

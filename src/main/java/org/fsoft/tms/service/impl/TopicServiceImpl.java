@@ -5,6 +5,7 @@ import org.fsoft.tms.entity.Course;
 import org.fsoft.tms.entity.Topic;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.repository.TopicRepository;
+import org.fsoft.tms.repository.UserRepository;
 import org.fsoft.tms.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public class TopicServiceImpl implements TopicService{
 
     @Autowired
     TopicRepository topic;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public List<Topic> getAllTopic() {
@@ -91,6 +95,14 @@ public class TopicServiceImpl implements TopicService{
     @Override
     public void addTopic(Topic t) {
         t.setActive(true);
+        topic.save(t);
+    }
+
+    @Override
+    public void addTrainerToTopic(int topicID, int trainerID) {
+        Topic t = topic.findOne(topicID);
+        User u = userRepository.findOne(trainerID);
+        t.setTrainer(u);
         topic.save(t);
     }
 }
