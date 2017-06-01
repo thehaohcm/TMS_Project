@@ -66,15 +66,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addTrainee(TraineeInfo traineeInfo, int staffId) {
+    public void addTrainee(User u, int staffId) {
         Role role = roleRepository.findOne(4);
-        traineeInfo.getUser().setRole(role);
-        traineeInfo.getUser().setActive(true);
+        u.setRole(role);
+        u.setActive(true);
         User manager = userRepository.findOne(staffId);
-        traineeInfo.getUser().setManager(manager);
-        String password = traineeInfo.getUser().getPassword();
-        traineeInfo.getUser().setPassword(encode(password));
-        userRepository.save(traineeInfo.getUser());
+        u.setManager(manager);
+        String password = u.getPassword();
+        u.setPassword(encode(password));
+        userRepository.save(u);
     }
 
     @Override
@@ -84,11 +84,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User c) {
+
         User temp = userRepository.findOne(c.getId());
-        temp.setUsername(c.getUsername());
         if(!c.getPassword().equals("")) {
             temp.setPassword(encode(c.getPassword()));
         }
+        temp.setUsername(c.getUsername());
 //        String password = c.getPassword();
 //        temp.setPassword(encode(password));
         userRepository.save(temp);
@@ -173,14 +174,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
-
-        if(!user.getPassword().equals("")){
-            String tmp=user.getPassword();
-            user.setPassword(encode(tmp));
-        }
         User user1 = userRepository.findOne(user.getId());
-        user1.setPassword(user.getUsername());
-        user1.setPassword(user.getPassword());
         user1.setUserProperties(user.getUserProperties());
         userRepository.save(user1);
     }
@@ -189,12 +183,12 @@ public class UserServiceImpl implements UserService {
     public void saveTrainer(TrainerInfo trainerInfo) {
         Set<UserProperty> userProperties = new HashSet<>(0);
 
-        logger.debug("-1:"+trainerInfo.getName());
+//        logger.debug("-1:"+trainerInfo.getName());
 
         userProperties = setTrainerProperty(trainerInfo.getUser(), trainerInfo.getName(),
                 trainerInfo.getEmail(), trainerInfo.getPhone(), trainerInfo.getAddress());
-        for(UserProperty userProperty : userProperties)
-            logger.debug("0:"+userProperty.getValue());
+//        for(UserProperty userProperty : userProperties)
+//            logger.debug("0:"+userProperty.getValue());
 
         User user = userRepository.findOne(trainerInfo.getUser().getId());
         user.setUserProperties(userProperties);
@@ -204,7 +198,8 @@ public class UserServiceImpl implements UserService {
         for(UserProperty userProperty : userProperties1)
             logger.debug("3:"+userProperty.getValue());
 //        logger.debug("4:"+user.getManager().toString());
-        saveUser(user);
+//        saveUser(user);
+        userRepository.save(user);
     }
 
     @Override
@@ -233,22 +228,36 @@ public class UserServiceImpl implements UserService {
         return userProperties;
     }
 
+//    public void saveTrainee(TraineeInfo trainee){
+//        Set<UserProperty> userProperties=new HashSet<>(0);
+//        userProperties=setTraineeProperty(trainee.getUser(),trainee.getName(),trainee.getBirthDate(),
+//                trainee.getEducation(),trainee.getProgrammingLanguage(),trainee.getToeicScore(),
+//                trainee.getExperienceDetail(),trainee.getDepartment(),trainee.getLocation());
+//
+//        User user=userRepository.findOne(trainee.getUser().getId());
+//        user.setUserProperties(userProperties);
+//        saveUser(user);
+//    }
+
     public void saveTrainee(TraineeInfo trainee){
-        Set<UserProperty> userProperties=new HashSet<UserProperty>(0);
+        Set<UserProperty> userProperties=new HashSet<>(0);
         userProperties=setTraineeProperty(trainee.getUser(),trainee.getName(),trainee.getBirthDate(),
                 trainee.getEducation(),trainee.getProgrammingLanguage(),trainee.getToeicScore(),
                 trainee.getExperienceDetail(),trainee.getDepartment(),trainee.getLocation());
-        logger.debug("gia tri id: "+trainee.getUser().getId());
-        User user=userRepository.findOne(trainee.getUser().getId());
 
+        User user=userRepository.findOne(trainee.getUser().getId());
+        if(!trainee.getUser().getPassword().equals("")) {
+            user.setPassword(encode(trainee.getUser().getPassword()));
+        }
+        user.setUsername(trainee.getUser().getUsername());
         user.setUserProperties(userProperties);
         userRepository.save(user);
     }
 
     public Set<UserProperty> setTraineeProperty(User user,String name,String birthDate,String education,
-                                                String programmingLanguage,String toeicScore,String experienceDetail,
-                                                String department,String location){
-        Set<UserProperty> userProperties=new HashSet<UserProperty>(0);
+                                                String programmingLanguage,String toeicScrore,String experienceDetail,
+                                                String department,String localtion){
+        Set<UserProperty> userProperties=new HashSet<>(0);
         UserProperty userProperty;
 
         userProperty=new UserProperty();
@@ -278,7 +287,7 @@ public class UserServiceImpl implements UserService {
         userProperty=new UserProperty();
         userProperty.setUser(user);
         userProperty.setProperty(propertyRepository.findOne(5));
-        userProperty.setValue(toeicScore);
+        userProperty.setValue(toeicScrore);
         userProperties.add(userProperty);
 
         userProperty=new UserProperty();
@@ -293,14 +302,6 @@ public class UserServiceImpl implements UserService {
         userProperty.setValue(department);
         userProperties.add(userProperty);
 
-        userProperty=new UserProperty();
-        userProperty.setUser(user);
-        userProperty.setProperty(propertyRepository.findOne(12));
-        userProperty.setValue(location);
-        userProperties.add(userProperty);
-        for(UserProperty u:userProperties) {
-            logger.debug("gia tri: "+u.getValue());
-        }
         return userProperties;
     }
 
