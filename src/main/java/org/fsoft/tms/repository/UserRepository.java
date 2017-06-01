@@ -11,9 +11,10 @@ import java.util.Set;
  * Created by DELL on 5/25/2017.
  */
 public interface UserRepository extends JpaRepository<User, Integer> {
-    public Set<User> findAllById(Integer id);
+    public User findAllById(Integer id);
     public User findUserByUsername(String username);
     public List<User> findAllByRole(Role role);
+    public List<User> findAllByRoleAndManager(Role role, User user);
     public User findAllByUsername(String username);
 }
 

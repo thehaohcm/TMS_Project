@@ -25,7 +25,7 @@ public interface CourseService {
 
     void addTrainingStaff();
 
-    void addTrainees();
+    void addTrainees(int courseID, int traineeID);
 
     void deleteCourse(int id);
 }
