@@ -1,12 +1,9 @@
 package org.fsoft.tms.service.impl;
 
-import org.apache.catalina.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.*;
-import org.fsoft.tms.entity.Role;
-import org.fsoft.tms.entity.User;
 import org.fsoft.tms.repository.*;
 import org.fsoft.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +11,7 @@ import org.springframework.security.config.authentication.PasswordEncoderParser;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -59,13 +57,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUserByRoleAndManager(int roleID, int staffID) {
-        Role role = roleRepository.findOne(roleID);
-        User user = userRepository.findOne(staffID);
-        return userRepository.findAllByRoleAndManager(role, user);
-    }
-
-    @Override
     public void addUser(User u, int roleId) {
         Role role = roleRepository.findOne(roleId);
         u.setRole(role);
@@ -98,7 +89,7 @@ public class UserServiceImpl implements UserService {
     public void updateUser(User c) {
 
         User temp = userRepository.findOne(c.getId());
-        if(!c.getPassword().equals("")) {
+        if(!(c.getPassword()==null)) {
             temp.setPassword(encode(c.getPassword()));
         }
         temp.setUsername(c.getUsername());
@@ -330,5 +321,10 @@ public class UserServiceImpl implements UserService {
         return arrUserCourse;
     }
 
-
+    @Override
+    public List<User> getAllUserByRoleAndManager(int roleID, int staffID) {
+        Role role = roleRepository.findOne(roleID);
+        User user = userRepository.findOne(staffID);
+        return userRepository.findAllByRoleAndManager(role, user);
+    }
 }

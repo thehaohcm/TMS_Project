@@ -49,7 +49,6 @@ public class TrainerAccountController {
 
     @RequestMapping(value = "/addAccount")
     public String addAccount (@ModelAttribute  TrainerInfo trainerInfo) {
-
         userService.addUser(trainerInfo.getUser(), 3);
         userService.saveTrainer(trainerInfo);
         return "redirect:/admin/trainer/";
@@ -86,4 +85,10 @@ public class TrainerAccountController {
         return "redirect:/admin/trainer/";
     }
 
+    @RequestMapping(value = "/account/{id}")
+    public String getPageProfile(@PathVariable String id, Model model) {
+        User user = userService.findOneUser(Integer.parseInt(id));
+        model.addAttribute("user", user);
+        return "trainerAccount/profile";
+    }
 }
