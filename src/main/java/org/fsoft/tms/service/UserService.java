@@ -28,6 +28,8 @@ public interface UserService {
 
     void addManager();
 
+    String encode(String password);
+
     void addCourse();
 
     void addTopic();

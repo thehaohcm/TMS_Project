@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface TopicRepository extends JpaRepository<Topic, Integer>{
     public List<Topic> findAllByTrainer(User user);
+    public List<Topic> findAllByCourse_Staff(User user);
 }

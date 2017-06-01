@@ -6,6 +6,8 @@ import org.fsoft.tms.entity.*;
 import org.fsoft.tms.repository.*;
 import org.fsoft.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.authentication.PasswordEncoderParser;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -19,6 +21,9 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
 
     private final Logger logger = LogManager.getLogger();
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -55,6 +60,8 @@ public class UserServiceImpl implements UserService {
         u.setActive(true);
         User manager = userRepository.findOne(1);
         u.setManager(manager);
+        String password = u.getPassword();
+        u.setPassword(encode(password));
         userRepository.save(u);
     }
 
@@ -65,6 +72,8 @@ public class UserServiceImpl implements UserService {
         u.setActive(true);
         User manager = userRepository.findOne(staffId);
         u.setManager(manager);
+        String password = u.getPassword();
+        u.setPassword(encode(password));
         userRepository.save(u);
     }
 
@@ -77,7 +86,8 @@ public class UserServiceImpl implements UserService {
     public void updateUser(User c) {
         User temp = userRepository.findOne(c.getId());
         temp.setUsername(c.getUsername());
-        temp.setPassword(c.getPassword());
+        String password = c.getPassword();
+        temp.setPassword(encode(password));
         userRepository.save(temp);
     }
 
@@ -218,5 +228,10 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findOne(id);
         user.setActive(false);
         userRepository.save(user);
+    }
+
+    @Override
+    public String encode(String password) {
+        return passwordEncoder.encode(password);
     }
 }
