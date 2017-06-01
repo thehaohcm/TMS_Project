@@ -28,4 +28,7 @@ public interface TopicService {
     void deleteTopic(int id);
 
     void addTopic(Topic t);
+
+    void addTrainerToTopic(int topicID, int trainerID);
 }
+

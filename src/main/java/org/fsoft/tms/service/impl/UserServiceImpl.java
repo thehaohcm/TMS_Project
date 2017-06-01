@@ -1,8 +1,12 @@
 package org.fsoft.tms.service.impl;
 
+import org.apache.catalina.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.*;
+import org.fsoft.tms.entity.Role;
+import org.fsoft.tms.entity.User;
 import org.fsoft.tms.repository.*;
 import org.fsoft.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,7 @@ import org.springframework.security.config.authentication.PasswordEncoderParser;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -51,6 +56,13 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUserByRole(int roleID) {
         Role role = roleRepository.findOne(roleID);
         return userRepository.findAllByRole(role);
+    }
+
+    @Override
+    public List<User> getAllUserByRoleAndManager(int roleID, int staffID) {
+        Role role = roleRepository.findOne(roleID);
+        User user = userRepository.findOne(staffID);
+        return userRepository.findAllByRoleAndManager(role, user);
     }
 
     @Override
@@ -316,4 +328,30 @@ public class UserServiceImpl implements UserService {
     public String encode(String password) {
         return passwordEncoder.encode(password);
     }
+
+    @Override
+    public List<User> getListTraineeCourse(int courseID) {
+        Course course = courseRepository.findOne(courseID);
+        List<User> arr = getAllUserByRoleAndManager(4, CurrentUser.getInstance().getUser().getId());
+        List<User> arrUserCourse = new ArrayList<>();
+        for(User user : arr) {
+            if(course.getTrainees().contains(user))
+                arrUserCourse.add(user);
+        }
+        return arrUserCourse;
+    }
+
+    @Override
+    public List<User> getListTraineeNonCourse(int courseID) {
+        Course course = courseRepository.findOne(courseID);
+        List<User> arr = getAllUserByRoleAndManager(4, CurrentUser.getInstance().getUser().getId());
+        List<User> arrUserCourse = new ArrayList<>();
+        for(User user : arr) {
+            if(!course.getTrainees().contains(user))
+                arrUserCourse.add(user);
+        }
+        return arrUserCourse;
+    }
+
+
 }
