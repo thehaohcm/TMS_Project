@@ -258,10 +258,7 @@ public class UserServiceImpl implements UserService {
                 trainee.getExperienceDetail(),trainee.getDepartment(),trainee.getLocation());
 
         User user=userRepository.findOne(trainee.getUser().getId());
-        if(!trainee.getUser().getPassword().equals("")) {
-            user.setPassword(encode(trainee.getUser().getPassword()));
-        }
-        user.setUsername(trainee.getUser().getUsername());
+
         user.setUserProperties(userProperties);
         userRepository.save(user);
     }
