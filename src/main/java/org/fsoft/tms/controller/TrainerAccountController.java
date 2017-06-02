@@ -54,6 +54,13 @@ public class TrainerAccountController {
         return "redirect:/admin/trainer/";
     }
 
+    @RequestMapping(value="/profile/{id}")
+    public String getPageProfile(@PathVariable String id, Model model){
+        User user=userService.findOneUser(Integer.parseInt(id));
+        model.addAttribute("trainer",user);
+        return "trainer/profile";
+    }
+
     @RequestMapping(value = "/update/{id}")
     public String getPageUpdate(@PathVariable String id, Model model) {
         User user = userService.findOneUser(Integer.parseInt(id));
