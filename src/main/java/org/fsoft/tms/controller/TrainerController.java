@@ -65,9 +65,11 @@ public class TrainerController
                 propertyService.findOneProperty(9)).getValue());
         trainerInfo.setAddress(userPropertyService.getUserProperty(user,
                 propertyService.findOneProperty(8)).getValue());
+        trainerInfo.setType(userPropertyService.getUserProperty(user,
+                propertyService.findOneProperty(11)).getValue());
         model.addAttribute("trainer", trainerInfo);
 //        model.addAttribute("listUserProperty", userPropertyService.getListUserProperty(user));
-        return "trainer/update";
+        return "trainerProfile/update";
     }
 
     @RequestMapping(value = "/updateProfile")

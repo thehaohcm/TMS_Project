@@ -46,7 +46,7 @@ public interface UserService {
 
     void saveTrainer(TrainerInfo trainerInfo);
 
-    Set<UserProperty> setTrainerProperty(User user, String name, String email, String phone, String address);
+    Set<UserProperty> setTrainerProperty(User user, String name, String email, String phone, String address, String type);
 
     void saveTrainee(TraineeInfo traineeInfo);
 

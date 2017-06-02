@@ -180,6 +180,13 @@
                                                     <td><input type="text" th:field="*{address}"/></td>
                                                 </tr>
                                                 <tr>
+                                                    <td>Type</td>
+                                                    <select class="form-control" th:field="*{type}">
+                                                        <option th:value="External" th:text="External"></option>
+                                                        <option th:value="Internal" th:text="Internal"></option>
+                                                    </select>
+                                                </tr>
+                                                <tr>
                                                     <input class="btn btn-primary" type="submit" value="Submit"/>
                                                 </tr>
                                             </table>

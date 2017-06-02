@@ -184,7 +184,7 @@ public class UserServiceImpl implements UserService {
     public void saveTrainer(TrainerInfo trainerInfo) {
         Set<UserProperty> userProperties = new HashSet<>(0);
         userProperties = setTrainerProperty(trainerInfo.getUser(), trainerInfo.getName(),
-                trainerInfo.getEmail(), trainerInfo.getPhone(), trainerInfo.getAddress());
+                trainerInfo.getEmail(), trainerInfo.getPhone(), trainerInfo.getAddress(), trainerInfo.getType());
 
         User user = userRepository.findOne(trainerInfo.getUser().getId());
         user.setUserProperties(userProperties);
@@ -192,7 +192,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<UserProperty> setTrainerProperty(User user, String name, String email, String phone, String address) {
+    public Set<UserProperty> setTrainerProperty(User user, String name, String email, String phone, String address, String type) {
         UserProperty userProperty = new UserProperty();
         Set<UserProperty> userProperties = new HashSet<>(0);
         userProperty.setUser(user);
@@ -213,6 +213,11 @@ public class UserServiceImpl implements UserService {
         userProperty.setUser(user);
         userProperty.setProperty(propertyRepository.findOne(8));
         userProperty.setValue(address);
+        userProperties.add(userProperty);
+        userProperty = new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(11));
+        userProperty.setValue(type);
         userProperties.add(userProperty);
         return userProperties;
     }
