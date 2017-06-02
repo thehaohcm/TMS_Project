@@ -38,6 +38,8 @@ public class LoginController {
             String name=auth.getName();
             CurrentUser currentUser = CurrentUser.getInstance();
             currentUser.setUser(loginService.findUserByUsername(name));
+            if(!currentUser.getUser().isActive())
+                return "redirect:/login?error";
             Role role = currentUser.getUser().getRole();
             switch(role.getName()){
                 case "ROLE_ADMIN":
