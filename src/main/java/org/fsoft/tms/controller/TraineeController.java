@@ -12,9 +12,7 @@ import org.fsoft.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.util.HashSet;
@@ -44,6 +42,15 @@ public class TraineeController {
     @RequestMapping(value="/")
     public String getPageIndex(Model model){
         model.addAttribute("listTrainee",userService.getAllUserByRole(4));
+        return "trainee/index";
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("q") String q, Model model) {
+        if (q.equals("")) {
+            return "redirect:/staff/trainee/";
+        }
+        model.addAttribute("listTrainee", userService.search(q, 4));
         return "trainee/index";
     }
 

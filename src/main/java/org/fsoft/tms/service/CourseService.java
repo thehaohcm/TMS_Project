@@ -28,4 +28,6 @@ public interface CourseService {
     void addTrainees(int courseID, int traineeID);
 
     void deleteCourse(int id);
+
+    public List<Course> searchCourse(String input);
 }

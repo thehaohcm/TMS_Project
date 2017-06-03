@@ -83,4 +83,10 @@ public class CourseServiceImpl implements CourseService{
     public List<Course> getAllCourseByCategory(Category c) {
         return  courseRepository.findAllByCategory(c);
     }
+
+    @Override
+    public List<Course> searchCourse(String input){
+        List<Course> courses=courseRepository.searchCourse(input);
+        return courses;
+    }
 }

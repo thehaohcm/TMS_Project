@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -92,5 +89,13 @@ public class CourseController {
     public String updateCourse(@ModelAttribute Course c) {
         course.updateCourse(c);
         return "redirect:/staff/course/";
+    }
+
+    @RequestMapping(value="/search")
+    public String searchCourse(@RequestParam("q") String q, Model model){
+        if(q.equals(""))
+            return "redirect:/staff/course/";
+        model.addAttribute("listCourse",course.searchCourse(q));
+        return "course/index";
     }
 }

@@ -3,6 +3,7 @@ package org.fsoft.tms.entity;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -46,7 +47,6 @@ public class Category implements Serializable{
     }
 
     @Column(name="NAME",nullable = false)
-    @NotEmpty
     public String getName() {
         return name;
     }
@@ -56,7 +56,6 @@ public class Category implements Serializable{
     }
 
     @Column(name="DESCRIPTION",nullable = true)
-    @NotEmpty
     public String getDescription() {
         return description;
     }
