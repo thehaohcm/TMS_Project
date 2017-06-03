@@ -30,5 +30,7 @@ public interface TopicService {
     void addTopic(Topic t);
 
     void addTrainerToTopic(int topicID, int trainerID);
+
+    public List<Topic> searchTopic(String input);
 }
 
