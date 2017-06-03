@@ -20,4 +20,6 @@ public interface CategoryService {
     Category findOneCategory(int id);
 
     List<Category> getListCategoryActive();
+
+    List<Category> searchCategory(String s);
 }

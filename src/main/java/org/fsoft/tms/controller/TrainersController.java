@@ -53,6 +53,8 @@ public class TrainersController {
                 propertyService.findOneProperty(9)).getValue());
         trainerInfo.setAddress(userPropertyService.getUserProperty(user,
                 propertyService.findOneProperty(8)).getValue());
+        trainerInfo.setType(userPropertyService.getUserProperty(user,
+                propertyService.findOneProperty(11)).getValue());
         model.addAttribute("trainer", trainerInfo);
         return "trainer/profile";
     }
@@ -60,23 +62,7 @@ public class TrainersController {
     @RequestMapping(value = "/updateProfile")
     public String UpdateProfile(@ModelAttribute TrainerInfo trainerInfo) {
         userService.saveTrainer(trainerInfo);
-//        Set<UserProperty> userProperties = new HashSet<>(0);
-//
-//        logger.debug("-1:"+trainerInfo.getName());
-//
-//        userProperties = userPropertyService.setTrainerProperty(trainerInfo.getUser(), trainerInfo.getName(),
-//                trainerInfo.getEmail(), trainerInfo.getPhone(), trainerInfo.getAddress());
-//        for(UserProperty userProperty : userProperties)
-//            logger.debug("0:"+userProperty.getValue());
-//
-//        User user = userService.findOneUser(trainerInfo.getUser().getId());
-//        user.setUserProperties(userProperties);
-//        logger.debug("1:"+user.getUsername());
-//        logger.debug("2:"+user.getPassword());
-//        Set<UserProperty> userProperties1 = user.getUserProperties();
-//        for(UserProperty userProperty : userProperties1)
-//            logger.debug("3:"+userProperty.getValue());
-//        userService.saveUser(user);
+
         return "redirect:/";
     }
 

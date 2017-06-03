@@ -49,10 +49,16 @@ public class TrainerAccountController {
 
     @RequestMapping(value = "/addAccount")
     public String addAccount (@ModelAttribute  TrainerInfo trainerInfo) {
-
         userService.addUser(trainerInfo.getUser(), 3);
         userService.saveTrainer(trainerInfo);
         return "redirect:/admin/trainer/";
+    }
+
+    @RequestMapping(value="/profile/{id}")
+    public String getPageProfile(@PathVariable String id, Model model){
+        User user=userService.findOneUser(Integer.parseInt(id));
+        model.addAttribute("trainer",user);
+        return "trainerAccount/profile";
     }
 
     @RequestMapping(value = "/update/{id}")
@@ -68,6 +74,8 @@ public class TrainerAccountController {
                 propertyService.findOneProperty(9)).getValue());
         trainerInfo.setAddress(userPropertyService.getUserProperty(user,
                 propertyService.findOneProperty(8)).getValue());
+        trainerInfo.setType(userPropertyService.getUserProperty(user,
+                propertyService.findOneProperty(11)).getValue());
         model.addAttribute("trainer", trainerInfo);
         return "trainerAccount/update";
     }
@@ -86,4 +94,10 @@ public class TrainerAccountController {
         return "redirect:/admin/trainer/";
     }
 
+//    @RequestMapping(value = "/account/{id}")
+//    public String getPageProfile(@PathVariable String id, Model model) {
+//        User user = userService.findOneUser(Integer.parseInt(id));
+//        model.addAttribute("user", user);
+//        return "trainerAccount/profile";
+//    }
 }

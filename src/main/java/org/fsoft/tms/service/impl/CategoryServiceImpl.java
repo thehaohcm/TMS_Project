@@ -32,7 +32,6 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public void deleteCategory(int id) {
-        //categoryRepository.delete(id);
         Category temp = categoryRepository.findOne(id);
         temp.setActive(false);
         categoryRepository.save(temp);
@@ -56,6 +55,11 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public List<Category> getListCategoryActive() {
         return categoryRepository.findAllByActive(true);
+    }
+
+    @Override
+    public List<Category> searchCategory(String input) {
+        return categoryRepository.findAllByName(input);
     }
 }
 

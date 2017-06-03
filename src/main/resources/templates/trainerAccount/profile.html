@@ -37,11 +37,11 @@
     <!--Header part of the indexwebpage -->
     <header class="main-header">
         <!-- Logo -->
-        <a class="logo" th:href="@{/trainerProfile}">
+        <a class="logo" th:href="@{/staff}">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>TS </b>TMS</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Training Staff </b>TMS</span>
+            <span class="logo-lg"><b>Training Staff</b>TMS</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -55,23 +55,23 @@
                     <!-- Messages: style can be found in dropdown.less-->
                     <!-- Tasks: style can be found in dropdown.less -->
                     <!--<li class="dropdown tasks-menu">-->
-                        <!--<a href="calendaradmin.html" class="button" th:href="@{calendaradmin.html}">-->
-                            <!--<i class="fa fa-calendar"></i>-->
-                            <!--<span class="label label-danger"></span>-->
-                        <!--</a>-->
+                    <!--<a href="calendaradmin.html" class="button" th:href="@{calendaradmin.html}">-->
+                    <!--<i class="fa fa-calendar"></i>-->
+                    <!--<span class="label label-danger"></span>-->
+                    <!--</a>-->
                     <!--</li>-->
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="../staic/dist/img/avatar2.png" class="user-image" alt="User Image" th:src="@{/dist/img/avatar2.png}"/>
-                            <span class="hidden-xs">Training Staff</span>
+                            <span class="hidden-xs">Admin</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
                                 <img src="../staic/dist/img/avatar2.png" class="img-circle" alt="User Image" th:src="@{/dist/img/avatar2.png}"/>
                                 <p>
-                                    Training Staff
+                                    Admin
                                 </p>
                             </li>
                             <!-- Menu Footer-->
@@ -97,7 +97,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="../static/dist/img/avatar2.png" class="img-circle" alt="User Image" th:src="@{/dist/img/avatar2.png}"/>
+                    <img src="../static/dist/img/avatar2.png" class="img-circle" alt="User Image" th:src="@{/dist/img/avatar.2png}"/>
                 </div>
                 <div class="pull-left info">
                     <p>Training Staff</p>
@@ -125,10 +125,16 @@
                         <li><a th:href="@{/staff/topic/}"><i class="fa fa-paper-plane"></i>Topic</a></li>
                     </ul>
                 </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-mortar-board"></i>
+                        <span>Trainer</span>
+                    </a>
+                </li>
                 <!--<li class="treeview">-->
-                    <!--<a href="calendaradmin.html" th:href="calendaradmin.html">-->
-                        <!--<i class="fa fa-calendar"></i> <span>Calendar</span>-->
-                    <!--</a>-->
+                <!--<a href="calendaradmin.html" th:href="calendaradmin.html">-->
+                <!--<i class="fa fa-calendar"></i> <span>Calendar</span>-->
+                <!--</a>-->
                 <!--</li>-->
             </ul>
         </section>
@@ -150,46 +156,23 @@
                     <div class="box box-primary">
                         <div class="box box-primary ">
                             <section class="content">
-                                <form action="#">
-                                    <p>Select</p>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-danger">Action</button>
-                                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                                            <span class="caret"></span>
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a value="id" th:text="id">Action</a></li>
-                                            <li><a value="name" th:text="name">Another action</a></li>
-                                        </ul>
-                                    </div>
-                                    <form action="#" method="get">
-                                        <div class="input-group">
-                                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                                            <span class="input-group-btn">
-                                 <button type="submit" name="search" id="search-btn" class="btn btn-flat" value="search"><i class="fa fa-search"></i></button>
-                                 </span>
-                                        </div>
-                                    </form>
-                                </form>
                                 <div class="col-md-15">
                                     <div class="box">
                                         <div class="box-header with-border">
-                                            <h1>Show list trainers</h1>
+                                            <h1 >Profile</h1>
                                         </div>
                                         <div class="box-body">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <td>No</td>
                                                     <td>Username</td>
-                                                    <td>Information</td>
-                                                    <td>Update</td>
+                                                    <td th:text="${trainer.username}"></td>
                                                 </tr>
-                                                <tr th:each="item:${listUser}" th:if="${item.active}==true">
-                                                    <td th:text="${item.id}"></td>
-                                                    <td th:text="${item.username}"></td>
-                                                    <td><a th:href="@{/staff/trainer/profile/{id}(id=${item.id})}" >link</a></td>
-                                                    <td style="width:150px"><a type="button" class="btn btn-block btn-info" th:href="@{/staff/trainer/update/{id}(id=${item.id})}" style="color:white;width: 100px">Update</a></td>
+                                                <tr th:each="item:${trainer.userProperties}">
+                                                    <td th:text="${item.pk.property.name}"></td>
+                                                    <td th:text="${item.value}"></td>
+                                                </tr>
+                                                <tr>
+                                                    <a type="button" th:href="@{/admin/trainer/update/{id}(id=${trainer.id})}" class="btn btn-block btn-info"  style="width:130px;color:white">Update Profile</a>
                                                 </tr>
                                             </table>
                                         </div>

@@ -1,12 +1,9 @@
 package org.fsoft.tms.service.impl;
 
-import org.apache.catalina.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.*;
-import org.fsoft.tms.entity.Role;
-import org.fsoft.tms.entity.User;
 import org.fsoft.tms.repository.*;
 import org.fsoft.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +11,7 @@ import org.springframework.security.config.authentication.PasswordEncoderParser;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -59,13 +57,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUserByRoleAndManager(int roleID, int staffID) {
-        Role role = roleRepository.findOne(roleID);
-        User user = userRepository.findOne(staffID);
-        return userRepository.findAllByRoleAndManager(role, user);
-    }
-
-    @Override
     public void addUser(User u, int roleId) {
         Role role = roleRepository.findOne(roleId);
         u.setRole(role);
@@ -96,12 +87,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User c) {
-
         User temp = userRepository.findOne(c.getId());
-        if(!c.getPassword().equals("")) {
+        logger.debug("temp1:"+temp.getPassword()+":a");
+        logger.debug("pass:"+c.getPassword()+":a");
+        if(!(c.getPassword().equals(""))) {
             temp.setPassword(encode(c.getPassword()));
+            logger.debug("pass1:"+temp.getPassword()+":a");
         }
         temp.setUsername(c.getUsername());
+        logger.debug("temp:"+temp.getPassword()+":a");
         userRepository.save(temp);
     }
 
@@ -193,7 +187,7 @@ public class UserServiceImpl implements UserService {
     public void saveTrainer(TrainerInfo trainerInfo) {
         Set<UserProperty> userProperties = new HashSet<>(0);
         userProperties = setTrainerProperty(trainerInfo.getUser(), trainerInfo.getName(),
-                trainerInfo.getEmail(), trainerInfo.getPhone(), trainerInfo.getAddress());
+                trainerInfo.getEmail(), trainerInfo.getPhone(), trainerInfo.getAddress(), trainerInfo.getType());
 
         User user = userRepository.findOne(trainerInfo.getUser().getId());
         user.setUserProperties(userProperties);
@@ -201,7 +195,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<UserProperty> setTrainerProperty(User user, String name, String email, String phone, String address) {
+    public Set<UserProperty> setTrainerProperty(User user, String name, String email, String phone, String address, String type) {
         UserProperty userProperty = new UserProperty();
         Set<UserProperty> userProperties = new HashSet<>(0);
         userProperty.setUser(user);
@@ -222,6 +216,11 @@ public class UserServiceImpl implements UserService {
         userProperty.setUser(user);
         userProperty.setProperty(propertyRepository.findOne(8));
         userProperty.setValue(address);
+        userProperties.add(userProperty);
+        userProperty = new UserProperty();
+        userProperty.setUser(user);
+        userProperty.setProperty(propertyRepository.findOne(11));
+        userProperty.setValue(type);
         userProperties.add(userProperty);
         return userProperties;
     }
@@ -330,5 +329,10 @@ public class UserServiceImpl implements UserService {
         return arrUserCourse;
     }
 
-
+    @Override
+    public List<User> getAllUserByRoleAndManager(int roleID, int staffID) {
+        Role role = roleRepository.findOne(roleID);
+        User user = userRepository.findOne(staffID);
+        return userRepository.findAllByRoleAndManager(role, user);
+    }
 }
