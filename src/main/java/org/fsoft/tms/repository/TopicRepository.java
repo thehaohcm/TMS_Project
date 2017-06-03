@@ -3,6 +3,8 @@ package org.fsoft.tms.repository;
 import org.fsoft.tms.entity.Topic;
 import org.fsoft.tms.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -12,4 +14,8 @@ import java.util.List;
 public interface TopicRepository extends JpaRepository<Topic, Integer>{
     public List<Topic> findAllByTrainer(User user);
     public List<Topic> findAllByCourse_Staff(User user);
+
+    @Query("Select t from Topic t where t.title LIKE concat('%',:input,'%') " +
+            "or  t.content LIKE concat('%',:input,'%')")
+    public List<Topic> searchTopic(@Param("input") String input);
 }

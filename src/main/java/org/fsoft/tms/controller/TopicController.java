@@ -1,12 +1,9 @@
 package org.fsoft.tms.controller;
 
-import ch.qos.logback.core.joran.spi.NoAutoStart;
-import org.fsoft.tms.CurrentUser;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.entity.Topic;
-import org.fsoft.tms.entity.UserProperty;
-import org.fsoft.tms.repository.CourseRepository;
-import org.fsoft.tms.repository.TopicRepository;
 import org.fsoft.tms.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.PathParam;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +22,8 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/staff/topic")
 public class TopicController {
+
+    private final Logger logger = LogManager.getLogger();
 
     @Autowired
     CourseService courseService;
@@ -120,5 +120,14 @@ public class TopicController {
             ex.printStackTrace();
         }
         return "redirect:/staff/topic/";
+    }
+
+    @RequestMapping(value="/search")
+    public String searchTopicStaff(@RequestParam String q,Model model){
+        logger.debug("Da vao TopicController /staff/topic/search");
+        if(q.equals(""))
+            return "redirect:/staff/topic/";
+        model.addAttribute("listTopic",topicService.searchTopic(q));
+        return "topic/index";
     }
 }

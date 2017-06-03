@@ -105,4 +105,10 @@ public class TopicServiceImpl implements TopicService{
         t.setTrainer(u);
         topic.save(t);
     }
+
+    @Override
+    public List<Topic> searchTopic(String input){
+        List<Topic> topics = topic.searchTopic(input);
+        return topics;
+    }
 }
