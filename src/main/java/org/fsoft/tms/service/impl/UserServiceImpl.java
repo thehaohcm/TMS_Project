@@ -87,12 +87,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User c) {
-
         User temp = userRepository.findOne(c.getId());
-        if(!(c.getPassword()==null)) {
+        logger.debug("temp1:"+temp.getPassword()+":a");
+        logger.debug("pass:"+c.getPassword()+":a");
+        if(!(c.getPassword().equals(""))) {
             temp.setPassword(encode(c.getPassword()));
+            logger.debug("pass1:"+temp.getPassword()+":a");
         }
         temp.setUsername(c.getUsername());
+        logger.debug("temp:"+temp.getPassword()+":a");
         userRepository.save(temp);
     }
 
