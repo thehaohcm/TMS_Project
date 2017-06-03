@@ -21,6 +21,6 @@ public interface CourseRepository extends JpaRepository<Course, Integer>{
 
     @Query("Select c from Course c where c.name LIKE concat('%',:input,'%') " +
             "or  c.description LIKE concat('%',:input,'%')"+
-            "or c.createdDate like concat('%',:input,'%') ")
+            "or upper(FUNCTION('TO_CHAR',c.createdDate)) like concat('%',:input,'%') ")
     public List<Course> searchCourse(@Param("input") String input);
 }
