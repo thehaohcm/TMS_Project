@@ -166,7 +166,7 @@
                                 <form action="#" th:action="@{/staff/course/addCourse}" th:object="${course}" method="post">
                                     <div class="input-group">
                                         <p>Name: </p>
-                                        <input type="text" th:field="*{name}" class="form-control" placeholder="Name..."/>
+                                        <input type="text" th:field="*{name}" class="form-control" placeholder="Name..." required=""/>
                                         <div class="form-group">
                                             <label>Description: </label>
                                             <textarea style="width:1280px;height:250px;resize:none;" id="description" th:field="*{description}"></textarea>

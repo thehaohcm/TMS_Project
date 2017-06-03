@@ -198,13 +198,13 @@
                                         <div class="box-body">
                                             <input type="hidden" th:field="*{user}"/>
                                             <label>Name</label>
-                                            <input type="text" th:field="*{name}"/>
+                                            <input type="text" th:field="*{name}" required=""/>
                                             <label>Mail</label>
-                                            <input type="text" th:field="*{email}"/>
+                                            <input type="email" th:field="*{email}" required=""/>
                                             <label>Phone</label>
-                                            <input type="text" th:field="*{phone}"/>
+                                            <input type="number" th:field="*{phone}" required=""/>
                                             <label>Address</label>
-                                            <input type="text" th:field="*{address}"/>
+                                            <input type="text" th:field="*{address}" required=""/>
                                             <label>Type</label>
                                             <select class="form-control" th:field="*{type}">
                                                 <option th:value="External" th:text="External"></option>

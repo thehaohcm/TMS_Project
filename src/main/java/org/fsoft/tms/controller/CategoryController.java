@@ -7,9 +7,13 @@ import org.fsoft.tms.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 /**
  * Created by DELL on 5/23/2017.
@@ -31,7 +35,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/add")
     public String getPageAddCategory(Model model) {
-        model.addAttribute("category", new Category());
+        model.addAttribute("course", new Category());
         return "category/add";
     }
 

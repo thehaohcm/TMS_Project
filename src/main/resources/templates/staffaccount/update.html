@@ -153,11 +153,11 @@
                             <form action="#" th:action="@{/admin/staff/update}" th:object="${user}" method="post">
                                 <input th:field="*{id}" type="hidden" class="form-control"/>
                                 <div class="form-group has-feedback">
-                                    <input th:field="*{username}" type="text" class="form-control" placeholder="User name"/>
+                                    <input th:field="*{username}" type="text" class="form-control" placeholder="User name" required=""/>
                                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                 </div>
                                 <div class="form-group has-feedback">
-                                    <input th:field="*{password}" type="password" class="form-control" placeholder="Password"/>
+                                    <input th:field="*{password}" type="password" class="form-control" placeholder="Password" required=""/>
                                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                                 </div>
                                 <div class="col-xs-4">

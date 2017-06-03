@@ -153,27 +153,27 @@
                             <form action="#" th:action="@{/admin/trainer/update}" th:object="${trainer}" method="post">
                                 <div class="input-group">
                                     <div class="form-group has-feedback">
-                                        <input th:field="*{user}" type="hidden" class="form-control" placeholder="User name"/>
+                                        <input th:field="*{user}" type="hidden" class="form-control" placeholder="User name" required=""/>
                                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input th:field="*{user.password}" type="password" class="form-control" placeholder="Password"/>
+                                        <input th:field="*{user.password}" type="password" class="form-control" placeholder="Password" required=""/>
                                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input th:field="*{name}" type="text" class="form-control" placeholder="Real name"/>
+                                        <input th:field="*{name}" type="text" class="form-control" placeholder="Real name" required=""/>
                                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input th:field="*{email}" type="text" class="form-control" placeholder="Email"/>
+                                        <input th:field="*{email}" type="email" class="form-control" placeholder="Email" required=""/>
                                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input th:field="*{phone}" type="text" class="form-control" placeholder="Phone number"/>
+                                        <input th:field="*{phone}" type="number" class="form-control" placeholder="Phone number" required=""/>
                                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <input th:field="*{address}" type="text" class="form-control" placeholder="Address"/>
+                                        <input th:field="*{address}" type="text" class="form-control" placeholder="Address" required=""/>
                                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                                     </div>
                                     <div class="form-group has-feedback">
