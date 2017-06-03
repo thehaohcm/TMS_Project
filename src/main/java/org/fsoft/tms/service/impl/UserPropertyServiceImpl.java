@@ -35,36 +35,15 @@ public class UserPropertyServiceImpl implements UserPropertyService {
         return userPropertyRepository.getAllByPk_UserAndPk_Property(user, property);
     }
 
-//    @Override
-//    public Set<UserProperty> setTrainerProperty(User user, String name, String email, String phone, String address) {
-//        UserProperty userProperty = new UserProperty();
-//        Set<UserProperty> userProperties = new HashSet<>(0);
-//        userProperty.setUser(user);
-//        userProperty.setProperty(propertyRepository.findOne(1));
-//        userProperty.setValue(name);
-//        userProperties.add(userProperty);
-//        userProperty = new UserProperty();
-//        userProperty.setUser(user);
-//        userProperty.setProperty(propertyRepository.findOne(10));
-//        userProperty.setValue(email);
-//        userProperties.add(userProperty);
-//        userProperty = new UserProperty();
-//        userProperty.setUser(user);
-//        userProperty.setProperty(propertyRepository.findOne(9));
-//        userProperty.setValue(phone);
-//        userProperties.add(userProperty);
-//        userProperty = new UserProperty();
-//        userProperty.setUser(user);
-//        userProperty.setProperty(propertyRepository.findOne(8));
-//        userProperty.setValue(address);
-//        userProperties.add(userProperty);
-//        return userProperties;
-//    }
-
     @Override
     public void saveTrainerProperty(List<UserProperty> userProperties) {
         userProperties.forEach((item)->{
             userPropertyRepository.save(item);
         });
+    }
+
+    @Override
+    public List<UserProperty> search(String input) {
+        return null;
     }
 }

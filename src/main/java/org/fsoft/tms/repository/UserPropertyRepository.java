@@ -5,6 +5,8 @@ import org.fsoft.tms.entity.User;
 import org.fsoft.tms.entity.UserProperty;
 import org.fsoft.tms.entity.UserPropertyId;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Set;
@@ -16,4 +18,7 @@ public interface UserPropertyRepository extends JpaRepository<UserProperty, User
 //    public List<UserProperty> findAllByUser(User user);
     public List<UserProperty> getAllByPk_User(User user);
     public UserProperty getAllByPk_UserAndPk_Property(User user, Property property);
+
+    @Query("select u from UserProperty u where u.value like concat('%',:input,'%')")
+    List<UserProperty> getUserProperties(@Param("input") String input);
 }
