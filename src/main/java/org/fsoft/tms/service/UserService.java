@@ -50,6 +50,8 @@ public interface UserService {
 
     void saveTrainee(TraineeInfo traineeInfo);
 
+    List<User> search(String value, int roleID);
+
     Set<UserProperty> setTraineeProperty(User user,String name,String birthDate,String education,
                                          String programmingLanguage,String toeicScore,String experimentDetail,
                                          String department,String location);

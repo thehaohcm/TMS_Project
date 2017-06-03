@@ -335,4 +335,34 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findOne(staffID);
         return userRepository.findAllByRoleAndManager(role, user);
     }
+
+    @Override
+    public List<User> search(String value, int roleID) {
+        List<UserProperty> arr = userPropertyRepository.getUserProperties(value);
+        int size = arr.size();
+        List<User> arr_temp = new ArrayList<>();
+        if (size > 0) {
+            arr_temp.add(arr.get(0).getUser());
+            for(int i = 1 ; i < arr.size(); i++) {
+                int z = 0;
+                for(int j = 0; j < arr_temp.size(); j++) {
+                    if(arr.get(i).getUser().getId() != arr_temp.get(j).getId())
+                        z++;
+                    else
+                        break;
+                }
+                if(z == arr_temp.size() )
+                    arr_temp.add(arr.get(i).getUser());
+            }
+        }
+
+        List<User> trainee = new ArrayList<>();
+        for (User u : arr_temp)
+        {
+            if(u.getRole().getId() == roleID)
+                trainee.add(u);
+
+        }
+        return trainee;
+    }
 }

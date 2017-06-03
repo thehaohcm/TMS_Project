@@ -19,4 +19,6 @@ public interface UserPropertyService {
 //    Set<UserProperty> setTrainerProperty(User user, String name, String email, String phone, String address);
 
     void saveTrainerProperty(List<UserProperty> userProperties);
+
+    List<UserProperty> search(String input);
 }
