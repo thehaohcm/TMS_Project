@@ -33,7 +33,7 @@ public class StaffAccountController {
 
     @RequestMapping(value = "/addAccount")
     public String addAccount (@ModelAttribute  User user) {
-        userService.addUser(user, 2);
+        userService.addUser(user, 2,1);
         return "redirect:/admin/staff/";
     }
 

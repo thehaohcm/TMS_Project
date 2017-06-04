@@ -13,7 +13,7 @@ import java.util.List;
 public interface CategoryRepository extends JpaRepository<Category,Integer> {
     public List<Category> findAllByActive(Boolean b);
 
-    @Query("Select c from Category c where c.name LIKE concat('%',:input,'%') or  c.description LIKE concat('%',:input,'%')")
+    @Query("Select c from Category c where upper(c.name) LIKE concat('%',upper(:input),'%') or  upper(c.description) LIKE concat('%',upper(:input),'%')")
     List<Category> findAllByName(@Param("input") String input);
 }
 

@@ -2,6 +2,7 @@ package org.fsoft.tms.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.entity.Topic;
 import org.fsoft.tms.service.*;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.PathParam;
 import java.util.Date;
 import java.util.List;
 
@@ -85,7 +85,7 @@ public class TopicController {
     @RequestMapping(value = "/trainer/{id}")
     public String addTrainer(@PathVariable String id, Model model) {
         model.addAttribute("topic", topicService.finOneById(Integer.parseInt(id)));
-        List<User> arr =  userService.getAllUserByRoleAndManager(3, 1);
+        List<User> arr =  userService.getAllUserByRoleAndManager(3, CurrentUser.getInstance().getUser().getId());
         model.addAttribute("listTrainer", arr);
         System.out.println("size: " + arr.size());
         return "topic/addtrainer";
