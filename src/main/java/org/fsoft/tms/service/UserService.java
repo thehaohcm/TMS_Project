@@ -59,4 +59,6 @@ public interface UserService {
     Set<UserProperty> setTraineeProperty(User user,String name,String birthDate,String education,
                                          String programmingLanguage,String toeicScore,String experimentDetail,
                                          String department,String location);
+
+    boolean checkUsername(String username);
 }

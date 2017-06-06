@@ -385,4 +385,13 @@ public class UserServiceImpl implements UserService {
         }
         return trainee;
     }
+
+    @Override
+    public boolean checkUsername(String username){
+        int count=userRepository.countByUsername(username);
+        logger.debug("count: "+count);
+        if(count>0)
+            return false;
+        return true;
+    }
 }
