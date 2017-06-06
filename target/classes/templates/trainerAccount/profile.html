@@ -107,29 +107,20 @@
             <ul class="sidebar-menu">
                 <li class="header">Control Panel</li>
                 <li class="active treeview">
-                    <a th:href="@{/staff}">
+                    <a th:href="@{/admin}">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-mortar-board"></i>
-                        <span>Trainning Staff</span>
+                        <span>Admin</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a th:href="@{/staff/trainee/}"><i class="fa fa-paper-plane"></i>Trainee</a></li>
-                        <li><a th:href="@{/staff/trainer/}"><i class="fa fa-paper-plane"></i>Trainer profile</a></li>
-                        <li><a th:href="@{/staff/course/}"><i class="fa fa-paper-plane"></i>Courses</a></li>
-                        <li><a th:href="@{/staff/category/}"><i class="fa fa-paper-plane"></i>Category</a></li>
-                        <li><a th:href="@{/staff/topic/}"><i class="fa fa-paper-plane"></i>Topic</a></li>
+                        <li><a th:href="@{/admin/staff/}"><i class="fa fa-paper-plane"></i> Trainning Staff</a></li>
+                        <li><a th:href="@{/admin/trainer/}"><i class="fa fa-paper-plane"></i> Trainer</a></li>
                     </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-mortar-board"></i>
-                        <span>Trainer</span>
-                    </a>
                 </li>
                 <!--<li class="treeview">-->
                 <!--<a href="calendaradmin.html" th:href="calendaradmin.html">-->
@@ -146,7 +137,7 @@
             <h1> Trainer <small>Control panel</small> </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Training Staff</li>
+                <li class="active">Admin</li>
             </ol>
         </section>
         <!-- Main content -->

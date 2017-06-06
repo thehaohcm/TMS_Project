@@ -88,14 +88,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(User c) {
         User temp = userRepository.findOne(c.getId());
-        logger.debug("temp1:"+temp.getPassword()+":a");
-        logger.debug("pass:"+c.getPassword()+":a");
-        if(!(c.getPassword().equals(""))) {
+        logger.debug("temp1:" + temp.getPassword() + ":a");
+        logger.debug("pass:" + c.getPassword() + ":a");
+        if (!(c.getPassword().equals(""))) {
             temp.setPassword(encode(c.getPassword()));
-            logger.debug("pass1:"+temp.getPassword()+":a");
+            logger.debug("pass1:" + temp.getPassword() + ":a");
         }
         temp.setUsername(c.getUsername());
-        logger.debug("temp:"+temp.getPassword()+":a");
+        logger.debug("temp:" + temp.getPassword() + ":a");
+        userRepository.save(temp);
+    }
+
+    public void updateUser(User c, boolean changePassword) {
+        User temp = userRepository.findOne(c.getId());
+        logger.debug("temp1:" + temp.getPassword() + ":a");
+        logger.debug("pass:" + c.getPassword() + ":a");
+        if (changePassword) {
+            temp.setPassword(encode(c.getPassword()));
+            logger.debug("pass1:" + temp.getPassword() + ":a");
+        }
+        temp.setUsername(c.getUsername());
+        logger.debug("temp:" + temp.getPassword() + ":a");
         userRepository.save(temp);
     }
 
@@ -225,66 +238,66 @@ public class UserServiceImpl implements UserService {
         return userProperties;
     }
 
-    public void saveTrainee(TraineeInfo trainee){
-        Set<UserProperty> userProperties=new HashSet<>(0);
-        userProperties=setTraineeProperty(trainee.getUser(),trainee.getName(),trainee.getBirthDate(),
-                trainee.getEducation(),trainee.getProgrammingLanguage(),trainee.getToeicScore(),
-                trainee.getExperienceDetail(),trainee.getDepartment(),trainee.getLocation());
+    public void saveTrainee(TraineeInfo trainee) {
+        Set<UserProperty> userProperties = new HashSet<>(0);
+        userProperties = setTraineeProperty(trainee.getUser(), trainee.getName(), trainee.getBirthDate(),
+                trainee.getEducation(), trainee.getProgrammingLanguage(), trainee.getToeicScore(),
+                trainee.getExperienceDetail(), trainee.getDepartment(), trainee.getLocation());
 
-        User user=userRepository.findOne(trainee.getUser().getId());
+        User user = userRepository.findOne(trainee.getUser().getId());
         user.setUserProperties(userProperties);
         userRepository.save(user);
     }
 
-    public Set<UserProperty> setTraineeProperty(User user,String name,String birthDate,String education,
-                                                String programmingLanguage,String toeicScrore,String experienceDetail,
-                                                String department,String localtion){
-        Set<UserProperty> userProperties=new HashSet<>(0);
+    public Set<UserProperty> setTraineeProperty(User user, String name, String birthDate, String education,
+                                                String programmingLanguage, String toeicScrore, String experienceDetail,
+                                                String department, String localtion) {
+        Set<UserProperty> userProperties = new HashSet<>(0);
         UserProperty userProperty;
 
-        userProperty=new UserProperty();
+        userProperty = new UserProperty();
         userProperty.setUser(user);
         userProperty.setProperty(propertyRepository.findOne(1));
         userProperty.setValue(name);
         userProperties.add(userProperty);
 
-        userProperty=new UserProperty();
+        userProperty = new UserProperty();
         userProperty.setUser(user);
         userProperty.setProperty(propertyRepository.findOne(2));
         userProperty.setValue(birthDate);
         userProperties.add(userProperty);
 
-        userProperty=new UserProperty();
+        userProperty = new UserProperty();
         userProperty.setUser(user);
         userProperty.setProperty(propertyRepository.findOne(3));
         userProperty.setValue(education);
         userProperties.add(userProperty);
 
-        userProperty=new UserProperty();
+        userProperty = new UserProperty();
         userProperty.setUser(user);
         userProperty.setProperty(propertyRepository.findOne(4));
         userProperty.setValue(programmingLanguage);
         userProperties.add(userProperty);
 
-        userProperty=new UserProperty();
+        userProperty = new UserProperty();
         userProperty.setUser(user);
         userProperty.setProperty(propertyRepository.findOne(5));
         userProperty.setValue(toeicScrore);
         userProperties.add(userProperty);
 
-        userProperty=new UserProperty();
+        userProperty = new UserProperty();
         userProperty.setUser(user);
         userProperty.setProperty(propertyRepository.findOne(6));
         userProperty.setValue(experienceDetail);
         userProperties.add(userProperty);
 
-        userProperty=new UserProperty();
+        userProperty = new UserProperty();
         userProperty.setUser(user);
         userProperty.setProperty(propertyRepository.findOne(7));
         userProperty.setValue(department);
         userProperties.add(userProperty);
 
-        userProperty=new UserProperty();
+        userProperty = new UserProperty();
         userProperty.setUser(user);
         userProperty.setProperty(propertyRepository.findOne(12));
         userProperty.setValue(localtion);
@@ -301,6 +314,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void recoverUser(int id) {
+        User user = userRepository.findOne(id);
+        user.setActive(true);
+        userRepository.save(user);
+    }
+
+    @Override
     public String encode(String password) {
         return passwordEncoder.encode(password);
     }
@@ -310,20 +330,21 @@ public class UserServiceImpl implements UserService {
         Course course = courseRepository.findOne(courseID);
         List<User> arr = getAllUserByRoleAndManager(4, CurrentUser.getInstance().getUser().getId());
         List<User> arrUserCourse = new ArrayList<>();
-        for(User user : arr) {
-            if(course.getTrainees().contains(user))
+        for (User user : arr) {
+            if (course.getTrainees().contains(user))
                 arrUserCourse.add(user);
         }
         return arrUserCourse;
     }
 
     @Override
+
     public List<User> getListTraineeNonCourse(int courseID) {
         Course course = courseRepository.findOne(courseID);
         List<User> arr = getAllUserByRoleAndManager(4, CurrentUser.getInstance().getUser().getId());
         List<User> arrUserCourse = new ArrayList<>();
-        for(User user : arr) {
-            if(!course.getTrainees().contains(user))
+        for (User user : arr) {
+            if (!course.getTrainees().contains(user))
                 arrUserCourse.add(user);
         }
         return arrUserCourse;
@@ -343,23 +364,22 @@ public class UserServiceImpl implements UserService {
         List<User> arr_temp = new ArrayList<>();
         if (size > 0) {
             arr_temp.add(arr.get(0).getUser());
-            for(int i = 1 ; i < arr.size(); i++) {
+            for (int i = 1; i < arr.size(); i++) {
                 int z = 0;
-                for(int j = 0; j < arr_temp.size(); j++) {
-                    if(arr.get(i).getUser().getId() != arr_temp.get(j).getId())
+                for (int j = 0; j < arr_temp.size(); j++) {
+                    if (arr.get(i).getUser().getId() != arr_temp.get(j).getId())
                         z++;
                     else
                         break;
                 }
-                if(z == arr_temp.size() )
+                if (z == arr_temp.size())
                     arr_temp.add(arr.get(i).getUser());
             }
         }
 
         List<User> trainee = new ArrayList<>();
-        for (User u : arr_temp)
-        {
-            if(u.getRole().getId() == roleID)
+        for (User u : arr_temp) {
+            if (u.getRole().getId() == roleID)
                 trainee.add(u);
 
         }

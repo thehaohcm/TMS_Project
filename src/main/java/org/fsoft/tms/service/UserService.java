@@ -28,6 +28,8 @@ public interface UserService {
 
     void updateUser(User c);
 
+    void updateUser(User c,boolean changePassword);
+
     void addPropertyForUser();
 
     void addRole();
@@ -43,6 +45,8 @@ public interface UserService {
     void saveUser(User user);
 
     void deleteUser(int id);
+
+    void recoverUser(int id);
 
     void saveTrainer(TrainerInfo trainerInfo);
 

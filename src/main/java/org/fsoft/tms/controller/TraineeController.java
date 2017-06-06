@@ -64,8 +64,12 @@ public class TraineeController {
     @RequestMapping(value = "/update/{id}")
     public String getPageUpdate(@PathVariable String id, Model model) {
         User user = userService.findOneUser(Integer.parseInt(id));
+        User userTemp=new User();
+        userTemp.setId(user.getId());
+        userTemp.setUsername(user.getUsername());
+        userTemp.setPassword(user.getPassword());
         TraineeInfo traineeInfo = new TraineeInfo();
-        traineeInfo.setUser(user);
+        traineeInfo.setUser(userTemp);
         traineeInfo.setName(userPropertyService.getUserProperty(user,
                 propertyService.findOneProperty(1)).getValue());
         traineeInfo.setBirthDate(userPropertyService.getUserProperty(user,
@@ -88,7 +92,12 @@ public class TraineeController {
 
     @RequestMapping(value="/updateProfile")
     public String updateProfile(@ModelAttribute TraineeInfo traineeInfo){
-        userService.updateUser(traineeInfo.getUser());
+        User user=userService.findOneUser(traineeInfo.getUser().getId());
+        String encryptedPass= userService.encode(traineeInfo.getUser().getPassword());
+        if(!traineeInfo.getUser().getPassword().trim().equals("")&&!user.getPassword().equals(encryptedPass))
+            userService.updateUser(traineeInfo.getUser(),true);
+        else
+            userService.updateUser(traineeInfo.getUser(),false);
         userService.saveTrainee(traineeInfo);
         return "redirect:/staff/trainee/";
     }
