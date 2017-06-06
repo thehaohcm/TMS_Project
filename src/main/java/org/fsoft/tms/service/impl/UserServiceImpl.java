@@ -365,4 +365,11 @@ public class UserServiceImpl implements UserService {
         }
         return trainee;
     }
+
+    @Override
+    public boolean checkUsername(String username){
+        if(userRepository.findAllByUsername(username)!=null)
+            return true;
+        return false;
+    }
 }

@@ -104,7 +104,9 @@ public class TraineeController {
 
     @RequestMapping(value="/addTrainee")
     public String addTrainee(@ModelAttribute TraineeInfo traineeInfo){
-        logger.debug("gia tri id-1: "+traineeInfo.getUser().getId());
+        if(!userService.checkUsername(traineeInfo.getUser().getUsername())){
+            
+        }
         userService.addTrainee(traineeInfo.getUser(), CurrentUser.getInstance().getUser().getId());
         userService.saveTrainee(traineeInfo);
         return "redirect:/staff/trainee/";
