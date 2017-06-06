@@ -184,12 +184,15 @@
                                                 <tr>
                                                     <td>No</td>
                                                     <td>Username</td>
+                                                    <td>Manager</td>
                                                     <td>Information</td>
                                                     <td>Update</td>
+                                                    <td>Delete</td>
                                                 </tr>
                                                 <tr th:each="item:${listUser}" th:if="${item.active}==true">
                                                     <td th:text="${item.id}"></td>
                                                     <td th:text="${item.username}"></td>
+                                                    <td th:text="${item.manager.username}"></td>
                                                     <td><a th:href="@{/admin/trainer/profile/{id}(id=${item.id})}" >link</a></td>
                                                     <td style="width:150px"><a type="button" class="btn btn-block btn-info" th:href="@{/admin/trainer/update/{id}(id=${item.id})}" style="color:white;width: 100px">Update</a></td>
                                                     <td style="width:150px"><a class="btn btn-block btn-danger"  type="button" th:href="@{/admin/trainer/delete/{id}(id=${item.id})}" style="width:100px;color:white">Delete</a></td>

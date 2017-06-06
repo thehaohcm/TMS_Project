@@ -159,26 +159,12 @@
                         <div class="box box-primary ">
                             <section class="content">
                                 <form action="#" th:action="@{/staff/topic/search}" method="get">
-                                    <p>Select</p>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-danger">Action</button>
-                                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                                            <span class="caret"></span>
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a value="id" th:text="id"></a></li>
-                                            <li><a value="name" th:text="name"></a></li>
-                                        </ul>
+                                    <div class="input-group">
+                                        <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                                        <span class="input-group-btn">
+                                            <button type="submit" name="search" id="search-btn" class="btn btn-flat" value="search"><i class="fa fa-search"></i></button>
+                                        </span>
                                     </div>
-                                    <form action="#" th:action="@{/staff/topic/search}" method="get">
-                                        <div class="input-group">
-                                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                                            <span class="input-group-btn">
-                                    <button type="submit" name="search" id="search-btn" class="btn btn-flat" value="search"><i class="fa fa-search"></i></button>
-                                    </span>
-                                        </div>
-                                    </form>
                                 </form>
                                 <div class="col-md-15">
                                     <div class="box">

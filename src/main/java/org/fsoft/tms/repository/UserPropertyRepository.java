@@ -19,6 +19,6 @@ public interface UserPropertyRepository extends JpaRepository<UserProperty, User
     public List<UserProperty> getAllByPk_User(User user);
     public UserProperty getAllByPk_UserAndPk_Property(User user, Property property);
 
-    @Query("select u from UserProperty u where u.value like concat('%',:input,'%')")
+    @Query("select u from UserProperty u where upper(u.value) like concat('%',upper(:input),'%')")
     List<UserProperty> getUserProperties(@Param("input") String input);
 }

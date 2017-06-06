@@ -20,7 +20,7 @@ public interface UserService {
 
     List<User> getListTraineeNonCourse(int courseID);
 
-    void addUser(User u, int roleId);
+    void addUser(User u, int roleId, int managerID);
 
     void addTrainee(User u, int staffId);
 

@@ -170,11 +170,11 @@
                                     <div class="input-group">
                                         <input size="1200px" type="hidden" th:field="*{id}" class="form-control"/>
                                         <p>Name: </p>
-                                        <input size="1200px" type="text" th:field="*{name}" class="form-control" placeholder="Name..." required=""/>
+                                        <input  required=""  size="1200px" type="text" th:field="*{name}" class="form-control" placeholder="Name..."/>
                                         <div class="form-group">
                                             <label>Description: </label>
                                         </div>
-                                        <textarea style="width:100%;height:250px;resize:none;" id="description" th:field="*{description}"></textarea>
+                                        <textarea  required=""  style="width:100%;height:250px;resize:none;" id="description" th:field="*{description}"></textarea>
                                         <p>Category</p>
                                         <select class="form-control" th:field="*{category}">
                                             <option th:each="item:${listCategory}" th:value="${item.id}" th:text="${item.name}"></option>

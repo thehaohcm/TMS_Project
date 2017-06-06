@@ -19,8 +19,8 @@ public interface CourseRepository extends JpaRepository<Course, Integer>{
     public List<Course> findAllByCategory(Category c);
     public List<Course> findAllByStaff(User user);
 
-    @Query("Select c from Course c where c.name LIKE concat('%',:input,'%') " +
-            "or  c.description LIKE concat('%',:input,'%')"+
-            "or upper(FUNCTION('TO_CHAR',c.createdDate)) like concat('%',:input,'%') ")
+    @Query("Select c from Course c where upper(c.name) LIKE concat('%',upper(:input),'%') " +
+            "or  upper(c.description) LIKE concat('%',upper(:input),'%')"+
+            "or upper(FUNCTION('TO_CHAR',c.createdDate)) like concat('%',upper(:input),'%') ")
     public List<Course> searchCourse(@Param("input") String input);
 }

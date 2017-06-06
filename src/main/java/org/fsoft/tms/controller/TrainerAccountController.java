@@ -44,12 +44,13 @@ public class TrainerAccountController {
         TrainerInfo trainerInfo = new TrainerInfo();
         trainerInfo.setUser(user);
         model.addAttribute("trainer", trainerInfo);
+        model.addAttribute("listStaff", userService.getAllUserByRole(2));
         return "trainerAccount/add";
     }
 
     @RequestMapping(value = "/addAccount")
     public String addAccount (@ModelAttribute  TrainerInfo trainerInfo) {
-        userService.addUser(trainerInfo.getUser(), 3);
+        userService.addUser(trainerInfo.getUser(), 3, trainerInfo.getUser().getManager().getId());
         userService.saveTrainer(trainerInfo);
         return "redirect:/admin/trainer/";
     }
