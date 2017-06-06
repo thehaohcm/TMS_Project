@@ -112,9 +112,13 @@ public class TraineeController {
     }
 
     @RequestMapping(value="/addTrainee")
-    public String addTrainee(@ModelAttribute TraineeInfo traineeInfo){
+    public String addTrainee(Model model, @ModelAttribute TraineeInfo traineeInfo){
         if(!userService.checkUsername(traineeInfo.getUser().getUsername())){
-            
+            User user =new User();
+            traineeInfo.setUser(user);
+            model.addAttribute("trainee",traineeInfo);
+            model.addAttribute("error","Username is exited!");
+            return "trainee/add";
         }
         userService.addTrainee(traineeInfo.getUser(), CurrentUser.getInstance().getUser().getId());
         userService.saveTrainee(traineeInfo);

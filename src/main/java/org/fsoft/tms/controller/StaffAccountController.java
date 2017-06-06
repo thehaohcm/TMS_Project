@@ -32,7 +32,12 @@ public class StaffAccountController {
     }
 
     @RequestMapping(value = "/addAccount")
-    public String addAccount (@ModelAttribute  User user) {
+    public String addAccount (Model model,@ModelAttribute  User user) {
+        if(!userService.checkUsername(user.getUsername())){
+            model.addAttribute("user",user);
+            model.addAttribute("error","Username is exited!");
+            return "staffaccount/add";
+        }
         userService.addUser(user, 2,1);
         return "redirect:/admin/staff/";
     }

@@ -388,8 +388,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean checkUsername(String username){
-        if(userRepository.findAllByUsername(username)!=null)
-            return true;
-        return false;
+        int count=userRepository.countByUsername(username);
+        logger.debug("count: "+count);
+        if(count>0)
+            return false;
+        return true;
     }
 }

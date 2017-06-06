@@ -49,7 +49,15 @@ public class TrainerAccountController {
     }
 
     @RequestMapping(value = "/addAccount")
-    public String addAccount (@ModelAttribute  TrainerInfo trainerInfo) {
+    public String addAccount (Model model,@ModelAttribute  TrainerInfo trainerInfo) {
+        if(!userService.checkUsername(trainerInfo.getUser().getUsername())){
+            User user =new User();
+            trainerInfo.setUser(user);
+            model.addAttribute("trainer",trainerInfo);
+            model.addAttribute("listStaff", userService.getAllUserByRole(2));
+            model.addAttribute("error","Username is exited!");
+            return "trainerAccount/add";
+        }
         userService.addUser(trainerInfo.getUser(), 3, trainerInfo.getUser().getManager().getId());
         userService.saveTrainer(trainerInfo);
         return "redirect:/admin/trainer/";
