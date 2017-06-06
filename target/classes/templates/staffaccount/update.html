@@ -73,7 +73,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div style="text-align:center" >
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -111,8 +111,8 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-paper-plane"></i> Trainning Staff</a></li>
-                        <li><a href="#"><i class="fa fa-paper-plane"></i> Trainer</a></li>
+                        <li><a th:href="@{/admin/staff/}"><i class="fa fa-paper-plane"></i> Trainning Staff</a></li>
+                        <li><a th:href="@{/admin/trainer/}"><i class="fa fa-paper-plane"></i> Trainer</a></li>
                     </ul>
                 </li>
                 <!--<li class="treeview">
@@ -150,6 +150,7 @@
                     </div><!-- /.box -->
                     <div class="box box-primary">
                         <section class="content">
+                            <section class="content">
                             <form action="#" th:action="@{/admin/staff/update}" th:object="${user}" method="post">
                                 <input th:field="*{id}" type="hidden" class="form-control"/>
                                 <div class="form-group has-feedback">
@@ -157,14 +158,14 @@
                                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                 </div>
                                 <div class="form-group has-feedback">
-                                    <input th:field="*{password}" type="password" class="form-control" placeholder="Password" required=""/>
+                                    <input th:field="*{password}" type="password" class="form-control" placeholder="Password"/>
                                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                                 </div>
                                 <div class="col-xs-4">
-                                    <button type="submit" class="btn btn-primary btn-block btn-flat">Create</button>
+                                    <button type="submit" class="btn btn-primary btn-block btn-flat" style="width: 25%">Update</button>
                                 </div><!-- /.col -->
                             </form>
-
+                            </section>
                             <div class="callout callout-info">
                                 <h4>Tip!</h4>
                                 <p>Using the Control Panel for easy to use the website and locale the place you need to work with. Everything will be more simple for you managerment.</p>

@@ -40,19 +40,32 @@ public class StaffAccountController {
     @RequestMapping(value = "/update/{id}")
     public String getPageUpdate(@PathVariable String id, Model model) {
         User user = userService.findOneUser(Integer.parseInt(id));
+        User user_temp=new User();
+        user_temp.setId(user.getId());
+        user_temp.setUsername(user.getUsername());
+        user_temp.setPassword(user.getPassword());
         model.addAttribute("user", user);
         return "staffaccount/update";
     }
 
     @RequestMapping(value = "/update")
     public String updateAccount (@ModelAttribute User user) {
-        userService.updateUser(user);
+        User user1=userService.findOneUser(user.getId());
+        String encrypt_pass= userService.encode(user.getPassword());
+        if(!user.getPassword().trim().equals("")&&!user1.getPassword().equals(encrypt_pass))
+            userService.updateUser(user,true);
+        userService.updateUser(user,false);
         return "redirect:/admin/staff/";
     }
 
     @RequestMapping(value = "/delete/{id}")
     public String deleteAccount(@PathVariable String id, Model model) {
         userService.deleteUser(Integer.parseInt(id));
+        return "redirect:/admin/staff/";
+    }
+    @RequestMapping(value = "/recover/{id}")
+    public String recoverAccount(@PathVariable String id, Model model) {
+        userService.recoverUser(Integer.parseInt(id));
         return "redirect:/admin/staff/";
     }
 }

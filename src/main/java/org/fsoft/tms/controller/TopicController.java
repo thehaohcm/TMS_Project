@@ -3,6 +3,7 @@ package org.fsoft.tms.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.CurrentUser;
+import org.fsoft.tms.entity.Category;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.entity.Topic;
 import org.fsoft.tms.service.*;
@@ -101,15 +102,20 @@ public class TopicController {
     public String adđTrainerToTopic(@PathVariable("trainerID") String trainerID, @PathVariable("topicID") String topicID, Model model) {
         topicService.addTrainerToTopic(Integer.parseInt(topicID), Integer.parseInt(trainerID));
         String email = userPropertyService.getUserProperty(userService.findOneUser(Integer.parseInt(trainerID)), propertyService.findOneProperty(10)).getValue();
-        Topic t = topicService.finOneById(Integer.parseInt(topicID));
+        Topic topic = topicService.finOneById(Integer.parseInt(topicID));
+        User user=userService.findOneUser(Integer.parseInt(trainerID));
         SimpleMailMessage message=new SimpleMailMessage();
         Date date=new Date();
-        message.setSubject("Tài khoản của bạn tại hệ thống TMS đã được tạo");
-        message.setText("Xin chào bạn, đây là mail tự động được gửi vào lúc "+date.toLocaleString()
-                +" từ hệ thống TMS nhằm thông báo về việc tài khoản của bạn đã được add vào topic tạo với thông tin như sau: \n" +
-                "Tên topic: "+ t.getTitle()+" "
-                +"Xin chân thành cảm ơn\n" +
-                "Lưu ý: Đây là hộp thư tự động, bạn không cần trả lời email này");
+        message.setSubject("Tài khoản của bạn tại hệ thống TMS đã được thêm vào topic "+topic.getTitle());
+        message.setText("Xin chào bạn, đây là thư tự động được gửi vào lúc "+date.toLocaleString()
+                +" từ hệ thống TMS nhằm thông báo về việc tài khoản '"+user.getUsername()
+                +"' của bạn đã được thêm vào topic tạo với thông tin như sau: \n"
+                +"Tên topic: "+ topic.getTitle()+" thuộc category "+topic.getCourse()+"\n"
+                +"Nội dung: \n"
+                +topic.getContent()+"\n"
+                +"Bạn vui lòng đăng nhập vào hệ thống TMS ở địa chỉ: http://localhost:8080 với tài khoản "+user.getUsername()
+                +" để sử dụng\n"
+                +"Lưu ý: Đây là hộp thư tự động, bạn không cần trả lời email này");
         message.setTo(email);
         //input into parameter in method setFrom same as variable spring.mail.username in file application.properties
         message.setFrom("email");
