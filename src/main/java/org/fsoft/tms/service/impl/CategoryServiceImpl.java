@@ -3,8 +3,12 @@ package org.fsoft.tms.service.impl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.entity.Category;
+import org.fsoft.tms.entity.Course;
+import org.fsoft.tms.entity.Topic;
 import org.fsoft.tms.repository.CategoryRepository;
 import org.fsoft.tms.service.CategoryService;
+import org.fsoft.tms.service.CourseService;
+import org.fsoft.tms.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +21,15 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService{
 
     private final Logger logger = LogManager.getLogger();
+
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    CourseService courseService;
+
+    @Autowired
+    TopicService topicService;
 
     @Override
     public List<Category> getListCategory() {
@@ -34,8 +45,16 @@ public class CategoryServiceImpl implements CategoryService{
     public void deleteCategory(int id) {
         Category temp = categoryRepository.findOne(id);
         temp.setActive(false);
+
+        List<Course> arrCourse = courseService.getAllCourseByCategory(temp);
+        for (Course course: arrCourse) {
+            List<Topic> arrTopic = topicService.findAllTopicByCourse(course);
+            for (Topic topic: arrTopic) {
+                topicService.deleteTopic(topic.getId());
+            }
+            courseService.deleteCourse(course.getId());
+        }
         categoryRepository.save(temp);
-        logger.debug("vao roi tui bay oi "+id );
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.*;
 import org.fsoft.tms.repository.*;
+import org.fsoft.tms.service.TopicService;
 import org.fsoft.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.authentication.PasswordEncoderParser;
@@ -393,5 +394,37 @@ public class UserServiceImpl implements UserService {
         if(count>0)
             return false;
         return true;
+    }
+
+    @Override
+    public void unAssignTraineeToCourse(int id) {
+        User user  = findOneUser(id);
+        user.getTraineeCourses().clear();
+    }
+
+    @Override
+    public void changeManagerTrainee(int userIdOld, int userIdNew) {
+        List<User> listTrainee = getAllUserByRoleAndManager(4, userIdOld);
+        for (User u: listTrainee) {
+            User temp = findOneUser(u.getId());
+            temp.setManager(findOneUser(userIdNew));
+            userRepository.save(temp);
+        }
+        User temp = findOneUser(userIdOld);
+        temp.getUsers().clear();
+        userRepository.save(temp);
+    }
+
+    @Override
+    public void changeManagerTrainer(int userIdOld, int userIdNew) {
+        List<User> listTrainer = getAllUserByRoleAndManager(3, userIdOld);
+        for (User u: listTrainer) {
+            User temp = findOneUser(u.getId());
+            temp.setManager(findOneUser(userIdNew));
+            userRepository.save(temp);
+        }
+        User temp = findOneUser(userIdOld);
+        temp.getUsers().clear();
+        userRepository.save(temp);
     }
 }

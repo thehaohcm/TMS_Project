@@ -53,7 +53,7 @@ public class TopicController {
     @RequestMapping(value = "/add")
     public String getPageAdd(Model model) {
         model.addAttribute("topic", new Topic());
-        model.addAttribute("listCourse", courseService.getAllCourseByStaff());
+        model.addAttribute("listCourse", courseService.getAllCourseByStaff(CurrentUser.getInstance().getUser()));
         return "topic/add";
     }
 
@@ -88,15 +88,18 @@ public class TopicController {
         model.addAttribute("topic", topicService.finOneById(Integer.parseInt(id)));
         List<User> arr =  userService.getAllUserByRoleAndManager(3, CurrentUser.getInstance().getUser().getId());
         model.addAttribute("listTrainer", arr);
-        System.out.println("size: " + arr.size());
         return "topic/addtrainer";
     }
 
-//    @RequestMapping(value = "/trainer/{trainerID}/{topicID}")
-//    public String adđTrainer1ToTopic(@PathVariable("trainerID") String trainerID, @PathVariable("topicID") String topicID, Model model) {
-//        topicService.addTrainerToTopic(Integer.parseInt(topicID), Integer.parseInt(trainerID));
-//        return "redirect:/staff/topic/";
-//    }
+    @RequestMapping(value = "/trainer/change/{id}")
+    public String changeTrainer(@PathVariable String id, Model model) {
+        Topic topic = topicService.finOneById(Integer.parseInt(id));
+        model.addAttribute("topic", topic);
+        List<User> arr =  userService.getAllUserByRoleAndManager(3, CurrentUser.getInstance().getUser().getId());
+        arr.remove(topic.getTrainer());
+        model.addAttribute("listTrainer", arr);
+        return "topic/addtrainer";
+    }
 
     @RequestMapping(value="/trainer/{trainerID}/{topicID}")
     public String adđTrainerToTopic(@PathVariable("trainerID") String trainerID, @PathVariable("topicID") String topicID, Model model) {
@@ -129,8 +132,7 @@ public class TopicController {
     }
 
     @RequestMapping(value="/search")
-    public String searchTopicStaff(@RequestParam String q,Model model){
-        logger.debug("Da vao TopicController /staff/topic/search");
+    public String searchTopicStaff(@RequestParam String q, Model model){
         if(q.equals(""))
             return "redirect:/staff/topic/";
         model.addAttribute("listTopic",topicService.searchTopic(q));

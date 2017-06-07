@@ -158,8 +158,8 @@
                                                     <td>Update</td>
                                                     <td>Delete</td>
                                                 </tr>
-                                                <tr th:each="item:${listUser}" th:if="${item.active}">
-                                                    <td th:text="${item.id}"></td>
+                                                <tr th:each="item,itemStat:${listUser}" th:if="${item.active}">
+                                                    <td th:text="${itemStat.count}"></td>
                                                     <td th:text="${item.username}"></td>
                                                     <td style="width:150px"><a type="button" class="btn btn-block btn-info" th:href="@{/admin/staff/update/{id}(id=${item.id})}" style="color:white;width: 100px">Update</a></td>
                                                     <td style="width:150px"><a class="btn btn-block btn-danger"  type="button" onclick="return confirm('Are you sure ?')" th:href="@{/admin/staff/delete/{id}(id=${item.id})}" style="width:100px;color:white">Delete</a></td>
@@ -168,22 +168,6 @@
 
                                                 <tr>
                                                     <a class="btn btn-block btn-success" style="width:70px; color:white" th:href="@{/admin/staff/add}">Add</a>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div class="box-body">
-                                            <table class="table table-bordered">
-                                                <tr>
-                                                    <td>No</td>
-                                                    <td>Username</td>
-                                                    <td>Update</td>
-                                                    <td>Delete</td>
-                                                </tr>
-                                                <tr th:each="item:${listUser}" th:if="${item.active}==false">
-                                                    <td th:text="${item.id}"></td>
-                                                    <td th:text="${item.username}"></td>
-                                                    <td style="width:150px"><a type="button" class="btn btn-block btn-info" th:href="@{/admin/staff/update/{id}(id=${item.id})}" style="color:white;width: 100px">Update</a></td>
-                                                    <td style="width:150px"><a class="btn btn-block btn-danger"  type="button"  th:href="@{/admin/staff/recover/{id}(id=${item.id})}" style="width:100px;color:white">Recover</a></td>
                                                 </tr>
                                             </table>
                                         </div>

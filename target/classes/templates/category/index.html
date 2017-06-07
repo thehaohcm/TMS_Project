@@ -181,8 +181,8 @@
                                                     <td>Update</td>
                                                     <td>Delete</td>
                                                 </tr>
-                                                <tr th:each="item:${listCategory}" th:if="${item.active}==true">
-                                                    <td th:text="${item.id}"></td>
+                                                <tr th:each="item,itemStat:${listCategory}" th:if="${item.active}==true">
+                                                    <td th:text="${itemStat.count}"></td>
                                                     <td th:text="${item.name}"></td>
                                                     <td th:text="${item.description}"></td>
                                                     <td style="width:150px"><a class="btn btn-block btn-info" type="button" th:href="@{/staff/category/update/{id}(id=${item.id})}" style="width:100px;color:white">Update</a></td>

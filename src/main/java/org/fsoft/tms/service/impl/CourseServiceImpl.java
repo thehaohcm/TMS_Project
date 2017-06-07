@@ -3,10 +3,13 @@ package org.fsoft.tms.service.impl;
 import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.Category;
 import org.fsoft.tms.entity.Course;
+import org.fsoft.tms.entity.Topic;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.repository.CourseRepository;
+import org.fsoft.tms.repository.TopicRepository;
 import org.fsoft.tms.repository.UserRepository;
 import org.fsoft.tms.service.CourseService;
+import org.fsoft.tms.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,14 +28,16 @@ public class CourseServiceImpl implements CourseService{
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    TopicService topicService;
+
     @Override
     public List<Course> getAllCourse() {
         return courseRepository.findAll();
     }
 
     @Override
-    public List<Course> getAllCourseByStaff() {
-        User user = CurrentUser.getInstance().getUser();
+    public List<Course> getAllCourseByStaff(User user) {
         return courseRepository.findAllByStaff(user);
     }
 
@@ -73,9 +78,21 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
+    public void deleteTrainee(int courseID, int traineeID) {
+        Course temp = courseRepository.findOne(courseID);
+        Set<User> arr = temp.getTrainees();
+        arr.remove(userRepository.findAllById(traineeID));
+        courseRepository.save(temp);
+    }
+
+    @Override
     public void deleteCourse(int id) {
         Course c = courseRepository.findOne(id);
         c.setActive(false);
+        List<Topic> arrTopic = topicService.findAllTopicByCourse(c);
+        for (Topic topic: arrTopic) {
+            topicService.deleteTopic(topic.getId());
+        }
         courseRepository.save(c);
     }
 
@@ -88,5 +105,18 @@ public class CourseServiceImpl implements CourseService{
     public List<Course> searchCourse(String input){
         List<Course> courses=courseRepository.searchCourse(input);
         return courses;
+    }
+
+    @Override
+    public void changeManager(int userIdOld, int userIdNew) {
+        User u = userRepository.findOne(userIdOld);
+        List<Course> listCourse = getAllCourseByStaff(u);
+        for (Course c : listCourse) {
+            Course temp = courseRepository.findOne(c.getId());
+            temp.setStaff(userRepository.findOne(userIdNew));
+            courseRepository.save(temp);
+        }
+        u.getCourses().clear();
+        userRepository.save(u);
     }
 }

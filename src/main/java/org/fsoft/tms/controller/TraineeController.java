@@ -3,9 +3,11 @@ package org.fsoft.tms.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.CurrentUser;
+import org.fsoft.tms.entity.Course;
 import org.fsoft.tms.entity.Property;
 import org.fsoft.tms.entity.TraineeInfo;
 import org.fsoft.tms.entity.User;
+import org.fsoft.tms.service.CourseService;
 import org.fsoft.tms.service.PropertyService;
 import org.fsoft.tms.service.UserPropertyService;
 import org.fsoft.tms.service.UserService;
@@ -36,6 +38,9 @@ public class TraineeController {
 
     @Autowired
     UserPropertyService userPropertyService;
+
+    @Autowired
+    CourseService courseService;
 
     private final Logger logger = LogManager.getLogger();
 
@@ -129,6 +134,7 @@ public class TraineeController {
     public String deleteTrainee(@PathVariable String id){
         User user=userService.findOneUser(Integer.parseInt(id));
         user.setActive(false);
+        userService.unAssignTraineeToCourse(Integer.parseInt(id));
         userService.saveUser(user);
         return "redirect:/staff/trainee/";
     }

@@ -169,8 +169,8 @@
                                                     <td>Username</td>
                                                     <td>Assign</td>
                                                 </tr>
-                                                <tr th:each="item:${listTrainer}" th:if="${item.active}==true">
-                                                    <td th:text="${item.id}"></td>
+                                                <tr th:each="item,itemStat:${listTrainer}" th:if="${item.active}==true">
+                                                    <td th:text="${itemStat.count}"></td>
                                                     <td th:text="${item.username}"></td>
                                                     <td style="width:150px"><a class="btn btn-block btn-success" type="button" th:href="@{/staff/topic/trainer/{trainerID}/{topicID}(trainerID=${item.id},topicID=${topic.id})}" style="width:50px;color:white">Add</a></td>
                                                 </tr>

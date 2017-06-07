@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.entity.TrainerInfo;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.service.PropertyService;
+import org.fsoft.tms.service.TopicService;
 import org.fsoft.tms.service.UserPropertyService;
 import org.fsoft.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class TrainerAccountController {
 
     @Autowired
     private UserPropertyService userPropertyService;
+
+    @Autowired
+    private TopicService topicService;
 
     @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
@@ -108,15 +112,8 @@ public class TrainerAccountController {
 
     @RequestMapping(value = "/delete/{id}")
     public String deleteAccount(@PathVariable String id, Model model) {
-        logger.debug("Id:" + id);
         userService.deleteUser(Integer.parseInt(id));
+        topicService.unAssignTopicToTrainer(userService.findOneUser(Integer.parseInt(id)));
         return "redirect:/admin/trainer/";
     }
-
-//    @RequestMapping(value = "/account/{id}")
-//    public String getPageProfile(@PathVariable String id, Model model) {
-//        User user = userService.findOneUser(Integer.parseInt(id));
-//        model.addAttribute("user", user);
-//        return "trainerAccount/profile";
-//    }
 }

@@ -1,6 +1,10 @@
 package org.fsoft.tms.controller;
 
+import ch.qos.logback.core.joran.spi.NoAutoStart;
+import org.fsoft.tms.CurrentUser;
+import org.fsoft.tms.entity.Course;
 import org.fsoft.tms.entity.User;
+import org.fsoft.tms.service.CourseService;
 import org.fsoft.tms.service.UserService;
 import org.hibernate.validator.internal.engine.messageinterpolation.InterpolationTerm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 /**
  * Created by DELL on 5/31/2017.
  */
@@ -18,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StaffAccountController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    CourseService courseService;
 
     @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
@@ -65,12 +74,48 @@ public class StaffAccountController {
 
     @RequestMapping(value = "/delete/{id}")
     public String deleteAccount(@PathVariable String id, Model model) {
+        User user = userService.findOneUser(Integer.parseInt(id));
+        List<User> listTrainee = userService.getAllUserByRoleAndManager(4, user.getId());
+        List<User> listTrainer = userService.getAllUserByRoleAndManager(3, user.getId());
+        List<Course> listCourse = courseService.getAllCourseByStaff(user);
+        if(listCourse.size() > 0 || listTrainee.size() > 0 || listTrainer.size() > 0) {
+            model.addAttribute("listTrainee", listTrainee);
+            model.addAttribute("listTrainer", listTrainer);
+            model.addAttribute("listCourse", listCourse);
+            model.addAttribute("user", user);
+            return "admin/delete";
+        }
+        else {
+            userService.deleteUser(Integer.parseInt(id));
+            return "redirect:/admin/staff/";
+        }
+    }
+
+    @RequestMapping(value = "/deleteanywhere/{id}")
+    public String deleteAnyWhere(@PathVariable String id, Model model) {
+        courseService.changeManager(Integer.parseInt(id), 1);
+        userService.changeManagerTrainee(Integer.parseInt(id), 1);
+        userService.changeManagerTrainer(Integer.parseInt(id), 1);
         userService.deleteUser(Integer.parseInt(id));
         return "redirect:/admin/staff/";
     }
-    @RequestMapping(value = "/recover/{id}")
-    public String recoverAccount(@PathVariable String id, Model model) {
-        userService.recoverUser(Integer.parseInt(id));
+
+    @RequestMapping(value = "/change/{id}")
+    public String change(@PathVariable String id, Model model) {
+        User user = userService.findOneUser(Integer.parseInt(id));
+        model.addAttribute("user", user);
+        List<User> listStaff = userService.getAllUserByRole(2);
+        listStaff.remove(user);
+        model.addAttribute("listStaff", listStaff);
+        return "admin/changemanager";
+    }
+
+    @RequestMapping(value = "/change/{userIdOld}/{userIdNew}")
+    public String changeManager(@PathVariable String userIdOld, @PathVariable String userIdNew, Model model) {
+        courseService.changeManager(Integer.parseInt(userIdOld), Integer.parseInt(userIdNew));
+        userService.changeManagerTrainee(Integer.parseInt(userIdOld), Integer.parseInt(userIdNew));
+        userService.changeManagerTrainer(Integer.parseInt(userIdOld), Integer.parseInt(userIdNew));
+        userService.deleteUser(Integer.parseInt(userIdOld));
         return "redirect:/admin/staff/";
     }
 }

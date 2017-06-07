@@ -61,4 +61,10 @@ public interface UserService {
                                          String department,String location);
 
     boolean checkUsername(String username);
+
+    void unAssignTraineeToCourse(int userID);
+
+    void changeManagerTrainee(int userIdOld, int userIdNew);
+
+    void changeManagerTrainer(int userIdOld, int userIdNew);
 }

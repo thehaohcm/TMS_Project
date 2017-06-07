@@ -41,6 +41,11 @@ public class TopicServiceImpl implements TopicService{
     }
 
     @Override
+    public List<Topic> findAllTopicByCourse(Course course) {
+        return topic.findAllByCourse(course);
+    }
+
+    @Override
     public List<Topic> findAllTopicByTrainer(User user) {
         return topic.findAllByTrainer(user);
     }
@@ -110,5 +115,18 @@ public class TopicServiceImpl implements TopicService{
     public List<Topic> searchTopic(String input){
         List<Topic> topics = topic.searchTopic(input);
         return topics;
+    }
+
+    @Override
+    public void unAssignTopicToTrainer(User user) {
+        List<Topic> arrTopic = findAllTopicByTrainer(user);
+        for (Topic t : arrTopic) {
+            Topic tp = topic.findOne(t.getId());
+            tp.setTrainer(null);
+            topic.save(tp);
+        }
+        User u = userRepository.findOne(user.getId());
+        u.getTopics().clear();
+        userRepository.save(u);
     }
 }

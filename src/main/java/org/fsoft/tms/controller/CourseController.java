@@ -33,7 +33,7 @@ public class CourseController {
 
     @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
-        model.addAttribute("listCourse", course.getAllCourseByStaff());
+        model.addAttribute("listCourse", course.getAllCourseByStaff(CurrentUser.getInstance().getUser()));
         return "course/index";
     }
 
@@ -58,8 +58,16 @@ public class CourseController {
         return "redirect:/staff/course/trainee/{courseID}";
     }
 
+    @RequestMapping(value = "/trainee/delete/{traineeID}/{courseID}")
+    public String removeTraineeToCourse(@PathVariable("traineeID") String traineeID, @PathVariable("courseID") String courseID, Model model) {
+        course.deleteTrainee(Integer.parseInt(courseID), Integer.parseInt(traineeID));
+        return "redirect:/staff/course/listtrainee/{courseID}";
+    }
+
     @RequestMapping(value = "/listtrainee/{id}")
     public String getListTraineeCourse(@PathVariable String id, Model model) {
+        Course c = course.findOneCourse(Integer.parseInt(id));
+        model.addAttribute("course", c);
         model.addAttribute("listTrainee", userService.getListTraineeCourse(Integer.parseInt(id)));
         return "course/listtrainee";
     }

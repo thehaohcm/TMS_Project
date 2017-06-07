@@ -21,6 +21,8 @@ public interface TopicService {
 
     List<Topic> findAllTopicByCourse(User user, Course course);
 
+    List<Topic> findAllTopicByCourse(Course course);
+
     List<Course> findAllCourseOfUser(User user);
 
     void updateTopic(Topic topic);
@@ -32,5 +34,7 @@ public interface TopicService {
     void addTrainerToTopic(int topicID, int trainerID);
 
     public List<Topic> searchTopic(String input);
+
+    void unAssignTopicToTrainer(User user);
 }
 

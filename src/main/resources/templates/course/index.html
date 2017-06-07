@@ -173,8 +173,8 @@
                                 <td>Update</td>
                                 <td>Delete</td>
                             </tr>
-                            <tr th:each="item:${listCourse}" th:if="${item.active}">
-                                <td th:text="${item.id}"></td>
+                            <tr th:each="item, itemStat:${listCourse}" th:if="${item.active}">
+                                <td th:text="${itemStat.count}"></td>
                                 <td th:text="${item.name}"></td>
                                 <td th:text="${item.description}"></td>
                                 <td th:text="${item.category.name}"></td>

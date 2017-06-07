@@ -159,13 +159,16 @@
                                         </div>
                                         <div class="box-body">
                                             <table class="table table-bordered">
+                                                <input type="hidden" th:object="${course}"/>
                                                 <tr>
                                                     <td >No</td>
                                                     <td>Username</td>
+                                                    <td>Delete</td>
                                                 </tr>
-                                                <tr th:each="item:${listTrainee}" th:if="${item.active}==true">
-                                                    <td th:text="${item.id}"></td>
+                                                <tr th:each="item, itemStat:${listTrainee}" th:if="${item.active}==true">
+                                                    <td th:text="${itemStat.count}"></td>
                                                     <td th:text="${item.username}"></td>
+                                                    <td style="width:150px"><a type="button" class="btn btn-block btn-danger" th:href="@{/staff/course/trainee/delete/{traineeID}/{courseID}(traineeID=${item.id},courseID=${course.id})}" onclick="return confirm('Are you sure ?')" style="color:white;width: 100px">Delete</a></td>
                                                 </tr>
                                             </table>
                                         </div>

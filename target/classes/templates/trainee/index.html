@@ -176,8 +176,8 @@
                                                     <td style="width:150px">Update</td>
                                                     <td style="width:150px">Delete</td>
                                                 </tr>
-                                                <tr th:each="item:${listTrainee}" th:if="${item.active}==true">
-                                                    <td style="width: 50px" th:text="${item.id}"></td>
+                                                <tr th:each="item,itemStat:${listTrainee}" th:if="${item.active}==true">
+                                                    <td style="width: 50px" th:text="${itemStat.count}"></td>
                                                     <td style="width: 500px" th:text="${item.username}"></td>
                                                     <td style="width:150px"><a class="btn btn-block btn-info" type="button" th:href="@{/staff/trainee/profile/{id}(id=${item.id})}" style="width:100px;color:white">Information</a></td>
                                                     <td style="width:150px"><a class="btn btn-block btn-info" type="button" th:href="@{/staff/trainee/update/{id}(id=${item.id})}" style="width:100px;color:white">Update</a></td>
@@ -186,25 +186,6 @@
                                                 <tr>
                                                     <a class="btn btn-block btn-success" style="width:150px; color:white" th:href="@{/staff/trainee/add}">Add Trainee</a>
                                                     <a class="btn btn-block btn-success" style="width:150px; color:white" th:href="@{/staff/trainee/excel/}">Import Excel File </a>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <p>Blocked Accound</p>
-                                        <div class="box-body">
-                                            <table class="table table-bordered">
-                                                <tr>
-                                                    <td style="width: 50px" >No</td>
-                                                    <td style="width: 500px">Username</td>
-                                                    <td style="width:150px">Information</td>
-                                                    <td style="width:150px">Update</td>
-                                                    <td style="width:150px">Delete</td>
-                                                </tr>
-                                                <tr th:each="item:${listTrainee}" th:if="${item.active}==false">
-                                                    <td style="width: 50px" th:text="${item.id}"></td>
-                                                    <td style="width: 500px" th:text="${item.username}"></td>
-                                                    <td style="width:150px"><a class="btn btn-block btn-info" type="button" th:href="@{/staff/trainee/profile/{id}(id=${item.id})}" style="width:100px;color:white">Information</a></td>
-                                                    <td style="width:150px"><a class="btn btn-block btn-info"  type="button" th:href="@{/staff/trainee/update/{id}(id=${item.id})}" style="width:100px;color:white">Update</a></td>
-                                                    <td style="width:150px"><a class="btn btn-block btn-danger"  type="button" th:href="@{/staff/trainee/recover/{id}(id=${item.id})}" style="width:100px;color:white">Recover</a></td>
                                                 </tr>
                                             </table>
                                         </div>
