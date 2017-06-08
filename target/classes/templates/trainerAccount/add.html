@@ -173,7 +173,7 @@
                                         <div class="form-group">
                                             <label>Manager</label>
                                             <select style="width:1250px;height: 35px"  th:field="*{user.manager}">
-                                                <option style="width:1250px;height: 35px"  th:each="item:${listStaff}" th:value="${item.id}" th:text="${item.username}"></option>
+                                                <option style="width:1250px;height: 35px"   th:each="item:${listStaff}" th:if="${item.active}==true" th:value="${item.id}" th:text="${item.username}"></option>
                                             </select>
                                         </div>
 
