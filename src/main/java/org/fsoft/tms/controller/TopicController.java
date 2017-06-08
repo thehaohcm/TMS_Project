@@ -6,8 +6,10 @@ import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.Category;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.entity.Topic;
+import org.fsoft.tms.event.OnAssignTopicCompleteEvent;
 import org.fsoft.tms.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
@@ -43,6 +45,9 @@ public class TopicController {
 
     @Autowired
     MailSender mailSender;
+
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
 
     @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
@@ -104,30 +109,32 @@ public class TopicController {
     @RequestMapping(value="/trainer/{trainerID}/{topicID}")
     public String adđTrainerToTopic(@PathVariable("trainerID") String trainerID, @PathVariable("topicID") String topicID, Model model) {
         topicService.addTrainerToTopic(Integer.parseInt(topicID), Integer.parseInt(trainerID));
-        String email = userPropertyService.getUserProperty(userService.findOneUser(Integer.parseInt(trainerID)), propertyService.findOneProperty(10)).getValue();
-        Topic topic = topicService.finOneById(Integer.parseInt(topicID));
-        User user=userService.findOneUser(Integer.parseInt(trainerID));
-        SimpleMailMessage message=new SimpleMailMessage();
-        Date date=new Date();
-        message.setSubject("Tài khoản của bạn tại hệ thống TMS đã được thêm vào topic "+topic.getTitle());
-        message.setText("Xin chào bạn, đây là thư tự động được gửi vào lúc "+date.toLocaleString()
-                +" từ hệ thống TMS nhằm thông báo về việc tài khoản '"+user.getUsername()
-                +"' của bạn đã được thêm vào topic tạo với thông tin như sau: \n"
-                +"Tên topic: "+ topic.getTitle()+" thuộc category "+topic.getCourse()+"\n"
-                +"Nội dung: \n"
-                +topic.getContent()+"\n"
-                +"Bạn vui lòng đăng nhập vào hệ thống TMS ở địa chỉ: http://localhost:8080 với tài khoản "+user.getUsername()
-                +" để sử dụng\n"
-                +"Lưu ý: Đây là hộp thư tự động, bạn không cần trả lời email này");
-        message.setTo(email);
-        //input into parameter in method setFrom same as variable spring.mail.username in file application.properties
-        message.setFrom("email");
-        try{
-            mailSender.send(message);
-        }catch (Exception ex){
-            mailSender.send(message);
-            ex.printStackTrace();
-        }
+        logger.debug("ahihi");
+        eventPublisher.publishEvent(new OnAssignTopicCompleteEvent(Integer.parseInt(trainerID), Integer.parseInt(topicID)));
+//        String email = userPropertyService.getUserProperty(userService.findOneUser(Integer.parseInt(trainerID)), propertyService.findOneProperty(10)).getValue();
+//        Topic topic = topicService.finOneById(Integer.parseInt(topicID));
+//        User user=userService.findOneUser(Integer.parseInt(trainerID));
+//        SimpleMailMessage message=new SimpleMailMessage();
+//        Date date=new Date();
+//        message.setSubject("Tài khoản của bạn tại hệ thống TMS đã được thêm vào topic "+topic.getTitle());
+//        message.setText("Xin chào bạn, đây là thư tự động được gửi vào lúc "+date.toLocaleString()
+//                +" từ hệ thống TMS nhằm thông báo về việc tài khoản '"+user.getUsername()
+//                +"' của bạn đã được thêm vào topic tạo với thông tin như sau: \n"
+//                +"Tên topic: "+ topic.getTitle()+" thuộc category "+topic.getCourse()+"\n"
+//                +"Nội dung: \n"
+//                +topic.getContent()+"\n"
+//                +"Bạn vui lòng đăng nhập vào hệ thống TMS ở địa chỉ: http://localhost:8080 với tài khoản "+user.getUsername()
+//                +" để sử dụng\n"
+//                +"Lưu ý: Đây là hộp thư tự động, bạn không cần trả lời email này");
+//        message.setTo(email);
+//        //input into parameter in method setFrom same as variable spring.mail.username in file application.properties
+//        message.setFrom("email");
+//        try{
+//            mailSender.send(message);
+//        }catch (Exception ex){
+//            mailSender.send(message);
+//            ex.printStackTrace();
+//        }
         return "redirect:/staff/topic/";
     }
 
