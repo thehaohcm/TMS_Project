@@ -25,54 +25,22 @@ public class TopicRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private CourseRepository courseRepository;
-
     @Test
-    public void testSaveTopic(){
-
-        Topic topic = new Topic();
-        topic.setTitle("The new Invoice");
-        topic.setContent("The addition of the 1000 miles highway");
-        topic.setActive(true);
-        topic.setCourse(courseRepository.findOne(1));
-        assertNull(topic.getId());
-        topicRepository.save(topic);
-        assertNotNull(topic.getId());
-
-        Topic fetchedTopic = topicRepository.findOne(topic.getId());
-        assertNotNull(fetchedTopic);
-        assertEquals(topic.getId(), fetchedTopic.getId());
-        assertEquals(topic.getContent(), fetchedTopic.getContent());
-
-        fetchedTopic.setContent("ABC");
-        topicRepository.save(fetchedTopic);
-        Topic fetchedUpdatedTopic = topicRepository.findOne(fetchedTopic.getId());
-        assertEquals(fetchedTopic.getContent(), fetchedUpdatedTopic.getContent());
-
-        long topicCount = topicRepository.count();
-        assertEquals(topicCount, 4);
-
-        Iterable<Topic> topics = topicRepository.findAll();
-        int count = 0;
-        for(Topic c : topics){
-            count++;
-        }
-        assertEquals(count, 4);
-
-        fetchedUpdatedTopic.setActive(false);
-        topicRepository.save(fetchedUpdatedTopic);
-        Topic fetchedDeletedTopic = topicRepository.findOne(fetchedUpdatedTopic.getId());
-        assertEquals(fetchedDeletedTopic.getActive(), false);
-
+    public void findAllByTrainer() throws Exception {
+        List<Topic> topics = topicRepository.findAllByTrainer(userRepository.getOne(59));
+        assertEquals(1,topics.size());
     }
 
-//    @Test
-//    public void findAllByTrainer() throws Exception {
-//    }
-//
-//    @Test
-//    public void findAllByCourse_Staff() throws Exception {
-//    }
+    @Test
+    public void findAllByCourse_Staff() throws Exception {
+        List<Topic> topics = topicRepository.findAllByCourse_Staff(userRepository.getOne(57));
+        assertEquals(2, topics.size());
+    }
+
+    @Test
+    public void searchTopic() throws Exception {
+        List<Topic> topics = topicRepository.searchTopic("English");
+        assertEquals(2, topics.size());
+    }
 
 }
