@@ -108,9 +108,16 @@ public class TopicController {
 
     @RequestMapping(value="/trainer/{trainerID}/{topicID}")
     public String adđTrainerToTopic(@PathVariable("trainerID") String trainerID, @PathVariable("topicID") String topicID, Model model) {
-        topicService.addTrainerToTopic(Integer.parseInt(topicID), Integer.parseInt(trainerID));
-        logger.debug("ahihi");
-        eventPublisher.publishEvent(new OnAssignTopicCompleteEvent(Integer.parseInt(trainerID), Integer.parseInt(topicID)));
+
+//        logger.debug("ahihi");
+        try{
+            eventPublisher.publishEvent(new OnAssignTopicCompleteEvent(Integer.parseInt(trainerID), Integer.parseInt(topicID)));
+            topicService.addTrainerToTopic(Integer.parseInt(topicID), Integer.parseInt(trainerID));
+        }catch (Exception ex)
+        {
+            logger.debug("ahihi");
+        }
+
 //        String email = userPropertyService.getUserProperty(userService.findOneUser(Integer.parseInt(trainerID)), propertyService.findOneProperty(10)).getValue();
 //        Topic topic = topicService.finOneById(Integer.parseInt(topicID));
 //        User user=userService.findOneUser(Integer.parseInt(trainerID));
