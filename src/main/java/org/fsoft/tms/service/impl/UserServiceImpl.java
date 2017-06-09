@@ -13,10 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.Null;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.sql.*;
+import java.util.Date;
+import java.util.*;
 
 /**
  * Created by thehaohcm on 5/30/17.
@@ -26,8 +25,10 @@ public class UserServiceImpl implements UserService {
 
     private final Logger logger = LogManager.getLogger();
 
+    private static final int EXPIRATION = 1;
+
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -46,6 +47,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserPropertyRepository userPropertyRepository;
+
+    @Autowired
+    private VerificationTokenRepository verificationTokenRepository;
 
     public List<User> getAllUser() {
         return userRepository.findAll();
@@ -427,4 +431,42 @@ public class UserServiceImpl implements UserService {
         temp.getUsers().clear();
         userRepository.save(temp);
     }
+
+    @Override
+    public void createVerificationToken(User user, String token){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Timestamp(cal.getTime().getTime()));
+        cal.add(Calendar.MINUTE, EXPIRATION);
+        Date date=new Date(cal.getTime().getTime());
+//        logger.debug("ngay het han:"+date.toString());
+        VerificationToken myToken = new VerificationToken(token, user, date);
+        myToken.setExpired(false);
+        verificationTokenRepository.save(myToken);
+    }
+
+    @Override
+    public VerificationToken getVerificationToken(String verificationToken){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Timestamp(cal.getTime().getTime()));
+        Date date=new Date(cal.getTime().getTime());
+        VerificationToken verificationToken1=verificationTokenRepository.findByToken(verificationToken);
+//        logger.debug("het han:"+verificationToken1.getExpiryDate().toString()+",hien tai:"+date.toString());
+        if(verificationToken1.getExpiryDate().before(date)){
+            verificationToken1.setExpired(true);
+        }
+        return verificationToken1;
+    }
+
+    @Override
+    public VerificationToken generateNewVerificationToken(final String existingVerificationToken){
+        VerificationToken verificationToken=verificationTokenRepository.findByToken(existingVerificationToken);
+        verificationToken.updateToken(UUID.randomUUID().toString());
+        verificationToken=verificationTokenRepository.save(verificationToken);
+        return verificationToken;
+    }
+
+//    public void deleteVerificationToken(final String existingVerificationToken){
+//        VerificationToken verificationToken=verificationTokenRepository.findByToken(existingVerificationToken);
+//        verificationTokenRepository.delete(verificationToken);
+//    }
 }

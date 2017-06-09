@@ -4,11 +4,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.entity.TrainerInfo;
 import org.fsoft.tms.entity.User;
+import org.fsoft.tms.event.OnRegistrationCompleteEvent;
 import org.fsoft.tms.service.PropertyService;
 import org.fsoft.tms.service.TopicService;
 import org.fsoft.tms.service.UserPropertyService;
 import org.fsoft.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,6 +38,9 @@ public class TrainerAccountController {
     @Autowired
     private TopicService topicService;
 
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
+
     @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
         model.addAttribute("listUser", userService.getAllUserByRole(3));
@@ -62,8 +67,10 @@ public class TrainerAccountController {
             model.addAttribute("error","Username is exited!");
             return "trainerAccount/add";
         }
+
         userService.addUser(trainerInfo.getUser(), 3, trainerInfo.getUser().getManager().getId());
         userService.saveTrainer(trainerInfo);
+        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(trainerInfo.getUser(), trainerInfo.getEmail()));
         return "redirect:/admin/trainer/";
     }
 

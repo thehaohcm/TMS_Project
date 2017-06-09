@@ -67,4 +67,10 @@ public interface UserService {
     void changeManagerTrainee(int userIdOld, int userIdNew);
 
     void changeManagerTrainer(int userIdOld, int userIdNew);
+
+    void createVerificationToken(User user, String token);
+
+    VerificationToken getVerificationToken(String verificationToken);
+
+    VerificationToken generateNewVerificationToken(final String existingVerificationToken);
 }
