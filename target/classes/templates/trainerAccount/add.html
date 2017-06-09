@@ -2,137 +2,11 @@
 
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Admin TMS</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
-    <!-- Bootstrap 3.3.5 -->
-
-    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css}"/>
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" th:href="@{https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css}"/>
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="../static/plugins/jvectormap/jquery-jvectormap-1.2.2.css" th:href="@{/plugins/jvectormap/jquery-jvectormap-1.2.2.css}"/>
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../static/dist/css/AdminLTE.min.css" th:href="@{/dist/css/AdminLTE.min.css}"/>
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../static/dist/css/skins/_all-skins.min.css" th:href="@{/dist/css/skins/_all-skins.min.css}"/>
-
-    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css}"/>
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" th:href="@{https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css}"/>
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="../static/plugins/jvectormap/jquery-jvectormap-1.2.2.css" th:href="@{/plugins/jvectormap/jquery-jvectormap-1.2.2.css}"/>
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../static/dist/css/AdminLTE.min.css" th:href="@{/dist/css/AdminLTE.min.css}"/>
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../static/dist/css/skins/_all-skins.min.css" th:href="@{/dist/css/skins/_all-skins.min.css}"/>
-
-</head>
+<head th:replace="layoutadmin :: head"></head>
 <body class="hold-transition skin-red sidebar-mini">
 <div class="wrapper">
-    <!--Header part of the indexwebpage -->
-    <header class="main-header">
-        <!-- Logo -->
-        <a  class="logo" th:href="@{/admin}">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>TMS</span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>TMS</span>
-        </a>
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top" role="navigation">
-            <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
-            <!-- Navbar Right Menu -->
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <!-- Tasks: style can be found in dropdown.less -->
-                    <!--<li class="dropdown tasks-menu">
-                        <a href="calendaradmin.html" class="button" th:href="@{calendaradmin.html}">
-                            <i class="fa fa-calendar"></i>
-                            <span class="label label-danger"></span>
-                        </a>
-                    </li>-->
-                    <!-- User Account: style can be found in dropdown.less -->
-                    <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="../../staic/dist/img/avatar.png" class="user-image" alt="User Image" th:src="@{/dist/img/avatar.png}"/>
-                            <span class="hidden-xs">Admin</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- User image -->
-                            <li class="user-header">
-                                <img src="../../staic/dist/img/avatar.png" class="img-circle" alt="User Image" th:src="@{/dist/img/avatar.png}"/>
-                                <p>
-                                    Admin
-                                </p>
-                            </li>
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div style="text-align:center" >
-                                    <a th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- Control Sidebar Toggle Button -->
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <!--Side bar part of the webpage  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-    <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="../../static/dist/img/avatar.png" class="img-circle" alt="User Image" th:src="@{/dist/img/avatar.png}"/>
-                </div>
-                <div class="pull-left info">
-                    <p>Admin</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i>Online</a>
-                </div>
-            </div>
-            <ul class="sidebar-menu">
-                <li class="header">Control Panel</li>
-                <li class="active treeview">
-                    <a th:href="@{/admin}">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-mortar-board"></i>
-                        <span>Admin</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a th:href="@{/admin/staff/}"><i class="fa fa-paper-plane"></i> Trainning Staff</a></li>
-                        <li><a th:href="@{/admin/trainer/}"><i class="fa fa-paper-plane"></i> Trainer</a></li>
-                    </ul>
-                </li>
-                <!--<li class="treeview">
-                    <a href="calendaradmin.html" th:href="calendaradmin.html">
-                        <i class="fa fa-calendar"></i> <span>Calendar</span>
-                    </a>
-                </li>-->
-            </ul>
-        </section>
-        <!-- /.sidebar -->
-    </aside>
+    <header th:replace="layoutadmin :: header"></header>
+    <aside th:replace="layoutadmin :: aside"></aside>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -224,33 +98,8 @@
         </section>
         <!-- /.content -->
     </div>
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 1.0
-        </div>
-        <strong>Copyright TMSGroup</strong> All rights reserved.
-    </footer>
+    <footer th:replace="layoutadmin :: footer"></footer>
 </div>
-<!-- jQuery 2.1.4 -->
-<script src="../static/plugins/jQuery/jQuery-2.1.4.min.js" th:src="@{/plugins/jQuery/jQuery-2.1.4.min.js}"></script>
-<!-- Bootstrap 3.3.5 -->
-<script src="../static/bootstrap/js/bootstrap.min.js" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" th:src="@{https://code.jquery.com/ui/1.11.4/jquery-ui.min.js}"></script>
-<!-- Slimscroll -->
-<script src="../static/plugins/slimScroll/jquery.slimscroll.min.js" th:src="@{/plugins/slimScroll/jquery.slimscroll.min.js}"></script>
-<!-- FastClick -->
-<script src="../static/plugins/fastclick/fastclick.min.js" th:src="@{/plugins/fastclick/fastclick.min.js}"></script>
-<!-- AdminLTE App -->
-<script src="../static/dist/js/app.min.js" th:src="@{/dist/js/app.min.js}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../static/dist/js/demo.js" th:src="@{/dist/js/demo.js}"></script>
-<!-- fullCalendar 2.2.5 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js}"></script>
-<script src="../static/plugins/fullcalendar/fullcalendar.min.js" th:src="@{/plugins/fullcalendar/fullcalendar.min.js}"></script>
-<!-- Page specific script -->
-
-
 </body>
 </html>
 
