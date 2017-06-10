@@ -30,7 +30,7 @@ import java.util.Iterator;
  * Created by DELL on 6/2/2017.
  */
 @Controller
-@RequestMapping(value = "/staff/trainee/excel")
+@RequestMapping(value = "/tms/trainees/excel")
 public class ExcelController {
 
     private String FILE_NAME = "";

@@ -123,6 +123,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/tms/courses/**/trainees/assignment").hasRole("AssignTraineeToCouse")
                 .antMatchers("/tms/courses/**/trainees/**/assign").hasRole("AssignTraineeToCouse")
                 .antMatchers("/tms/courses/**/trainees/**/delete").hasRole("AssignTraineeToCouse")
+                .antMatchers("/tms/trainees/excel").hasRole("ImportExcelFile")
+                .antMatchers("/tms/trainees/excel/*").hasRole("ImportExcelFile")
 //                    //Category
 //                .antMatchers("/staff/category/").hasRole("ViewSearchCourseCategory")
 //                .antMatchers("/staff/category/add").hasRole("AddCourseCategory")
