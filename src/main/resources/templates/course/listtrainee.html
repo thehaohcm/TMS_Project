@@ -41,7 +41,7 @@
                                                 <tr th:each="item, itemStat:${listTrainee}" th:if="${item.active}==true">
                                                     <td th:text="${itemStat.count}"></td>
                                                     <td th:text="${item.username}"></td>
-                                                    <td style="width:150px"><a type="button" class="btn btn-block btn-danger" th:href="@{/staff/course/trainee/delete/{traineeID}/{courseID}(traineeID=${item.id},courseID=${course.id})}" onclick="return confirm('Are you sure ?')" style="color:white;width: 100px">Delete</a></td>
+                                                    <td style="width:150px"><a type="button" class="btn btn-block btn-danger" th:href="@{/tms/courses/{courseID}/trainees/{traineeID}/delete(traineeID=${item.id},courseID=${course.id})}" onclick="return confirm('Are you sure ?')" style="color:white;width: 100px">Delete</a></td>
                                                 </tr>
                                             </table>
                                         </div>

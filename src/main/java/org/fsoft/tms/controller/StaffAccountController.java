@@ -20,13 +20,13 @@ import java.util.List;
  * Created by DELL on 5/31/2017.
  */
 @Controller
-@RequestMapping(value = "/admin/staff")
+@RequestMapping(value = "/tms/staffs")
 public class StaffAccountController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    CourseService courseService;
+    private CourseService courseService;
 
     @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
@@ -48,10 +48,10 @@ public class StaffAccountController {
             return "staffaccount/add";
         }
         userService.addUser(user, 2,1);
-        return "redirect:/admin/staff/";
+        return "redirect:/tms/staffs/";
     }
 
-    @RequestMapping(value = "/update/{id}")
+    @RequestMapping(value = "/{id}/update")
     public String getPageUpdate(@PathVariable String id, Model model) {
         User user = userService.findOneUser(Integer.parseInt(id));
         User user_temp=new User();
@@ -69,10 +69,10 @@ public class StaffAccountController {
         if(!user.getPassword().trim().equals("")&&!user1.getPassword().equals(encrypt_pass))
             userService.updateUser(user,true);
         userService.updateUser(user,false);
-        return "redirect:/admin/staff/";
+        return "redirect:/tms/staffs/";
     }
 
-    @RequestMapping(value = "/delete/{id}")
+    @RequestMapping(value = "/{id}/delete")
     public String deleteAccount(@PathVariable String id, Model model) {
         User user = userService.findOneUser(Integer.parseInt(id));
         List<User> listTrainee = userService.getAllUserByRoleAndManager(4, user.getId());
@@ -87,20 +87,20 @@ public class StaffAccountController {
         }
         else {
             userService.deleteUser(Integer.parseInt(id));
-            return "redirect:/admin/staff/";
+            return "redirect:/tms/staffs/";
         }
     }
 
-    @RequestMapping(value = "/deleteanywhere/{id}")
+    @RequestMapping(value = "/{id}/deleteanyway")
     public String deleteAnyWhere(@PathVariable String id, Model model) {
         courseService.changeManager(Integer.parseInt(id), 1);
         userService.changeManagerTrainee(Integer.parseInt(id), 1);
         userService.changeManagerTrainer(Integer.parseInt(id), 1);
         userService.deleteUser(Integer.parseInt(id));
-        return "redirect:/admin/staff/";
+        return "redirect:/tms/staffs/";
     }
 
-    @RequestMapping(value = "/change/{id}")
+    @RequestMapping(value = "/{id}/change")
     public String change(@PathVariable String id, Model model) {
         User user = userService.findOneUser(Integer.parseInt(id));
         model.addAttribute("user", user);
@@ -110,13 +110,13 @@ public class StaffAccountController {
         return "admin/changemanager";
     }
 
-    @RequestMapping(value = "/change/{userIdOld}/{userIdNew}")
+    @RequestMapping(value = "/{userIdOld}/managers/{userIdNew}/change")
     public String changeManager(@PathVariable String userIdOld, @PathVariable String userIdNew, Model model) {
         courseService.changeManager(Integer.parseInt(userIdOld), Integer.parseInt(userIdNew));
         userService.changeManagerTrainee(Integer.parseInt(userIdOld), Integer.parseInt(userIdNew));
         userService.changeManagerTrainer(Integer.parseInt(userIdOld), Integer.parseInt(userIdNew));
         userService.deleteUser(Integer.parseInt(userIdOld));
-        return "redirect:/admin/staff/";
+        return "redirect:/tms/staffs/";
     }
 }
 

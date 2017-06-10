@@ -13,6 +13,7 @@ import org.fsoft.tms.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -102,9 +103,18 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public List<Course> searchCourse(String input){
-        List<Course> courses=courseRepository.searchCourse(input);
-        return courses;
+    public List<Course> searchCourse(String input, User user){
+        List<Course> courses = courseRepository.searchCourse(input);
+        List<Course> courses1 = new ArrayList<>();
+        if(user.getRole().getId() != 1){
+            for(int i = 0; i < courses.size(); i++) {
+                if(courses.get(i).getStaff().getId()== user.getId())
+                    courses1.add(courses.get(i));
+            }
+            return courses1;
+        }
+        else
+            return courses;
     }
 
     @Override

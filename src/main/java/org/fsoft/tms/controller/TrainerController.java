@@ -22,37 +22,37 @@ import java.util.Set;
  * Created by DELL on 5/27/2017.
  */
 @Controller
-@RequestMapping(value = "/staff/trainer")
+@RequestMapping(value = "/tms/trainers")
 public class TrainerController
 {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    PropertyService propertyService;
+    private PropertyService propertyService;
 
     @Autowired
-    UserPropertyService userPropertyService;
+    private UserPropertyService userPropertyService;
 
     @Autowired
-    TopicService topicService;
+    private TopicService topicService;
 
     private final Logger logger = LogManager.getLogger();
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/view")
     public String getPageIndex(Model model) {
         model.addAttribute("listUser", userService.getAllUserByRoleAndManager(3, CurrentUser.getInstance().getUser().getId()));
         return "trainerProfile/index";
     }
 
-    @RequestMapping(value = "/profile/{id}")
+    @RequestMapping(value = "/{id}/profile")
     public String getPageProfile(@PathVariable String id, Model model) {
         User user = userService.findOneUser(Integer.parseInt(id));
         model.addAttribute("user", user);
         return "trainerProfile/profile";
     }
 
-    @RequestMapping(value = "/update/{id}")
+    @RequestMapping(value = "/{id}/profile/update")
     public String getPageUpdate(@PathVariable String id, Model model) {
         User user = userService.findOneUser(Integer.parseInt(id));
         TrainerInfo trainerInfo = new TrainerInfo();
@@ -76,7 +76,7 @@ public class TrainerController
     public String Update(@ModelAttribute TrainerInfo trainerInfo) {
         userService.saveTrainer(trainerInfo);
 
-        return "redirect:/staff/trainer/";
+        return "redirect:/tms/trainers/view";
     }
 
 //    @RequestMapping(value = "/update/{id}")

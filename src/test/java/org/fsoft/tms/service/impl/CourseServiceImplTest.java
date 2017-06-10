@@ -92,7 +92,7 @@ public class CourseServiceImplTest {
 
     @Test
     public void searchCourse() throws Exception {
-        List<Course> courses = courseService.searchCourse("ABC");
+        List<Course> courses = courseService.searchCourse("ABC", userService.findOneUser(2));
         assertEquals(1, courses.size());
     }
 

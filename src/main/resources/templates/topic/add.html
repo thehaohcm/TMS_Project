@@ -28,11 +28,11 @@
                                 <h1>Add Topic</h1>
                             </div>
                             <div class="box-body">
-                                <form action="#" th:action="@{/staff/topic/addTopic}" th:object="${topic}" method="post">
+                                <form action="#" th:action="@{/tms/topics/addTopic}" th:object="${topic}" method="post">
                                     <div class="input-group">
                                         <p>Course: </p>
                                         <select th:field="*{course}" class="form-control">
-                                            <option th:each="item:${listCourse}" th:value="${item.id}" th:text="${item.name}"></option>
+                                            <option th:each="item:${listCourse}" th:value="${item.id}" th:text="${item.name}" th:if="${item.active}"></option>
                                         </select>
                                         <p>Title: </p>
                                         <input required="" size="1200px" type="text" class="form-control" th:field="*{title}" placeholder="Name..."/>

@@ -24,10 +24,10 @@
                     <div class="box box-primary">
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h1>Add Category</h1>
+                                <h1>Add Course</h1>
                             </div>
                             <div class="box-body">
-                                <form action="#" th:action="@{/staff/course/addCourse}" th:object="${course}" method="post">
+                                <form action="#" th:action="@{/tms/courses/addCourse}" th:object="${course}" method="post">
                                     <div class="input-group">
                                         <p>Name: </p>
                                         <input required=""  type="text" th:field="*{name}" class="form-control" placeholder="Name..."/>
@@ -41,7 +41,7 @@
                                         </div>
                                         <p>Category</p>
                                         <select class="form-control" th:field="*{category}">
-                                            <option th:each="item:${listCategory}" th:value="${item.id}" th:text="${item.name}"></option>
+                                            <option th:each="item:${listCategory}" th:value="${item.id}" th:text="${item.name}"  th:if="${item.active}" ></option>
                                         </select>
                                     </div>
                                 </form>

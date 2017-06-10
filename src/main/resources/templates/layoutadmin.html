@@ -197,8 +197,8 @@
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <div style="text-align:center" >
-                                        <a href="#" th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
+                                    <div align="center" >
+                                        <a  th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -236,32 +236,35 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a th:href="@{/admin/staff/}"><i class="fa fa-paper-plane"></i> Trainning Staff</a></li>
-                            <li><a th:href="@{/admin/trainer/}"><i class="fa fa-paper-plane"></i> Trainer</a></li>
+                            <li><a th:href="@{/tms/staffs/}"><i class="fa fa-paper-plane"></i> Trainning Staff</a></li>
+                            <li><a th:href="@{/tms/trainers/}"><i class="fa fa-paper-plane"></i> Trainer</a></li>
+                            <li><a th:href="@{/tms/courses/}"><i class="fa fa-paper-plane"></i>Course</a></li>
+                            <li><a th:href="@{/tms/categories/}"><i class="fa fa-paper-plane"></i>Category</a></li>
+                            <li><a th:href="@{/tms/topics/}"><i class="fa fa-paper-plane"></i>Topic</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-mortar-board"></i>
-                            <span>Training Staff</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a th:href="@{/admin/staff/}"><i class="fa fa-paper-plane"></i> Trainning Staff</a></li>
-                            <li><a th:href="@{/admin/trainer/}"><i class="fa fa-paper-plane"></i> Trainer</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-mortar-board"></i>
-                            <span>Trainer</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a th:href="@{/admin/staff/}"><i class="fa fa-paper-plane"></i> Trainning Staff</a></li>
-                            <li><a th:href="@{/admin/trainer/}"><i class="fa fa-paper-plane"></i> Trainer</a></li>
-                        </ul>
-                    </li>
+                    <!--<li class="treeview">-->
+                        <!--<a href="#">-->
+                            <!--<i class="fa fa-mortar-board"></i>-->
+                            <!--<span>Training Staff</span>-->
+                            <!--<i class="fa fa-angle-left pull-right"></i>-->
+                        <!--</a>-->
+                        <!--<ul class="treeview-menu">-->
+                            <!--<li><a th:href="@{/admin/staff/}"><i class="fa fa-paper-plane"></i> Trainning Staff</a></li>-->
+                            <!--<li><a th:href="@{/admin/trainer/}"><i class="fa fa-paper-plane"></i> Trainer</a></li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                    <!--<li class="treeview">-->
+                        <!--<a href="#">-->
+                            <!--<i class="fa fa-mortar-board"></i>-->
+                            <!--<span>Trainer</span>-->
+                            <!--<i class="fa fa-angle-left pull-right"></i>-->
+                        <!--</a>-->
+                        <!--<ul class="treeview-menu">-->
+                            <!--<li><a th:href="@{/admin/staff/}"><i class="fa fa-paper-plane"></i> Trainning Staff</a></li>-->
+                            <!--<li><a th:href="@{/admin/trainer/}"><i class="fa fa-paper-plane"></i> Trainer</a></li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
 
                 </ul>
             </section>

@@ -41,7 +41,7 @@
                                                         <tr th:each="item,itemStat:${listStaff}" th:if="${item.active}==true">
                                                             <td th:text="${itemStat.count}"></td>
                                                             <td th:text="${item.username}"></td>
-                                                            <td style="width:150px"><a class="btn btn-block btn-warning" type="button" th:href="@{/admin/staff/change/{userIdOld}/{userIdNew}(userIdOld=${user.id},userIdNew=${item.id})}" style="width:50px;color:white">Change management</a></td>
+                                                            <td style="width:150px"><a class="btn btn-block btn-warning" type="button" th:href="@{/tms/staffs/{userIdOld}/managers/{userIdNew}/change(userIdOld=${user.id},userIdNew=${item.id})}" style="width:50px;color:white">Change management</a></td>
                                                         </tr>
                                                     </table>
                                                 </div>

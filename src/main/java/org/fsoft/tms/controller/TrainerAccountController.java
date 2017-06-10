@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by Isabella on 31-May-2017.
  */
 @Controller
-@RequestMapping(value = "/admin/trainer")
+@RequestMapping(value = "/tms/trainers")
 public class TrainerAccountController {
 
     private final Logger logger = LogManager.getLogger();
@@ -71,17 +71,17 @@ public class TrainerAccountController {
         userService.addUser(trainerInfo.getUser(), 3, trainerInfo.getUser().getManager().getId());
         userService.saveTrainer(trainerInfo);
         eventPublisher.publishEvent(new OnRegistrationCompleteEvent(trainerInfo.getUser(), trainerInfo.getEmail()));
-        return "redirect:/admin/trainer/";
+        return "redirect:/tms/trainers/";
     }
 
-    @RequestMapping(value="/profile/{id}")
+    @RequestMapping(value="/{id}/account")
     public String getPageProfile(@PathVariable String id, Model model){
         User user=userService.findOneUser(Integer.parseInt(id));
         model.addAttribute("trainer",user);
         return "trainerAccount/profile";
     }
 
-    @RequestMapping(value = "/update/{id}")
+    @RequestMapping(value = "/{id}/update")
     public String getPageUpdate(@PathVariable String id, Model model) {
         User user = userService.findOneUser(Integer.parseInt(id));
         User userTemp=new User();
@@ -114,13 +114,13 @@ public class TrainerAccountController {
         else
             userService.updateUser(trainerInfo.getUser(),false);
         userService.saveTrainer(trainerInfo);
-        return "redirect:/admin/trainer/";
+        return "redirect:/tms/trainers/";
     }
 
-    @RequestMapping(value = "/delete/{id}")
+    @RequestMapping(value = "/{id}/delete")
     public String deleteAccount(@PathVariable String id, Model model) {
         userService.deleteUser(Integer.parseInt(id));
         topicService.unAssignTopicToTrainer(userService.findOneUser(Integer.parseInt(id)));
-        return "redirect:/admin/trainer/";
+        return "redirect:/tms/trainers/";
     }
 }

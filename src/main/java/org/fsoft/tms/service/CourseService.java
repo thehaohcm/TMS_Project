@@ -31,7 +31,7 @@ public interface CourseService {
 
     void deleteCourse(int id);
 
-    public List<Course> searchCourse(String input);
+    List<Course> searchCourse(String input, User user);
 
     void changeManager(int userIdOld, int userIdNew);
 }

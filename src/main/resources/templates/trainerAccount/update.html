@@ -34,9 +34,9 @@
                     </div><!-- /.box -->
                     <div class="box box-primary">
                         <section class="content">
-                            <form  th:action="@{/admin/trainer/update}" th:object="${trainer}" method="post">
+                            <form  th:action="@{/tms/trainers/update}" th:object="${trainer}" method="post">
                                 <div class="input-group">
-                                    <label>User name: </label>
+                                    <!--<label>User name: </label>-->
                                     <div class="form-group ">
                                         <input style="width: 1250px" th:field="*{user.id}" type="hidden" class="form-control" placeholder="User name" required=""/>
                                         <input style="width: 1250px" th:field="*{user.username}" type="hidden" class="form-control" placeholder="User name" required=""/>

@@ -100,7 +100,7 @@ public class TopicServiceImplTest {
 
     @Test
     public void searchTopic() throws Exception {
-        List<Topic> topics = topicService.searchTopic("ABC");
+        List<Topic> topics = topicService.searchTopic("ABC", userService.findOneUser(3));
         assertEquals(1, topics.size());
     }
 
