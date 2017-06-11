@@ -110,8 +110,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/demo/**").denyAll()
                 .antMatchers("/tms/**").denyAll()
 
-                .antMatchers("/register/**").hasRole("Login")
-
                 .and()
                 .formLogin()
                     .loginPage("/login")
