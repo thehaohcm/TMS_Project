@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,7 +55,35 @@ public class TraineeController {
             name = auth.getName();
         }
         User user = loginService.findUserByUsername(name);
-        model.addAttribute("listTrainee",userService.getAllUserByRoleAndManager(4, user.getId()));
+        List<User> arr;
+        if(user.getRole().getName().equals("ROLE_ADMIN"))
+            arr = userService.getAllUserByRole(4);
+        else
+            arr = userService.getAllUserByRoleAndManager(4,user.getId());
+        List<TraineeInfo> listTrainee = new ArrayList<>();
+        for(int i = 0; i < arr.size(); i++) {
+            TraineeInfo traineeInfo = new TraineeInfo();
+            User u = arr.get(i);
+            traineeInfo.setUser(u);
+            traineeInfo.setName(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(1)).getValue());
+            traineeInfo.setBirthDate(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(2)).getValue());
+            traineeInfo.setEducation(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(3)).getValue());
+            traineeInfo.setProgrammingLanguage(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(4)).getValue());
+            traineeInfo.setToeicScore(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(5)).getValue());
+            traineeInfo.setExperienceDetail(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(6)).getValue());
+            traineeInfo.setDepartment(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(7)).getValue());
+            traineeInfo.setLocation(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(12)).getValue());
+            listTrainee.add(traineeInfo);
+        }
+        model.addAttribute("listTrainee",listTrainee);
         return "trainee/index";
     }
 
@@ -70,7 +99,31 @@ public class TraineeController {
             user =loginService.findUserByUsername(name);
             model.addAttribute("role", user.getRole());
         }
-        model.addAttribute("listTrainee", userService.search(q, 4, user));
+        List<User> arr = userService.search(q, 4, user);
+        List<TraineeInfo> listTrainee = new ArrayList<>();
+        for(int i = 0; i < arr.size(); i++) {
+            TraineeInfo traineeInfo = new TraineeInfo();
+            User u = arr.get(i);
+            traineeInfo.setUser(u);
+            traineeInfo.setName(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(1)).getValue());
+            traineeInfo.setBirthDate(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(2)).getValue());
+            traineeInfo.setEducation(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(3)).getValue());
+            traineeInfo.setProgrammingLanguage(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(4)).getValue());
+            traineeInfo.setToeicScore(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(5)).getValue());
+            traineeInfo.setExperienceDetail(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(6)).getValue());
+            traineeInfo.setDepartment(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(7)).getValue());
+            traineeInfo.setLocation(userPropertyService.getUserProperty(u,
+                    propertyService.findOneProperty(12)).getValue());
+            listTrainee.add(traineeInfo);
+        }
+        model.addAttribute("listTrainee",listTrainee);
         return "trainee/index";
     }
 

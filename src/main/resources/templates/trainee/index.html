@@ -43,17 +43,33 @@
                                             <table class="table table-bordered">
                                                 <tr>
                                                     <td style="width: 50px" >No</td>
-                                                    <td style="width: 500px">Username</td>
+                                                    <td>Username</td>
+                                                    <td>Name</td>
+                                                    <td>Birthday</td>
+                                                    <td>Education</td>
+                                                    <td>Programming Language</td>
+                                                    <td>Experience Details</td>
+                                                    <td>Toiec Score</td>
+                                                    <td>Department</td>
+                                                    <td>Location</td>
                                                     <td style="width:150px">Information</td>
                                                     <td style="width:150px">Update</td>
                                                     <td style="width:150px">Delete</td>
                                                 </tr>
-                                                <tr th:each="item,itemStat:${listTrainee}" th:if="${item.active}==true">
+                                                <tr th:each="item,itemStat:${listTrainee}" th:if="${item.user.active}==true">
                                                     <td style="width: 50px" th:text="${itemStat.count}"></td>
-                                                    <td style="width: 500px" th:text="${item.username}"></td>
-                                                    <td style="width:150px"><a class="btn btn-block btn-info" type="button" th:href="@{/tms/trainees/{id}/profile(id=${item.id})}" style="width:100px;color:white">Information</a></td>
-                                                    <td style="width:150px"><a class="btn btn-block btn-info" type="button" th:href="@{/tms/trainees/{id}/update(id=${item.id})}" style="width:100px;color:white">Update</a></td>
-                                                    <td style="width:150px"><a class="btn btn-block btn-danger"  type="button" onclick="return confirm('Are you sure ?')" th:href="@{/tms/trainees/{id}/delete(id=${item.id})}" style="width:100px;color:white">Delete</a></td>
+                                                    <td th:text="${item.user.username}"></td>
+                                                    <td th:text="${item.name}"></td>
+                                                    <td th:text="${item.birthDate}"></td>
+                                                    <td th:text="${item.education}"></td>
+                                                    <td th:text="${item.programmingLanguage}"></td>
+                                                    <td th:text="${item.experienceDetail}"></td>
+                                                    <td th:text="${item.toeicScore}"></td>
+                                                    <td th:text="${item.department}"></td>
+                                                    <td th:text="${item.location}"></td>
+                                                    <td style="width:150px"><a class="btn btn-block btn-info" type="button" th:href="@{/tms/trainees/{id}/profile(id=${item.user.id})}" style="width:100px;color:white">Information</a></td>
+                                                    <td style="width:150px"><a class="btn btn-block btn-info" type="button" th:href="@{/tms/trainees/{id}/update(id=${item.user.id})}" style="width:100px;color:white">Update</a></td>
+                                                    <td style="width:150px"><a class="btn btn-block btn-danger"  type="button" onclick="return confirm('Are you sure ?')" th:href="@{/tms/trainees/{id}/delete(id=${item.user.id})}" style="width:100px;color:white">Delete</a></td>
                                                 </tr>
                                                 <tr>
                                                     <a class="btn btn-block btn-success" style="width:150px; color:white" th:href="@{/tms/trainees/add}">Add Trainee</a>
