@@ -64,13 +64,6 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public void addTrainingStaff() {
-        Course temp = courseRepository.findOne(2);
-        temp.setStaff(userRepository.findOne(1));
-        courseRepository.save(temp);
-    }
-
-    @Override
     public void addTrainees(int courseID, int traineeID) {
         Course temp = courseRepository.findOne(courseID);
         Set<User> arr = temp.getTrainees();
@@ -103,12 +96,12 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public List<Course> searchCourse(String input, User user){
+    public List<Course> searchCourse(String input, User u){
         List<Course> courses = courseRepository.searchCourse(input);
         List<Course> courses1 = new ArrayList<>();
-        if(user.getRole().getId() != 1){
+        if(!u.getRole().getName().equals("ROLE_ADMIN")){
             for(int i = 0; i < courses.size(); i++) {
-                if(courses.get(i).getStaff().getId()== user.getId())
+                if(courses.get(i).getStaff().getId()== u.getId())
                     courses1.add(courses.get(i));
             }
             return courses1;

@@ -115,7 +115,7 @@ public class TopicServiceImpl implements TopicService{
     public List<Topic> searchTopic(String input,User user){
         List<Topic> topics = topic.searchTopic(input);
         List<Topic> topics1 = new ArrayList<>();
-        if(user.getRole().getId() != 1){
+        if(!user.getRole().getName().equals("ROLE_ADMIN")){
             for (Topic t: topics) {
                 if(t.getCourse().getStaff().getId() == user.getId())
                     topics1.add(t);

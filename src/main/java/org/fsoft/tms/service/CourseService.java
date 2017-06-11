@@ -23,8 +23,6 @@ public interface CourseService {
 
     void updateCourse(Course c);
 
-    void addTrainingStaff();
-
     void addTrainees(int courseID, int traineeID);
 
     void deleteTrainee(int courseID, int traineeID);

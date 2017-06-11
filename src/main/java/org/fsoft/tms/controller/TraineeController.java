@@ -63,7 +63,14 @@ public class TraineeController {
         if (q.equals("")) {
             return "redirect:/tms/trainees/";
         }
-        model.addAttribute("listTrainee", userService.search(q, 4));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = null;
+        if (auth != null) {
+            String name = auth.getName();
+            user =loginService.findUserByUsername(name);
+            model.addAttribute("role", user.getRole());
+        }
+        model.addAttribute("listTrainee", userService.search(q, 4, user));
         return "trainee/index";
     }
 

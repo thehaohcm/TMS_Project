@@ -392,6 +392,42 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> search(String value, int roleID, User manager) {
+        List<UserProperty> arr = userPropertyRepository.getUserProperties(value);
+        int size = arr.size();
+        List<User> arr_temp = new ArrayList<>();
+        if (size > 0) {
+            arr_temp.add(arr.get(0).getUser());
+            for (int i = 1; i < arr.size(); i++) {
+                int z = 0;
+                for (int j = 0; j < arr_temp.size(); j++) {
+                    if (arr.get(i).getUser().getId() != arr_temp.get(j).getId())
+                        z++;
+                    else
+                        break;
+                }
+                if (z == arr_temp.size())
+                    arr_temp.add(arr.get(i).getUser());
+            }
+        }
+
+        List<User> trainee = new ArrayList<>();
+        if(manager.getRole().getName().equals("ROLE_ADMIN")){
+            for (User u : arr_temp) {
+                if (u.getRole().getId() == roleID)
+                    trainee.add(u);
+            }
+            return trainee;
+        }else {
+            for (User u : arr_temp) {
+                if (u.getRole().getId() == roleID && u.getManager().getId() == manager.getId())
+                    trainee.add(u);
+            }
+            return trainee;
+        }
+    }
+
+    @Override
     public boolean checkUsername(String username){
         int count=userRepository.countByUsername(username);
         logger.debug("count: "+count);

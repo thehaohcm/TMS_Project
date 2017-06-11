@@ -56,6 +56,8 @@ public interface UserService {
 
     List<User> search(String value, int roleID);
 
+    List<User> search(String value, int roleID, User staff);
+
     Set<UserProperty> setTraineeProperty(User user,String name,String birthDate,String education,
                                          String programmingLanguage,String toeicScore,String experimentDetail,
                                          String department,String location);
