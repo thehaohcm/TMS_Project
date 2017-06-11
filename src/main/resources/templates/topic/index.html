@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="layoutstaff :: head"></head>
-<body class="hold-transition skin-purple sidebar-mini">
+<body th:attr="class=${role.id==2 ? 'hold-transition skin-purple sidebar-mini' : ''}"
+      th:attrappend="class=${role.id==1 ? 'hold-transition skin-red sidebar-mini' : ''}">
 <div class="wrapper">
     <th:block th:if="${role.id}==2" th:remove="tag">
         <header th:replace="layoutstaff :: header"></header>
