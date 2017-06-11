@@ -20,23 +20,23 @@ import java.util.Set;
  * Created by Isabella on 30-May-2017.
  */
 @Controller
-@RequestMapping(value = "/trainer")
+@RequestMapping(value = "/tms")
 public class TrainersController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    UserPropertyService userPropertyService;
+    private UserPropertyService userPropertyService;
 
     @Autowired
-    PropertyService propertyService;
+    private PropertyService propertyService;
 
     @Autowired
-    TopicService topicService;
+    private TopicService topicService;
 
     @Autowired
-    CourseService courseService;
+    private CourseService courseService;
 
     private final Logger logger = LogManager.getLogger();
 
@@ -66,21 +66,21 @@ public class TrainersController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/topic")
+    @RequestMapping(value = "/trainer/topics")
     public String getListTopic(Model model) {
         CurrentUser currentUser = CurrentUser.getInstance();
         model.addAttribute("listTopic", topicService.findAllTopicByTrainer(currentUser.getUser()));
         return "trainer/topic";
     }
 
-    @RequestMapping(value = "/course")
+    @RequestMapping(value = "/trainer/courses")
     public String getListCourse(Model model) {
         CurrentUser currentUser = CurrentUser.getInstance();
         model.addAttribute("listCourse", topicService.findAllCourseOfUser(currentUser.getUser()));
         return "trainer/course";
     }
 
-    @RequestMapping(value = "/course/listTopic/{id}")
+    @RequestMapping(value = "/trainer/courses/{id}/topics")
     public String getListTopicCourse(@PathVariable String id, Model model) {
         CurrentUser currentUser = CurrentUser.getInstance();
         Course course = courseService.findOneCourse(Integer.parseInt(id));

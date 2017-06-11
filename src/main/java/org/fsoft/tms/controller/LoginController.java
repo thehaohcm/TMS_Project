@@ -25,13 +25,13 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController {
 
     @Autowired
-    LoginService loginService;
+    private LoginService loginService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
@@ -43,11 +43,15 @@ public class LoginController {
             Role role = currentUser.getUser().getRole();
             switch(role.getName()){
                 case "ROLE_ADMIN":
-                    return "redirect:/admin";
+                    //return "redirect:/admin";
+                    return "admin/index";
                 case "ROLE_TS":
-                    return "redirect:/staff";
+                    //return "redirect:/staff";
+                    return "staff/index";
                 case "ROLE_TER":
-                    return "redirect:/trainer";
+                    //return "redirect:/trainer";
+                    model.addAttribute("user", loginService.findUserByUsername(name));
+                    return "trainer/index";
                 case "ROLE_TEE":
                     return "logout";
             }

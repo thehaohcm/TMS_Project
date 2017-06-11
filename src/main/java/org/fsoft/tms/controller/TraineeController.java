@@ -7,11 +7,10 @@ import org.fsoft.tms.entity.Course;
 import org.fsoft.tms.entity.Property;
 import org.fsoft.tms.entity.TraineeInfo;
 import org.fsoft.tms.entity.User;
-import org.fsoft.tms.service.CourseService;
-import org.fsoft.tms.service.PropertyService;
-import org.fsoft.tms.service.UserPropertyService;
-import org.fsoft.tms.service.UserService;
+import org.fsoft.tms.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,47 +25,56 @@ import java.util.Set;
  * Created by thehaohcm on 5/30/17.
  */
 @Controller
-@RequestMapping(value="/staff/trainee")
+@RequestMapping(value="/tms/trainees")
 public class TraineeController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    PropertyService propertyService;
+    private PropertyService propertyService;
 
 
     @Autowired
-    UserPropertyService userPropertyService;
+    private UserPropertyService userPropertyService;
 
     @Autowired
-    CourseService courseService;
+    private LoginService loginService;
+
+    @Autowired
+    private CourseService courseService;
 
     private final Logger logger = LogManager.getLogger();
 
     @RequestMapping(value="/")
     public String getPageIndex(Model model){
-        model.addAttribute("listTrainee",userService.getAllUserByRole(4));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = "";
+        if (auth != null) {
+            name = auth.getName();
+        }
+        User user = loginService.findUserByUsername(name);
+        model.addAttribute("listTrainee",userService.getAllUserByRoleAndManager(4, user.getId()));
         return "trainee/index";
     }
 
     @GetMapping("/search")
     public String search(@RequestParam("q") String q, Model model) {
         if (q.equals("")) {
-            return "redirect:/staff/trainee/";
+            return "redirect:/tms/trainees/";
         }
         model.addAttribute("listTrainee", userService.search(q, 4));
         return "trainee/index";
     }
 
-    @RequestMapping(value="/profile/{id}")
+    @RequestMapping(value="/{id}/profile")
     public String getPageProfile(@PathVariable String id, Model model){
         User user=userService.findOneUser(Integer.parseInt(id));
         model.addAttribute("trainee",user);
         return "trainee/profile";
     }
 
-    @RequestMapping(value = "/update/{id}")
+    @RequestMapping(value = "/{id}/update")
     public String getPageUpdate(@PathVariable String id, Model model) {
         User user = userService.findOneUser(Integer.parseInt(id));
         User userTemp=new User();
@@ -95,7 +103,7 @@ public class TraineeController {
         return "trainee/update";
     }
 
-    @RequestMapping(value="/updateProfile")
+    @RequestMapping(value="/update")
     public String updateProfile(@ModelAttribute TraineeInfo traineeInfo){
         User user=userService.findOneUser(traineeInfo.getUser().getId());
         String encryptedPass= userService.encode(traineeInfo.getUser().getPassword());
@@ -104,7 +112,7 @@ public class TraineeController {
         else
             userService.updateUser(traineeInfo.getUser(),false);
         userService.saveTrainee(traineeInfo);
-        return "redirect:/staff/trainee/";
+        return "redirect:/tms/trainees/";
     }
 
     @RequestMapping(value="/add")
@@ -127,23 +135,23 @@ public class TraineeController {
         }
         userService.addTrainee(traineeInfo.getUser(), CurrentUser.getInstance().getUser().getId());
         userService.saveTrainee(traineeInfo);
-        return "redirect:/staff/trainee/";
+        return "redirect:/tms/trainees/";
     }
 
-    @RequestMapping(value="/delete/{id}")
+    @RequestMapping(value="/{id}/delete")
     public String deleteTrainee(@PathVariable String id){
         User user=userService.findOneUser(Integer.parseInt(id));
         user.setActive(false);
         userService.unAssignTraineeToCourse(Integer.parseInt(id));
         userService.saveUser(user);
-        return "redirect:/staff/trainee/";
+        return "redirect:/tms/trainees/";
     }
 
-    @RequestMapping(value="/recover/{id}")
+    @RequestMapping(value="/{id}/recover")
     public String recoverTrainee(@PathVariable String id){
         User user=userService.findOneUser(Integer.parseInt(id));
         user.setActive(true);
         userService.saveUser(user);
-        return "redirect:/staff/trainee/";
+        return "redirect:/tms/trainees/";
     }
 }

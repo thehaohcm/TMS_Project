@@ -33,7 +33,7 @@ public interface TopicService {
 
     void addTrainerToTopic(int topicID, int trainerID);
 
-    public List<Topic> searchTopic(String input);
+    List<Topic> searchTopic(String input, User user);
 
     void unAssignTopicToTrainer(User user);
 }

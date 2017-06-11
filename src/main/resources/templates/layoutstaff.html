@@ -167,7 +167,7 @@
     <!--Header part of the indexwebpage -->
     <header th:fragment="header" class="main-header">
         <!-- Logo -->
-        <a th:href="@{/tms}" class="logo">
+        <a th:href="@{/staff}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>ST</b> TMS</span>
             <!-- logo for regular state and mobile devices -->
@@ -206,11 +206,9 @@
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                            <li class="user-footer">
                                 <div align="center" >
                                     <a  th:href="@{/logout}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
-                            </li>
                             </li>
                         </ul>
                     </li>
@@ -235,7 +233,7 @@
             <ul class="sidebar-menu">
                 <li class="header">Control Panel</li>
                 <li class="active treeview">
-                    <a th:href="@{/tms}">
+                    <a th:href="@{/staff}">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
@@ -247,8 +245,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a th:href="@{/tms/trainees/}"><i class="fa fa-paper-plane"></i>Trainee</a></li>
-                        <li><a th:href="@{/tms/trainers/}"><i class="fa fa-paper-plane"></i>Trainer profile</a></li>
-                        <li><a th:href="@{/tms/courses/}"><i class="fa fa-paper-plane"></i>Courses</a></li>
+                        <li><a th:href="@{/tms/trainers/view}"><i class="fa fa-paper-plane"></i>Trainer profile</a></li>
+                        <li><a th:href="@{/tms/courses/}"><i class="fa fa-paper-plane"></i>Course</a></li>
                         <li><a th:href="@{/tms/categories/}"><i class="fa fa-paper-plane"></i>Category</a></li>
                         <li><a th:href="@{/tms/topics/}"><i class="fa fa-paper-plane"></i>Topic</a></li>
                     </ul>

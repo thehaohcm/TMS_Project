@@ -27,7 +27,7 @@
                                 <h1>Update Courses</h1>
                             </div>
                             <div class="box-body">
-                                <form action="#" th:action="@{/staff/course/updateCourse}" th:object="${course}" method="get">
+                                <form action="#" th:action="@{/tms/courses/update}" th:object="${course}" method="get">
                                     <div class="input-group">
                                         <input size="1200px" type="hidden" th:field="*{id}" class="form-control"/>
                                         <p>Name: </p>

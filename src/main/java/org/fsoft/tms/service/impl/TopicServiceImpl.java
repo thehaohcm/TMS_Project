@@ -112,9 +112,18 @@ public class TopicServiceImpl implements TopicService{
     }
 
     @Override
-    public List<Topic> searchTopic(String input){
+    public List<Topic> searchTopic(String input,User user){
         List<Topic> topics = topic.searchTopic(input);
-        return topics;
+        List<Topic> topics1 = new ArrayList<>();
+        if(user.getRole().getId() != 1){
+            for (Topic t: topics) {
+                if(t.getCourse().getStaff().getId() == user.getId())
+                    topics1.add(t);
+            }
+            return topics1;
+        }
+        else
+            return topics;
     }
 
     @Override
@@ -129,4 +138,5 @@ public class TopicServiceImpl implements TopicService{
         u.getTopics().clear();
         userRepository.save(u);
     }
+
 }

@@ -28,7 +28,7 @@
                                 <h1>Update Topic</h1>
                             </div>
                             <div class="box-body">
-                                <form action="#" th:action="@{/staff/topic/updateTopic}" th:object="${topic}" method="post">
+                                <form action="#" th:action="@{/tms/topics/update}" th:object="${topic}" method="post">
                                     <div class="input-group">
                                         <input size="1200px" type="hidden" class="form-control" th:field="*{id}"/>
                                         <p>Title: </p>

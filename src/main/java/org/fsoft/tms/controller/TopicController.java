@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,35 +25,47 @@ import java.util.List;
  * Created by DELL on 5/27/2017.
  */
 @Controller
-@RequestMapping(value = "/staff/topic")
+@RequestMapping(value = "/tms/topics")
 public class TopicController {
 
     private final Logger logger = LogManager.getLogger();
 
     @Autowired
-    CourseService courseService;
+    private CourseService courseService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    UserPropertyService userPropertyService;
+    private UserPropertyService userPropertyService;
 
     @Autowired
-    PropertyService propertyService;
+    private PropertyService propertyService;
 
     @Autowired
-    TopicService topicService;
+    private TopicService topicService;
 
     @Autowired
-    MailSender mailSender;
+    private LoginService loginService;
+
+    @Autowired
+    private MailSender mailSender;
 
     @Autowired
     private ApplicationEventPublisher eventPublisher;
 
     @RequestMapping(value = "/")
     public String getPageIndex(Model model) {
-        model.addAttribute("listTopic", topicService.getAllTopicByStaff());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            String name = auth.getName();
+            User user =loginService.findUserByUsername(name);
+            model.addAttribute("role", user.getRole());
+            if(user.getRole().getId() == 2)
+                model.addAttribute("listTopic", topicService.getAllTopicByStaff());
+            else
+                model.addAttribute("listTopic", topicService.getAllTopic());
+        }
         return "topic/index";
     }
 
@@ -66,29 +80,29 @@ public class TopicController {
     public String getPageAdd(@ModelAttribute Topic topic) {
         topic.setActive(true);
         topicService.addTopic(topic);
-        return "redirect:/staff/topic/";
+        return "redirect:/tms/topics/";
     }
 
-    @RequestMapping(value = "/update/{id}")
+    @RequestMapping(value = "/{id}/update")
     public String getPageAdd(@PathVariable String id, Model model) {
         Topic topic = topicService.finOneById(Integer.parseInt(id));
         model.addAttribute("topic", topic);
         return "topic/update";
     }
 
-    @RequestMapping(value = "/updateTopic")
+    @RequestMapping(value = "/update")
     public String update(@ModelAttribute Topic topic) {
         topicService.updateTopic(topic);
-        return "redirect:/staff/topic/";
+        return "redirect:/tms/topics/";
     }
 
-    @RequestMapping(value = "/delete/{id}")
+    @RequestMapping(value = "/{id}/delete")
     public String getPageDelete(@PathVariable String id) {
         topicService.deleteTopic(Integer.parseInt(id));
-        return "redirect:/staff/topic/";
+        return "redirect:/tms/topics/";
     }
 
-    @RequestMapping(value = "/trainer/{id}")
+    @RequestMapping(value = "/{id}/trainers")
     public String addTrainer(@PathVariable String id, Model model) {
         model.addAttribute("topic", topicService.finOneById(Integer.parseInt(id)));
         List<User> arr =  userService.getAllUserByRoleAndManager(3, CurrentUser.getInstance().getUser().getId());
@@ -96,7 +110,7 @@ public class TopicController {
         return "topic/addtrainer";
     }
 
-    @RequestMapping(value = "/trainer/change/{id}")
+    @RequestMapping(value = "/{id}/trainers/change")
     public String changeTrainer(@PathVariable String id, Model model) {
         Topic topic = topicService.finOneById(Integer.parseInt(id));
         model.addAttribute("topic", topic);
@@ -106,16 +120,15 @@ public class TopicController {
         return "topic/addtrainer";
     }
 
-    @RequestMapping(value="/trainer/{trainerID}/{topicID}")
+    @RequestMapping(value="/{topicID}/trainers/{trainerID}")
     public String adđTrainerToTopic(@PathVariable("trainerID") String trainerID, @PathVariable("topicID") String topicID, Model model) {
 
-//        logger.debug("ahihi");
         try{
             eventPublisher.publishEvent(new OnAssignTopicCompleteEvent(Integer.parseInt(trainerID), Integer.parseInt(topicID)));
             topicService.addTrainerToTopic(Integer.parseInt(topicID), Integer.parseInt(trainerID));
         }catch (Exception ex)
         {
-            logger.debug("ahihi");
+            logger.debug("problem here!");
         }
 
 //        String email = userPropertyService.getUserProperty(userService.findOneUser(Integer.parseInt(trainerID)), propertyService.findOneProperty(10)).getValue();
@@ -142,14 +155,21 @@ public class TopicController {
 //            mailSender.send(message);
 //            ex.printStackTrace();
 //        }
-        return "redirect:/staff/topic/";
+        return "redirect:/tms/topics/";
     }
 
     @RequestMapping(value="/search")
     public String searchTopicStaff(@RequestParam String q, Model model){
         if(q.equals(""))
-            return "redirect:/staff/topic/";
-        model.addAttribute("listTopic",topicService.searchTopic(q));
+            return "redirect:/tms/topics/";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = null;
+        if (auth != null) {
+            String name = auth.getName();
+            user =loginService.findUserByUsername(name);
+            model.addAttribute("role", user.getRole());
+        }
+        model.addAttribute("listTopic",topicService.searchTopic(q, user));
         return "topic/index";
     }
 }
