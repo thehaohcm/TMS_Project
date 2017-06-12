@@ -70,7 +70,7 @@
                                                     <td th:if="${role.id}==2" style="width:150px"><a class="btn btn-block btn-danger"  type="button" th:href="@{/tms/topics/{id}/delete(id=${item.id})}" style="width:100px;color:white" onclick="return confirm('Are you sure ?')">Delete</a></td>
                                                 </tr>
                                                 <tr>
-                                                    <a class="btn btn-block btn-success" style="width:100px; color:white" th:href="@{/tms/topics/add}">Add Topic</a>
+                                                    <a th:if="${role.id}==2" class="btn btn-block btn-success" style="width:100px; color:white" th:href="@{/tms/topics/add}">Add Topic</a>
                                                 </tr>
                                             </table>
                                         </div>
