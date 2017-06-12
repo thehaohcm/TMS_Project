@@ -8,6 +8,9 @@ import org.fsoft.tms.repository.TopicRepository;
 import org.fsoft.tms.repository.UserRepository;
 import org.fsoft.tms.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,9 +28,12 @@ public class TopicServiceImpl implements TopicService{
     @Autowired
     UserRepository userRepository;
 
+    private final static int PAGESIZE = 4;
+
     @Override
     public List<Topic> getAllTopic() {
-        return topic.findAll();
+        PageRequest request = new PageRequest(2, PAGESIZE, Sort.Direction.ASC, "id");
+        return topic.findAll(request).getContent();
     }
 
     @Override
