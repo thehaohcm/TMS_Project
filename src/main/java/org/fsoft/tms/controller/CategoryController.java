@@ -3,8 +3,10 @@ package org.fsoft.tms.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.entity.Category;
+import org.fsoft.tms.entity.Course;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.service.CategoryService;
+import org.fsoft.tms.service.CourseService;
 import org.fsoft.tms.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by DELL on 5/23/2017.
@@ -26,6 +29,9 @@ public class CategoryController {
     private final Logger logger = LogManager.getLogger();
     @Autowired
     private CategoryService category;
+
+    @Autowired
+    private CourseService courseService;
 
     @Autowired
     private LoginService loginService;
@@ -71,9 +77,15 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/{id}/delete")
-    public String deleteCatogory(@PathVariable String id) {
-//        logger.debug("vao rui");
-        category.deleteCategory(Integer.parseInt(id));
+    public String deleteCatogory(@PathVariable String id, Model model) {
+        Category temp = category.findOneCategory(Integer.parseInt(id));
+        List<Course> arrCourse = courseService.getAllCourseByCategory(temp);
+        if(arrCourse.size() > 0) {
+            model.addAttribute("listCourse", arrCourse);
+            return "category/coursedelete";
+        }
+        else
+            category.deleteCategory(Integer.parseInt(id));
         return "redirect:/tms/categories/";
     }
 
