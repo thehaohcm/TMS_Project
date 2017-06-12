@@ -83,6 +83,7 @@ public class TraineeController {
                     propertyService.findOneProperty(12)).getValue());
             listTrainee.add(traineeInfo);
         }
+        model.addAttribute("role",user.getRole());
         model.addAttribute("listTrainee",listTrainee);
         return "trainee/index";
     }
@@ -123,6 +124,7 @@ public class TraineeController {
                     propertyService.findOneProperty(12)).getValue());
             listTrainee.add(traineeInfo);
         }
+        model.addAttribute("role",user.getRole());
         model.addAttribute("listTrainee",listTrainee);
         return "trainee/index";
     }
