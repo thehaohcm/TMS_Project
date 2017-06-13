@@ -112,7 +112,7 @@ public class ExcelController {
             FILE_NAME = UPLOADED_FOLDER + file.getOriginalFilename();
 
             Files.write(path, bytes);
-            return "redirect:/staff/trainee/excel/read";
+            return "redirect:/tms/trainees/excel/read";
         } catch (IOException e) {
             redirectAttributes.addFlashAttribute("messages",
                     "You failed uploaded '" + file.getOriginalFilename() + "'");
