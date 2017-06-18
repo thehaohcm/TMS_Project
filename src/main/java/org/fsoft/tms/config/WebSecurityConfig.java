@@ -103,6 +103,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/tms/trainees/**/profile").hasRole("UpdateTraineeAccount")
                 .antMatchers("/tms/trainees/**/delete").hasRole("DeleteTraineeAccount")
                 .antMatchers("/tms/trainees/**/recover").hasRole("DeleteTraineeAccount")
+                //Trainer
+                .antMatchers("/tms/trainers/view").hasRole("EditTrainerProfile")
+                .antMatchers("/tms/trainers/**/profile").hasRole("EditTrainerProfile")
+                .antMatchers("/tms/trainers/**/profile/updateProfile").hasRole("EditTrainerProfile")
+                .antMatchers("/tms/trainers/updateProfile").hasRole("EditTrainerProfile")
 //                    //Course
 //                .antMatchers("/staff/course/").hasRole("ViewSearchCourse")
 //                .antMatchers("/staff/course/add").hasRole("AddCourse")

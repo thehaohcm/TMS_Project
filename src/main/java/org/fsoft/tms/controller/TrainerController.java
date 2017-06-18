@@ -52,7 +52,7 @@ public class TrainerController
         return "trainerProfile/profile";
     }
 
-    @RequestMapping(value = "/{id}/profile/update")
+    @RequestMapping(value = "/{id}/profile/updateProfile")
     public String getPageUpdate(@PathVariable String id, Model model) {
         User user = userService.findOneUser(Integer.parseInt(id));
         TrainerInfo trainerInfo = new TrainerInfo();
