@@ -16,6 +16,7 @@ public interface TopicRepository extends JpaRepository<Topic, Integer>{
     public List<Topic> findAllByTrainer(User user);
     public List<Topic> findAllByCourse_Staff(User user);
     public List<Topic> findAllByCourse(Course course);
+    public List<Topic> findAllByActive(Boolean b);
 
     @Query("Select t from Topic t where upper(t.title) LIKE concat('%',upper(:input),'%') " +
             "or  upper(t.content) LIKE concat('%',upper(:input),'%')")

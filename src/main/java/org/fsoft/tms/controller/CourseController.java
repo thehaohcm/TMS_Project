@@ -3,12 +3,11 @@ package org.fsoft.tms.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.CurrentUser;
+import org.fsoft.tms.entity.Category;
+import org.fsoft.tms.entity.Topic;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.entity.Course;
-import org.fsoft.tms.service.CategoryService;
-import org.fsoft.tms.service.CourseService;
-import org.fsoft.tms.service.LoginService;
-import org.fsoft.tms.service.UserService;
+import org.fsoft.tms.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -18,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by DELL on 5/24/2017.
@@ -35,6 +35,9 @@ public class CourseController {
     private CategoryService category;
 
     @Autowired
+    private TopicService topicService;
+
+    @Autowired
     private LoginService loginService;
 
     @RequestMapping(value = "/")
@@ -44,6 +47,8 @@ public class CourseController {
             String name = auth.getName();
             User user =loginService.findUserByUsername(name);
             model.addAttribute("role", user.getRole());
+            model.addAttribute("category", new Category());
+            model.addAttribute("listCategory",category.getListCategoryActive());
             if(user.getRole().getId() == 2)
                 model.addAttribute("listCourse", course.getAllCourseByStaff(CurrentUser.getInstance().getUser()));
             else
@@ -65,6 +70,22 @@ public class CourseController {
     public String addCourse(@ModelAttribute Course c) {
         course.addCourse(c);
         return "redirect:/tms/courses/";
+    }
+
+    @RequestMapping(value = "/categories")
+    public String fillter(@ModelAttribute Category c, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            String name = auth.getName();
+            User user = loginService.findUserByUsername(name);
+            model.addAttribute("role", user.getRole());
+            Category cat = category.findOneCategory(c.getId());
+            List<Course> listCourse = course.getAllCourseByCategoryAndStaff(cat, user);
+            model.addAttribute("category", new Category());
+            model.addAttribute("listCategory", category.getListCategoryActive());
+            model.addAttribute("listCourse", listCourse);
+        }
+        return "course/index";
     }
 
     @RequestMapping(value = "/{id}/trainees/assignment")
@@ -95,7 +116,19 @@ public class CourseController {
         return "course/listtrainee";
     }
 
-
+    @RequestMapping(value = "/{id}/topic")
+    public String getListTopicCourse(@PathVariable String id, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            String name = auth.getName();
+            User user = loginService.findUserByUsername(name);
+            model.addAttribute("role", user.getRole());
+        }
+        Course c = course.findOneCourse(Integer.parseInt(id));
+        model.addAttribute("course", c);
+        model.addAttribute("listTopic", topicService.findAllTopicByCourse(c));
+        return "course/topic";
+    }
 
     @RequestMapping(value = "/{id}/update")
     public String updateCourse(@PathVariable String id, Model model) {
@@ -106,7 +139,25 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/{id}/delete")
-    public String deleteCourse(@PathVariable String id) {
+    public String deleteCourse(@PathVariable String id, Model model) {
+        Course c = course.findOneCourse(Integer.parseInt(id));
+        List<Topic> arrTopic = topicService.findAllTopicByCourse(c);
+        Set<User> arrTrainee =  c.getTrainees();
+        if(arrTopic.size() > 0 || arrTrainee.size() > 0) {
+            model.addAttribute("course", c);
+            model.addAttribute("listTrainee", arrTrainee);
+            model.addAttribute("listTopic", arrTopic);
+            return "course/delete";
+        }
+        else {
+            course.deleteCourse(Integer.parseInt(id));
+            return "redirect:/tms/courses/";
+        }
+    }
+
+    @RequestMapping(value = "/{id}/deleteanyway")
+    public String deleteAnyway(@PathVariable String id, Model model) {
+        Course c = course.findOneCourse(Integer.parseInt(id));
         course.deleteCourse(Integer.parseInt(id));
         return "redirect:/tms/courses/";
     }

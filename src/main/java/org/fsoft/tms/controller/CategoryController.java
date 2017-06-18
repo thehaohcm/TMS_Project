@@ -81,12 +81,33 @@ public class CategoryController {
         Category temp = category.findOneCategory(Integer.parseInt(id));
         List<Course> arrCourse = courseService.getAllCourseByCategory(temp);
         if(arrCourse.size() > 0) {
+            model.addAttribute("category", temp);
             model.addAttribute("listCourse", arrCourse);
             return "category/coursedelete";
         }
         else
             category.deleteCategory(Integer.parseInt(id));
         return "redirect:/tms/categories/";
+    }
+
+    @RequestMapping(value = "/{id}/deleteanyway")
+    public String deleteAnyway(@PathVariable String id) {
+        category.deleteCategory(Integer.parseInt(id));
+        return "redirect:/tms/categories/";
+    }
+
+    @RequestMapping(value = "/{id}/courses")
+    public String listCourse(@PathVariable String id, Model model) {
+        Category cat = category.findOneCategory(Integer.parseInt(id));
+        List<Course> arrCourse = courseService.getAllCourseByCategory(cat);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            String name = auth.getName();
+            User user =loginService.findUserByUsername(name);
+            model.addAttribute("role", user.getRole());
+        }
+        model.addAttribute("listCourse", arrCourse);
+        return "category/course";
     }
 
     @RequestMapping(value = "/{id}/update")

@@ -43,6 +43,11 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
+    public List<Course> getAllCourseByCategoryAndStaff(Category c, User user) {
+        return courseRepository.findAllByCategoryAndStaff(c, user);
+    }
+
+    @Override
     public void addCourse(Course course) {
         course.setActive(true);
         course.setStaff(CurrentUser.getInstance().getUser());
@@ -87,6 +92,7 @@ public class CourseServiceImpl implements CourseService{
         for (Topic topic: arrTopic) {
             topicService.deleteTopic(topic.getId());
         }
+        c.getTrainees().clear();
         courseRepository.save(c);
     }
 
@@ -121,5 +127,10 @@ public class CourseServiceImpl implements CourseService{
         }
         u.getCourses().clear();
         userRepository.save(u);
+    }
+
+    @Override
+    public List<Course> getAllCourseByActive(Boolean b) {
+        return courseRepository.findAllByActive(b);
     }
 }

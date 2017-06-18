@@ -43,6 +43,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <div>
+                        <input type="hidden" th:object="${category}"/>
+                        <a th:href="@{/tms/categories/{id}/deleteanyway(id=${category.id})}" class="btn btn-block btn-danger" style="width:150px; color:white" type="submit">Delete Anyway</a>
+                        <a th:href="@{/tms/categories/}" class="btn btn-block btn-warning" style="width:150px; color:white" type="submit">Cancle</a>
+                    </div>
                 </div>
             </div>
         </section>

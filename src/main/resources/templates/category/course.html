@@ -24,26 +24,15 @@
         </section>
         <!-- Main content -->
         <section class="content">
-            <form action="#" th:action="@{/tms/courses/search}" method="get">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                    <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-flat" value="search"><i class="fa fa-search"></i></button>
-                    </span>
-                </div>
-            </form>
             <div class="col-md-15">
                 <div class="box">
                     <div class="box-header with-border">
                         <h1>Show list Course</h1>
                     </div>
-                    <form th:action="@{/tms/courses/categories}" th:object="${category}">
-                        <p>Category</p>
-                        <select class="form-control" th:field="*{id}">
-                        <option th:each="item:${listCategory}" th:value="${item.id}" th:text="${item.name}"  th:if="${item.active}" ></option>
-                        </select>
-                        <input type="submit" th:value="submit"/>
-                    </form>
+                    <!--<p>Category</p>-->
+                    <!--<select class="form-control" th:>-->
+                        <!--<option th:each="item:${listCategory}" th:value="${item.id}" th:text="${item.name}"  th:if="${item.active}" ></option>-->
+                    <!--</select>-->
                     <div>
                         <table class="table table-bordered">
                             <tbody>

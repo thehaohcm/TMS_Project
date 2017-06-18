@@ -46,14 +46,14 @@ public class CategoryServiceImpl implements CategoryService{
         Category temp = categoryRepository.findOne(id);
         temp.setActive(false);
 
-//        List<Course> arrCourse = courseService.getAllCourseByCategory(temp);
-//        for (Course course: arrCourse) {
-//            List<Topic> arrTopic = topicService.findAllTopicByCourse(course);
-//            for (Topic topic: arrTopic) {
-//                topicService.deleteTopic(topic.getId());
-//            }
-//            courseService.deleteCourse(course.getId());
-//        }
+        List<Course> arrCourse = courseService.getAllCourseByCategory(temp);
+        for (Course course: arrCourse) {
+            List<Topic> arrTopic = topicService.findAllTopicByCourse(course);
+            for (Topic topic: arrTopic) {
+                topicService.deleteTopic(topic.getId());
+            }
+            courseService.deleteCourse(course.getId());
+        }
         categoryRepository.save(temp);
     }
 

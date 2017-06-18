@@ -32,8 +32,9 @@ public class TopicServiceImpl implements TopicService{
 
     @Override
     public List<Topic> getAllTopic() {
-        PageRequest request = new PageRequest(2, PAGESIZE, Sort.Direction.ASC, "id");
-        return topic.findAll(request).getContent();
+//        PageRequest request = new PageRequest(2, PAGESIZE, Sort.Direction.ASC, "id");
+//        return topic.findAll(request).getContent();
+        return  topic.findAll();
     }
 
     @Override
@@ -100,6 +101,7 @@ public class TopicServiceImpl implements TopicService{
     public void deleteTopic(int id) {
         Topic temp = topic.findOne(id);
         temp.setActive(false);
+        temp.setTrainer(null);
         topic.save(temp);
     }
 
@@ -145,4 +147,8 @@ public class TopicServiceImpl implements TopicService{
         userRepository.save(u);
     }
 
+    @Override
+    public List<Topic> getAllTopicByActive(Boolean b) {
+        return topic.findAllByActive(b);
+    }
 }

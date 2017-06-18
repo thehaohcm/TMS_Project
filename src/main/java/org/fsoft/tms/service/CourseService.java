@@ -13,7 +13,11 @@ public interface CourseService {
 
     List<Course> getAllCourse();
 
+    List<Course> getAllCourseByActive(Boolean b);
+
     List<Course> getAllCourseByStaff(User user);
+
+    List<Course> getAllCourseByCategoryAndStaff(Category c, User user);
 
     List<Course> getAllCourseByCategory(Category c);
 

@@ -17,7 +17,9 @@ import java.util.Set;
 public interface CourseRepository extends JpaRepository<Course, Integer>{
     public Set<Course> findAllById(Integer id);
     public List<Course> findAllByCategory(Category c);
+    public List<Course> findAllByCategoryAndStaff(Category c, User u);
     public List<Course> findAllByStaff(User user);
+    public List<Course> findAllByActive(Boolean b);
 
     @Query("Select c from Course c where upper(c.name) LIKE concat('%',upper(:input),'%') " +
             "or  upper(c.description) LIKE concat('%',upper(:input),'%')"+

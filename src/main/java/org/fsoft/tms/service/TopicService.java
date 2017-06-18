@@ -15,6 +15,8 @@ public interface TopicService {
 
     List<Topic> getAllTopicByStaff();
 
+    List<Topic> getAllTopicByActive(Boolean b);
+
     Topic finOneById(Integer id);
 
     List<Topic> findAllTopicByTrainer(User user);

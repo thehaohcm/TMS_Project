@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fsoft.tms.CurrentUser;
 import org.fsoft.tms.entity.Category;
+import org.fsoft.tms.entity.Course;
 import org.fsoft.tms.entity.User;
 import org.fsoft.tms.entity.Topic;
 import org.fsoft.tms.event.OnAssignTopicCompleteEvent;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by DELL on 5/27/2017.
@@ -61,10 +63,37 @@ public class TopicController {
             String name = auth.getName();
             User user =loginService.findUserByUsername(name);
             model.addAttribute("role", user.getRole());
-            if(user.getRole().getId() == 2)
+            model.addAttribute("course", new Course());
+            if(user.getRole().getId() == 2) {
                 model.addAttribute("listTopic", topicService.getAllTopicByStaff());
-            else
+                model.addAttribute("listCourse", courseService.getAllCourseByStaff(user));
+            }
+            else {
                 model.addAttribute("listTopic", topicService.getAllTopic());
+                model.addAttribute("listCourse", courseService.getAllCourse());
+            }
+        }
+        return "topic/index";
+    }
+
+    @RequestMapping(value = "/courses")
+    public String filter(@ModelAttribute Course c, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            String name = auth.getName();
+            User user =loginService.findUserByUsername(name);
+            Course course = courseService.findOneCourse(c.getId());
+            model.addAttribute("role", user.getRole());
+            model.addAttribute("course", new Course());
+            if(user.getRole().getId() == 2) {
+//                model.addAttribute("listTopic", topicService.getAllTopicByStaff());
+                model.addAttribute("listCourse", courseService.getAllCourseByStaff(user));
+            }
+            else {
+//                model.addAttribute("listTopic", topicService.getAllTopic());
+                model.addAttribute("listCourse", courseService.getAllCourse());
+            }
+            model.addAttribute("listTopic", topicService.findAllTopicByCourse(course));
         }
         return "topic/index";
     }

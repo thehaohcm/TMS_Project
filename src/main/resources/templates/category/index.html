@@ -49,6 +49,7 @@
                                                     <td >No</td>
                                                     <td>Name</td>
                                                     <td>Description</td>
+                                                    <td>List courses</td>
                                                     <td th:if="${role.id}==2" >Update</td>
                                                     <td th:if="${role.id}==2" >Delete</td>
                                                 </tr>
@@ -56,6 +57,7 @@
                                                     <td th:text="${itemStat.count}"></td>
                                                     <td th:text="${item.name}"></td>
                                                     <td th:text="${item.description}"></td>
+                                                    <td><a th:href="@{/tms/categories/{id}/courses(id=${item.id})}" class="btn btn-block btn-info" style="width:150px; color:white" type="submit">View course</a></td>
                                                     <td th:if="${role.id}==2" style="width:150px"><a class="btn btn-block btn-info" type="button" th:href="@{/tms/categories/{id}/update(id=${item.id})}" style="width:100px;color:white">Update</a></td>
                                                     <td th:if="${role.id}==2" style="width:150px"><a class="btn btn-block btn-danger"  type="button" th:href="@{/tms/categories/{id}/delete(id=${item.id})}" style="width:100px;color:white">Delete</a></td>
                                                 </tr>
