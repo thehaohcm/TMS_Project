@@ -77,8 +77,10 @@ public class ExcelController {
                 traineeInfo.setDepartment(cell.getStringCellValue());
                 cell = row.getCell(8);
                 traineeInfo.setLocation(cell.getStringCellValue());
-                userService.addTrainee(traineeInfo.getUser(), CurrentUser.getInstance().getUser().getId());
-                userService.saveTrainee(traineeInfo);
+                if(userService.checkUsername(traineeInfo.getUser().getUsername())) {
+                    userService.addTrainee(traineeInfo.getUser(), CurrentUser.getInstance().getUser().getId());
+                    userService.saveTrainee(traineeInfo);
+                }
             }
             model.addAttribute("messages", "Write file successful");
         } catch (FileNotFoundException e) {
