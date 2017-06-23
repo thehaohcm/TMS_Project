@@ -80,10 +80,15 @@ public class CourseController {
             User user = loginService.findUserByUsername(name);
             model.addAttribute("role", user.getRole());
             Category cat = category.findOneCategory(c.getId());
-            List<Course> listCourse = course.getAllCourseByCategoryAndStaff(cat, user);
+
             model.addAttribute("category", new Category());
             model.addAttribute("listCategory", category.getListCategoryActive());
-            model.addAttribute("listCourse", listCourse);
+            if(user.getRole().getId() == 2){
+                List<Course> listCourse = course.getAllCourseByCategoryAndStaff(cat, user);
+                model.addAttribute("listCourse", listCourse);
+            }
+            else
+                model.addAttribute("listCourse", course.getAllCourseByCategory(cat));
         }
         return "course/index";
     }

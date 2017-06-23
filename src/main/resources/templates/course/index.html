@@ -37,7 +37,7 @@
                     <div class="box-header with-border">
                         <h1>Show list Course</h1>
                     </div>
-                    <form th:if="${role.id}==2" th:action="@{/tms/courses/categories}" th:object="${category}">
+                    <form th:action="@{/tms/courses/categories}" th:object="${category}">
                         <p>Category</p>
                         <select class="form-control" th:field="*{id}">
                         <option th:each="item:${listCategory}" th:value="${item.id}" th:text="${item.name}"  th:if="${item.active}" ></option>
